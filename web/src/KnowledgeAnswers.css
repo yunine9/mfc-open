@@ -1,0 +1,164 @@
+@layer legacy {
+.ka-history,.ka-main,.ka-evidence { min-width:0; min-height:0; overflow:auto; overscroll-behavior:contain; scrollbar-gutter:stable; }
+.ka-history > p { margin:12px 4px 20px; font-size:12px; line-height:1.6; color:var(--muted); }
+.ka-history nav { display:grid; align-content:start; gap:5px; }
+.ka-history-row { display:flex; align-items:center; gap:2px; min-width:0; }
+.ka-history-row .ka-history-item { flex:1; min-width:0; }
+.ka-history-row .ka-delete { flex:none; color:var(--muted); }
+.ka-delete-question { margin-left:auto; }
+.ka-history-item:hover { background:var(--surface); }
+.ka-history-item span { overflow:hidden; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; font-size:13px; line-height:1.6; overflow-wrap:anywhere; }
+.ka-history-empty { display:grid; justify-items:center; gap:12px; padding:40px 8px; color:var(--faint); font-size:12px; }
+.ka-compose form > label { display:block; font-weight:500; font-size:13px; margin-bottom:9px; }
+.ka-compose form > textarea { min-height:154px; max-height:280px; resize:vertical; font-size:14px; line-height:1.8; }
+.ka-material-upload { margin:10px 0 18px; }
+.ka-material-upload p { font-size:12px; line-height:1.8; }
+.ka-context { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:15px; margin:12px 0 18px; padding:18px; border:1px solid var(--line); border-radius:8px; background:var(--surface-2); }
+.ka-context label { display:grid; align-content:start; gap:8px; font-size:12px; font-weight:500; }
+.ka-context select,.ka-context input { width:100%; min-width:0; height:36px; padding:6px 9px; border:1px solid var(--line); border-radius:6px; background:var(--surface); color:var(--text); font-size:13px; }
+.ka-context small { font-weight:400; color:var(--muted); font-size:11px; line-height:1.6; }
+.ka-sources summary,.ka-activity summary { cursor:pointer; width:fit-content; }
+.ka-sources > div { display:flex; justify-content:space-between; gap:15px; padding:10px 0; border-bottom:1px solid var(--line); line-height:1.7; }
+.ka-sources strong { font-weight:500; color:var(--text); flex-shrink:0; }
+.ka-question small { color:var(--muted); font-size:12px; }
+.ka-loading { display:flex; align-items:center; gap:10px; color:var(--muted); font-size:14px; }
+.ka-progress { margin:24px 0; padding:18px; border:1px solid var(--line); border-radius:9px; background:var(--surface-2); }
+.ka-progress > div { display:flex; align-items:center; gap:10px; }
+.ka-progress > div > svg { color:var(--primary); }
+.ka-progress strong { font-size:14px; font-weight:600; }
+.ka-progress button { margin-left:auto; }
+.ka-progress p { font-size:13px; line-height:1.7; margin:12px 0; overflow-wrap:anywhere; }
+.ka-progress small { font-size:12px; color:var(--muted); }
+.ka-spinner { animation:ka-spin 1.1s linear infinite; }
+@keyframes ka-spin { to { transform:rotate(360deg); } }
+.ka-activity ol { margin:12px 0 0; padding-left:18px; }
+.ka-activity li { padding:7px 0; line-height:1.7; }
+.ka-activity li span { font-weight:500; color:var(--text); }
+.ka-activity li p { margin:3px 0; overflow-wrap:anywhere; }
+.ka-answer .md-block-code,.ka-answer .md-table { max-width:100%; overflow:auto; }
+.ka-unknowns h3,.ka-citations h3 { margin:0 0 10px; font-size:13px; font-weight:600; }
+.ka-citations > button:hover,.ka-citations > button[aria-pressed=true] { background:var(--surface-2); border-color:var(--primary); }
+.ka-citations button > span { display:grid; place-items:center; flex-shrink:0; width:20px; height:20px; border-radius:5px; color:var(--primary); background:color-mix(in srgb,var(--primary) 9%,var(--surface)); font-size:11px; }
+.ka-citations strong { font-size:12px; color:var(--text); font-weight:500; }
+.ka-feedback > div:first-child { display:flex; align-items:center; flex-wrap:wrap; gap:5px; }
+.ka-feedback span { margin-right:12px; font-size:12px; color:var(--muted); }
+.ka-feedback-form { display:grid; justify-items:end; gap:10px; margin-top:12px; }
+.ka-feedback-form textarea { min-height:80px; font-size:13px; }
+.ka-terminal { margin-top:24px; padding:20px; background:var(--surface-2); border:1px solid var(--line); border-radius:9px; }
+.ka-terminal h3 { margin:0 0 10px; font-size:15px; font-weight:600; }
+.ka-terminal p { margin:0 0 18px; line-height:1.8; font-size:13px; overflow-wrap:anywhere; }
+.ka-error { color:var(--danger); font-size:13px; line-height:1.7; overflow-wrap:anywhere; }
+.ka-error button { margin-left:8px; }
+.ka-notice { margin-top:16px; padding:12px 14px; font-size:12px; line-height:1.75; color:var(--muted); border:1px solid var(--line); border-radius:7px; background:var(--surface-2); overflow-wrap:anywhere; }
+.ka-notice p { margin:4px 0; }
+.ka-notice button { color:var(--primary); margin-left:8px; cursor:pointer; }
+.ka-evidence > header { display:flex; align-items:flex-start; gap:12px; justify-content:space-between; }
+.ka-evidence header > div { min-width:0; }
+.ka-evidence header small { font-size:11px; color:var(--muted); }
+.ka-evidence-meta > div { display:grid; grid-template-columns:56px minmax(0,1fr); gap:10px; }
+.ka-evidence-meta dt { color:var(--muted); }
+.ka-evidence-meta dd { margin:0; line-height:1.6; overflow-wrap:anywhere; }
+
+/* 问答拥有完整桌面工作区，正文和原文各自滚动。 */
+.ka-app-main { padding:24px !important; }
+.ka-workspace { display:grid; min-width:0; overflow:hidden; border:1px solid var(--line); background:var(--surface); color:var(--text); margin:0; height:calc(100dvh - 48px); min-height:540px; grid-template-columns:232px minmax(0,1fr); border-radius:16px; box-shadow:0 8px 30px #10182805; }
+.ka-workspace.has-evidence { grid-template-columns:232px minmax(0,1fr) minmax(320px,27%); }
+.ka-history { display:flex; flex-direction:column; border-right:1px solid var(--line); padding:24px 16px 18px; background:color-mix(in srgb,var(--surface-2) 65%,var(--surface)); }
+.ka-history header { display:flex; align-items:center; justify-content:flex-start; gap:10px; padding:0 6px; margin-bottom:26px; }
+.ka-history h1 { font-size:17px; letter-spacing:-.03em; font-weight:650; margin:0; }
+.ka-brand-icon { display:grid; place-items:center; width:34px; height:34px; background:var(--surface); color:var(--primary); border:1px solid var(--line); border-radius:10px; box-shadow:var(--shadow-sm); }
+.ka-new-question { width:100%; min-height:38px; }
+.ka-history-search { display:flex; align-items:center; gap:8px; margin:20px 2px; color:var(--faint); }
+.ka-history-search input { width:100%; min-width:0; outline:none; background:transparent; font-size:12px; color:var(--text); }
+.ka-history-search:focus-within { color:var(--text-strong); }
+.ka-history-search input:focus-visible { outline:1px solid var(--line-strong); outline-offset:4px; border-radius:3px; }
+.ka-history-label { display:flex; justify-content:space-between; margin:6px 7px 12px; color:var(--faint); font-size:11px; }
+.ka-history-item { display:grid; border:1px solid transparent; border-radius:8px; background:transparent; text-align:left; color:var(--text); cursor:pointer; padding:12px 10px; gap:8px; }
+.ka-history-item[aria-current=page] { background:var(--surface); box-shadow:var(--shadow-sm); border-color:color-mix(in srgb,var(--primary) 20%,var(--line)); }
+.ka-history-item small { color:var(--muted); display:flex; align-items:center; gap:5px; font-size:10px; }
+.ka-status-dot { width:5px; height:5px; border-radius:50%; background:var(--faint); }
+.ka-status-dot.is-running,.ka-status-dot.is-queued { background:var(--attention); }
+.ka-status-dot.is-done { background:var(--success); }
+.ka-status-dot.is-failed { background:var(--danger); }
+.ka-main { padding:36px clamp(28px,3.8vw,72px) 48px; background:var(--surface); }
+.ka-compose,.ka-answer-view { max-width:840px; margin:0 auto; }
+.ka-compose-title { margin:clamp(20px,8dvh,96px) 0 32px; }
+.ka-eyebrow { display:flex; align-items:center; gap:7px; margin-bottom:19px; font-size:12px; color:var(--muted); }
+.ka-compose-title h2 { margin:0 0 12px; color:var(--text-strong); font-size:28px; font-weight:620; line-height:1.5; letter-spacing:-.04em; }
+.ka-compose-title p { margin:0; color:var(--muted); line-height:1.8; max-width:580px; font-size:13px; }
+.ka-question-form { padding:20px 22px 0; border:1px solid var(--line-strong); border-radius:14px; box-shadow:0 4px 18px #10182805; background:var(--surface); }
+.ka-question-form:focus-within { border-color:color-mix(in srgb,var(--primary) 45%,var(--line)); }
+.ka-question-form > .ka-input-label { color:var(--muted); font-weight:500; font-size:12px; }
+.ka-compose .ka-question-form > textarea { min-height:130px; max-height:260px; padding:0; border:0; border-radius:0; box-shadow:none; outline:none; font-size:15px; line-height:1.9; background:transparent; }
+.ka-question-form > textarea:focus-visible { box-shadow:none; border:0; outline:none; }
+.ka-context-toggle { margin-top:12px; padding-left:0; color:var(--muted); font-size:12px; margin:6px 14px 0 0; }
+.ka-submit { display:flex; justify-content:space-between; align-items:center; position:sticky; bottom:0; z-index:2; border-top:1px solid var(--line); background:var(--surface); padding:14px 0; margin-top:14px; gap:14px; }
+.ka-submit small { color:var(--muted); font-size:11px; }
+.ka-examples { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; margin-top:22px; }
+.ka-examples button { display:grid; grid-template-columns:1fr auto; gap:10px; padding:18px; border:1px solid var(--line); border-radius:10px; text-align:left; cursor:pointer; transition:background .15s,border-color .15s; }
+.ka-examples button:hover { background:var(--surface-2); border-color:var(--line-strong); }
+.ka-examples button > svg:first-child { color:var(--muted); grid-column:1/-1; }
+.ka-examples strong { font-size:12px; font-weight:550; grid-column:1/-1; }
+.ka-examples span { font-size:11px; line-height:1.8; color:var(--muted); grid-column:1/-1; }
+.ka-examples button > svg:last-child { display:none; }
+.ka-sources { color:var(--muted); font-size:12px; margin-top:24px; }
+.ka-sources summary { font-size:11px; }
+.ka-question { border-bottom:1px solid var(--line); padding-bottom:24px; }
+.ka-question > small { display:flex; align-items:center; gap:8px; color:var(--faint); }
+.ka-question h2 { margin:10px 0 0; font-weight:600; white-space:pre-wrap; overflow-wrap:anywhere; color:var(--text-strong); font-size:24px; line-height:1.65; letter-spacing:-.025em; margin-top:14px; }
+.ka-answer-toolbar { display:flex; align-items:center; justify-content:space-between; gap:12px; margin:24px 0 8px; }
+.ka-answer-toolbar > span { display:flex; align-items:center; gap:8px; font-size:13px; font-weight:550; }
+.ka-answer-source-count { color:var(--faint); font-size:11px; font-weight:400; margin-left:6px; }
+.ka-answer-toolbar button { color:var(--muted); font-size:12px; }
+.ka-copy-status { font-size:12px; color:var(--muted); text-align:right; margin:0; }
+.ka-answer { padding:4px 0 12px; }
+.ka-answer .md { overflow-wrap:anywhere; font-size:15px; line-height:1.95; }
+.ka-answer .md > :first-child { margin-top:0; }
+.ka-answer .md-block-code { margin:14px 0; padding:16px 18px; font-size:12px; line-height:1.85; background:var(--surface-2); border:1px solid var(--line); border-radius:10px; }
+.ka-answer .md-table { display:block; width:100%; }
+.ka-inline-sources { display:flex; align-items:center; flex-wrap:wrap; gap:6px; margin:10px 0 26px; }
+.ka-inline-sources > span { font-size:10px; color:var(--faint); margin-right:2px; }
+.ka-source-link { display:inline-flex; align-items:center; gap:6px; max-width:260px; padding:4px 8px 4px 5px; border:1px solid var(--line); border-radius:6px; background:var(--surface-2); color:var(--muted); cursor:pointer; font-size:11px; text-align:left; }
+.ka-source-link > span:first-child { display:grid; place-items:center; min-width:17px; height:17px; background:var(--surface); border:1px solid var(--line); border-radius:4px; font-size:10px; color:var(--text); }
+.ka-source-link > span:last-child { overflow:hidden; white-space:nowrap; text-overflow:ellipsis; }
+.ka-source-link:hover { border-color:var(--primary); color:var(--text-strong); }
+.ka-source-link:focus-visible,.ka-examples button:focus-visible,.ka-history-item:focus-visible { outline:2px solid var(--primary); outline-offset:3px; }
+.ka-unknowns { background:var(--surface-2); border:1px solid var(--line); border-left:3px solid var(--attention); border-radius:8px; padding:16px 18px; margin-top:8px; }
+.ka-unknowns h3 { font-size:12px; }
+.ka-unknowns ul { margin:0; padding-left:18px; font-size:12px; line-height:1.9; }
+.ka-citations { padding-top:18px; border-top:1px solid var(--line); margin:24px 0; }
+.ka-citations h3 { display:flex; align-items:center; gap:8px; font-size:12px; color:var(--muted); }
+.ka-citations h3 > span { margin-left:auto; font-size:11px; color:var(--faint); }
+.ka-citations > button { display:flex; gap:10px; width:100%; border:1px solid var(--line); background:var(--surface); text-align:left; cursor:pointer; align-items:center; border-color:transparent; padding:10px 4px; margin:0; border-bottom-color:var(--line); border-radius:0; }
+.ka-citations button > div { display:grid; gap:5px; min-width:0; overflow-wrap:anywhere; flex:1; }
+.ka-citations button > svg { color:var(--faint); flex-shrink:0; }
+.ka-citations small { font-size:11px; line-height:1.6; color:var(--muted); white-space:nowrap; text-overflow:ellipsis; overflow:hidden; max-width:100%; }
+.ka-feedback { margin-top:25px; border-top:0; padding-top:0; }
+.ka-feedback button { font-size:12px; }
+.ka-activity { margin:18px 0; font-size:12px; color:var(--muted); padding-top:16px; border-top:1px solid var(--line); margin-top:26px; }
+.ka-evidence { border-left:1px solid var(--line); padding:24px 20px; background:color-mix(in srgb,var(--surface-2) 55%,var(--surface)); outline:none; }
+.ka-evidence h3 { margin:7px 0 18px; line-height:1.7; color:var(--text-strong); font-weight:600; overflow-wrap:anywhere; font-size:16px; margin-bottom:18px; }
+.ka-evidence-details summary,.ka-full-source summary { cursor:pointer; font-size:12px; color:var(--muted); line-height:1.8; }
+.ka-evidence-meta { display:grid; gap:10px; font-size:11px; margin:14px 0 20px; }
+.ka-evidence-note { font-size:11px; line-height:1.7; color:var(--muted); margin:18px 0; }
+.ka-quoted-source h4 { font-size:12px; font-weight:550; margin:0 0 10px; }
+.ka-evidence-content { margin:0; border:1px solid var(--line); background:var(--surface); white-space:pre-wrap; overflow-wrap:anywhere; font-family:var(--font-mono,ui-monospace,monospace); font-size:12px; line-height:1.95; padding:16px; border-radius:9px; tab-size:2; }
+.ka-full-source { margin-top:20px; }
+.ka-full-source[open] summary { margin-bottom:12px; }
+@media (max-width:1500px) {
+  .ka-app-main { padding:16px !important; }
+  .ka-workspace { margin-inline:20px; margin:0; height:calc(100dvh - 32px); grid-template-columns:200px minmax(0,1fr); }
+  .ka-workspace.has-evidence { grid-template-columns:184px minmax(0,1fr) 300px; }
+  .ka-main { padding:28px; }
+  .ka-workspace.has-evidence .ka-main { padding:24px; }
+  .ka-compose-title { margin-top:38px; }
+  .ka-compose-title h2 { font-size:25px; }
+  .ka-question h2 { font-size:21px; }
+  .ka-evidence { padding:22px 16px; }
+  .ka-history { padding:22px 12px; }
+  .ka-examples button { padding:14px; }
+}
+.ka-question h2.is-collapsed { display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
+.ka-question-expand { color:var(--muted); font-size:11px; margin-top:10px; cursor:pointer; }
+.ka-question-expand:hover { color:var(--text-strong); text-decoration:underline; }
+}

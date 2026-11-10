@@ -1,0 +1,285 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1320 506" role="group" lang="zh-CN" aria-labelledby="archify-diagram-title archify-diagram-description" data-preset="blueprint" data-quality-profile="standard"><style>:root,svg{--text:#eff6ff;--text-muted:#adbed3;--text-dim:#64819e;--grid:#183049;--mask:#10233a;--frontend-fill:#102d46;--frontend-stroke:#4fc8fc;--backend-fill:#0c302d;--backend-stroke:#62dcc0;--database-fill:#182c47;--database-stroke:#a0b8ff;--cloud-fill:#23213b;--cloud-stroke:#b5a2ff;--security-fill:#24203e;--security-stroke:#b5a2ff;--messagebus-fill:#133b3b;--messagebus-stroke:#62dcc0;--external-fill:#1c263a;--external-stroke:#a4b5d6;--arrow:#7897b8;--arrow-emphasis:#58d0ff;--bg:#081322;font-family:Inter,"Microsoft YaHei","PingFang SC",system-ui,sans-serif;color-scheme:dark}
+*{box-sizing:border-box}body{margin:0;background:#081322;color:var(--text);height:100vh;overflow:hidden}button{font:inherit;cursor:pointer;color:inherit}button:focus-visible,[data-node-id]:focus-visible{outline:2px solid #77d3ff;outline-offset:4px}button:disabled{cursor:default;opacity:.4}[hidden]{display:none!important}.shell{height:100vh;max-width:2400px;margin:auto;display:grid;grid-template-rows:auto auto auto minmax(0,1fr) auto auto;gap:15px;padding:28px 40px 18px;background:radial-gradient(ellipse at 78% 5%,#12304c66,transparent 42%),radial-gradient(ellipse at 5% 88%,#12372e33,transparent 40%)}.masthead{display:flex;justify-content:space-between;align-items:center;gap:24px}.identity{display:flex;align-items:center;gap:18px}.brand-mark{font-family:Arial,sans-serif;width:54px;height:58px;border:1px solid #5ad4ff60;border-radius:17px;background:linear-gradient(150deg,#254b7180,#15394d30);display:grid;place-items:center;font-size:37px;line-height:1;font-weight:900;color:#78d7ff;box-shadow:0 0 26px #3baeff18}.eyebrow{color:#80d5ff;font-size:14px;letter-spacing:3px;font-weight:800}.eyebrow span{font-size:10px;color:#7c96b0;letter-spacing:2px;margin-left:14px}h1{font-size:32px;letter-spacing:.2px;margin:6px 0 0;font-weight:650}.headline-side{display:flex;flex-direction:column;gap:9px;text-align:right}.headline-side strong{font-size:17px;font-weight:500;color:#d5e7fa}.headline-side>span{font-size:13px;color:#86a4bc}.human-strip{display:flex;align-items:center;gap:25px;min-height:46px;padding:0 18px;border:1px solid #2d4b64;border-radius:11px;background:linear-gradient(90deg,#14364e70,#14233b30);font-size:14px;color:#bed0e5}.human-label{color:#e9f8ff;font-weight:650;padding-right:22px;border-right:1px solid #38556e;display:flex;align-items:center;gap:10px}.human-label i{width:7px;height:7px;background:#62d7ff;border-radius:50%;box-shadow:0 0 15px #62d7ff}.human-strip b{color:#526d84}.human-strip em{font-size:12px;font-style:normal;margin-left:auto;color:#7ca4bd}.scene-nav{display:flex;justify-content:space-between;align-items:center;gap:20px}.scene-nav [role=tablist]{display:flex;gap:5px}.scene-nav button{border:1px solid transparent;background:transparent;border-radius:8px;padding:9px 16px;color:#8fa9c4;font-size:14px;transition:background .2s,color .2s}.scene-nav button:hover{background:#21354b;color:white}.scene-nav button[aria-selected=true]{background:#18344c;border-color:#345972;color:#e6f5ff;box-shadow:inset 0 1px #8bdbff0e}.controls{display:flex;gap:8px}.controls button{border-color:#2a435b;color:#c0d1e5;padding:8px 13px}.controls button.play{color:#b9eeff;border-color:#3d718e;background:#13354d}.dot{display:inline-block;width:6px;height:6px;border-radius:50%;margin-right:8px;vertical-align:middle}.cyan{background:#55caff}.mint{background:#62dcc0}.violet{background:#b5a2ff}.stage{position:relative;min-height:0;border:1px solid #29425a;border-radius:16px;overflow:hidden;background:linear-gradient(160deg,#0e2134,#091622 70%);isolation:isolate;box-shadow:0 16px 64px #0002,inset 0 1px #9bd8ff0c}.stage:before{content:"";position:absolute;inset:0;background-image:linear-gradient(#3b668010 1px,transparent 1px),linear-gradient(90deg,#3b668010 1px,transparent 1px);background-size:28px 28px;pointer-events:none;z-index:-1}.stage-glow{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 40%,#25586a16,transparent 60%);z-index:-1}#diagram{height:100%;padding:7px 16px 29px;transition:opacity .35s,filter .35s}#diagram>svg{display:block;width:100%;height:100%;overflow:visible}.stage-key{position:absolute;bottom:11px;left:24px;display:flex;gap:22px;font-size:11px;color:#809cb6}.interact-hint{position:absolute;bottom:11px;right:24px;color:#7d97b0;font-size:11px}.narration{display:flex;align-items:center;gap:28px;padding:14px 20px;background:#13243a80;border:1px solid #243b52;border-radius:12px;min-height:84px}.chapter{flex:none;width:158px}.chapter>span{font-size:11px;letter-spacing:1px;color:#80b8db}.progress-track{margin-top:13px;height:3px;background:#293a50;border-radius:3px;overflow:hidden}.progress-track i{display:block;height:100%;width:12%;background:linear-gradient(90deg,#63c9ff,#6ee2c4);transition:width .25s}.narrative-copy{flex:1}.narrative-copy h2{font-size:19px;font-weight:600;margin:0 0 7px}.narrative-copy p{margin:0;font-size:13px;line-height:1.7;color:#a2bbd1}.story-controls{display:flex;gap:7px}.story-controls button{border:1px solid #38536c;border-radius:9px;background:#183047;width:36px;height:36px;color:#b4d2ed}.story-controls button:hover{background:#2b516f}footer{display:flex;justify-content:space-between;align-items:center;color:#5f7d98;font-size:11px;letter-spacing:.6px}footer b{margin:0 7px;font-weight:400}footer>span:first-child{color:#94afc6;font-size:12px;letter-spacing:2px}
+/* The diagram geometry and semantic IDs below come from the unmodified Archify renderer. */
+svg .c-grid{stroke:#23435c;fill:none;opacity:.18}svg .c-mask{fill:var(--mask);stroke:none}svg .c-frontend{fill:var(--frontend-fill);stroke:var(--frontend-stroke)}svg .c-backend{fill:var(--backend-fill);stroke:var(--backend-stroke)}svg .c-database{fill:var(--database-fill);stroke:var(--database-stroke)}svg .c-cloud{fill:var(--cloud-fill);stroke:var(--cloud-stroke)}svg .c-security{fill:var(--security-fill);stroke:var(--security-stroke)}svg .c-messagebus{fill:var(--messagebus-fill);stroke:var(--messagebus-stroke)}svg .c-external{fill:var(--external-fill);stroke:var(--external-stroke)}svg .t-primary{fill:var(--text)}svg .t-muted{fill:var(--text-muted)}svg .t-dim{fill:var(--text-dim)}svg .t-frontend{fill:var(--frontend-stroke)}svg .t-backend{fill:var(--backend-stroke)}svg .t-database{fill:var(--database-stroke)}svg .t-cloud,svg .t-security{fill:#b5a2ff}svg .t-external{fill:#a4b5d6}svg .a-default{stroke:var(--arrow);fill:none}svg .a-emphasis{stroke:var(--arrow-emphasis);fill:none}svg .a-security{stroke:#b5a2ff;fill:none;stroke-dasharray:5,5}svg .a-dashed{stroke:#a0b8ff;fill:none;stroke-dasharray:4,4}svg .m-default{fill:var(--arrow)}svg .m-emphasis{fill:var(--arrow-emphasis)}svg .m-security{fill:#b5a2ff}svg .m-dashed{fill:#a0b8ff}svg .c-region{fill:#1b36511a;stroke:#31516b;stroke-width:.7;stroke-dasharray:none}svg [data-boundary-label]{fill:#c1d9ed;font-size:11px;font-weight:500;letter-spacing:.6px}svg [data-node-id]{cursor:pointer;transition:opacity .25s,filter .25s}svg [data-node-id] rect{rx:8;stroke-width:1}svg [data-node-id] text[data-node-label]{font-size:17px;font-weight:650}svg [data-node-id] text[data-detail=context]{font-size:9px}svg [data-node-id] text[data-detail=fine]{font-size:8.5px}svg [data-node-id]:hover rect:not(.c-mask){stroke-width:2;filter:drop-shadow(0 0 6px #8fe4ff50)}svg .semantic-sigil{fill:none;stroke:currentColor;stroke-width:1.3;stroke-linecap:round;stroke-linejoin:round;opacity:.75}svg .s-frontend{color:#64d1ff}svg .s-backend{color:#74e9cc}svg .s-cloud,svg .s-security{color:#b5a2ff}svg .s-external{color:#a4b5d6}svg .semantic-sigil .sigil-fill{fill:currentColor;stroke:none}svg [data-edge-id]{transition:opacity .25s,stroke .25s}svg path.knowledge-edge{stroke:#62dcc0;marker-end:url(#knowledge-arrow)}svg g.knowledge-edge text{fill:#83e7ce}svg [data-node-id].dim,svg [data-edge-id].dim{opacity:.14}svg [data-node-id].active rect:not(.c-mask){stroke-width:2.1;filter:drop-shadow(0 0 7px #64d1ff55)}svg [data-node-id].knowledge-node.active rect:not(.c-mask){filter:drop-shadow(0 0 8px #62dcc050)}svg path.active{stroke-width:2.7}svg .flow-particle{stroke-width:2.8;stroke-linecap:round;fill:none;stroke-dasharray:8 64;pointer-events:none;animation:travel 2.8s linear infinite;filter:drop-shadow(0 0 3px currentColor);opacity:.85}@keyframes travel{to{stroke-dashoffset:-144}}
+#detail{position:absolute;right:22px;top:22px;width:340px;background:#132740f5;border:1px solid #4c789a;border-radius:14px;padding:28px;box-shadow:0 20px 80px #0007;backdrop-filter:blur(15px);animation:arrive .2s ease-out}#detail button{position:absolute;right:12px;top:10px;background:none;border:0;font-size:24px;color:#9fb5ca}#detail small{color:#69d1fb;letter-spacing:2px;font-size:11px}#detail h2{font-size:23px;margin:13px 0}#detail p{font-size:15px;line-height:1.9;color:#c0d2e3;margin:0}#detail-foot{border-top:1px solid #35536e;margin-top:20px;padding-top:15px;font-size:12px;line-height:1.8;color:#88acc4}@keyframes arrive{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+#philosophy{position:absolute;inset:0;padding:28px 38px;background:radial-gradient(ellipse at 50% 0,#21324b,#0b1a2b 80%);animation:arrive .2s ease-out;display:flex;flex-direction:column;justify-content:center}.philosophy-title{text-align:center;margin-bottom:22px}.philosophy-title>span{font-size:10px;letter-spacing:3px;color:#8fafd4}.philosophy-title h2{font-weight:600;font-size:30px;margin:10px 0}.philosophy-title p{color:#9cb3ca;font-size:14px}.principles{display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:1330px;width:100%;margin:0 auto}.principles article{border:1px solid #3a4d66;background:linear-gradient(120deg,#2036508c,#10203580);border-radius:12px;padding:20px 24px}.principles article>span{font-size:11px;color:#86c3e9;letter-spacing:1px}.principles article:nth-child(3)>span{color:#74dbc2}.principles h3{font-size:20px;font-weight:550;margin:10px 0}.principles p{font-size:14px;line-height:1.85;color:#aac1d6;margin:0 0 14px}.principles small{display:block;font-size:11px;color:#779ebc;border-top:1px solid #35516a;padding-top:11px}
+@media (max-height:820px){.shell{padding:18px 26px 12px;gap:9px}h1{font-size:26px}.human-strip{min-height:38px;font-size:12px;gap:16px}.masthead .brand-mark{width:45px;height:48px;font-size:30px}.headline-side strong{font-size:14px}.scene-nav button{padding:6px 13px;font-size:12px}.narration{min-height:66px;padding:9px 16px}.narrative-copy h2{font-size:16px}.narrative-copy p{font-size:12px}.philosophy-title{margin-bottom:8px}.philosophy-title h2{font-size:25px}.philosophy-title p{margin:8px 0}.principles{gap:11px}.principles article{padding:12px 18px}.principles h3{font-size:17px;margin:8px 0}.principles p{font-size:12px;margin-bottom:8px}.principles small{padding-top:8px}#philosophy{padding:20px 30px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+svg rect[data-composition-frame-id="0"]{fill:#1a46601a;stroke:#416785}svg rect[data-composition-frame-id="1"]{fill:#124b391a;stroke:#386b63}svg rect[data-composition-frame-id="2"]{fill:#352b4b1a;stroke:#514b73}svg g[data-composition-frame-id="1"] text{fill:#92e8d0}svg g[data-composition-frame-id="2"] text{fill:#c5b6f5}.human-strip>span,.human-strip>em{white-space:nowrap}
+
+.controls #zoom-level{align-self:center;min-width:40px;text-align:center;font-size:12px;color:#94b9d4}.controls #zoom-in,.controls #zoom-out{font-size:18px;padding:4px 10px}.stage.presenting #diagram{margin-right:370px}.stage.presenting .interact-hint{display:none}#auto-explanation{position:absolute;right:22px;top:50%;transform:translateY(-50%);width:326px;padding:26px;border:1px solid #43758f;border-radius:16px;background:linear-gradient(140deg,#1a354c,#102438);box-shadow:0 16px 60px #0004}#auto-step{font-size:12px;letter-spacing:1px;color:#80d8e9}#auto-explanation h2{font-size:24px;line-height:1.55;margin:18px 0}#auto-explanation p{font-size:16px;line-height:1.95;color:#c3d6e7;margin:0}.auto-actions{display:flex;gap:10px;margin-top:24px}.auto-actions button{border:1px solid #42647d;background:#1c3d55;border-radius:8px;padding:9px 14px;font-size:14px}.auto-actions button:hover{background:#2c5470}.stage.presenting .narrative-copy{opacity:.8}#auto-explanation.arriving h2,#auto-explanation.arriving p{animation:arrive .2s ease-out}.stage.presenting #diagram>svg{overflow:hidden}
+@media(max-height:820px){.stage.presenting #diagram{margin-right:305px}#auto-explanation{right:16px;width:279px;padding:20px}#auto-explanation h2{font-size:20px;margin:12px 0}#auto-explanation p{font-size:14px;line-height:1.85}.auto-actions{margin-top:16px}.controls{gap:5px}}
+
+/* 详细讲解拥有独立阅读区域；短提要不挤压图，长正文不遮挡操作。 */
+.stage.presenting #diagram{margin-right:440px}
+.stage.presenting #philosophy{right:440px;overflow:auto}
+#auto-explanation{z-index:2;width:396px;max-height:calc(100% - 36px);display:flex;flex-direction:column;padding:24px}
+#auto-step,#auto-explanation h2,.reading-hint,.auto-actions{flex:none}
+#auto-explanation h2{font-size:22px;line-height:1.5;margin:14px 0}
+#auto-explanation #auto-body{min-height:0;overflow-y:auto;white-space:pre-line;scrollbar-width:thin;line-height:1.8;padding-right:6px}
+#auto-body:focus-visible{outline:2px solid #77d3ff;outline-offset:3px}
+.reading-hint{font-size:12px;color:#8fb3cd;margin-top:14px}
+.auto-actions{margin-top:14px}
+@media(max-height:820px){.stage.presenting #diagram{margin-right:380px}.stage.presenting #philosophy{right:380px;padding:18px}#auto-explanation{width:350px;right:15px;padding:18px;max-height:calc(100% - 24px)}#auto-explanation h2{font-size:19px;margin:10px 0}#auto-explanation #auto-body{font-size:15px;line-height:1.75}.reading-hint{margin-top:10px}.auto-actions{margin-top:10px}.stage.presenting .philosophy-title h2{font-size:22px}.stage.presenting .principles article{padding:12px}.stage.presenting .principles h3{font-size:16px}}
+
+/* 能力域大框内呈现小能力；每个视图有独立的 Archify 布局。 */
+svg [data-boundary-label]{font-size:12px;font-weight:600;letter-spacing:.2px}
+svg [data-node-id] text[data-detail=context]{font-size:11px}
+svg [data-node-id] text[data-detail=fine]{font-size:9px}
+svg .planned-node rect:not(.c-mask){stroke:#d9b985;stroke-dasharray:5 4}
+svg .planned-node text[data-detail=fine]{fill:#d9b985}
+.stage.inspecting #diagram{margin-right:400px}
+#detail{width:356px;max-height:calc(100% - 44px);overflow-y:auto;z-index:2}
+@media(max-height:820px){.stage.inspecting #diagram{margin-right:345px}#detail{right:15px;top:15px;width:315px;max-height:calc(100% - 30px);padding:22px}#detail h2{font-size:20px}#detail p{font-size:14px}}
+svg .t-database{fill:var(--database-stroke)}svg .s-database{color:var(--database-stroke)}
+</style><rect width="100%" height="100%" fill="#081322"/>
+        <title id="archify-diagram-title">知识视图 · 生产、治理、存储与消费</title>
+        <desc id="archify-diagram-description">MAE Flow · 能力架构</desc>
+        <!-- Definitions -->
+        <defs>
+          <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+            <polygon points="0 0, 10 3.5, 0 7" class="m-default" />
+          </marker>
+          <marker id="arrowhead-emphasis" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+            <polygon points="0 0, 10 3.5, 0 7" class="m-emphasis" />
+          </marker>
+          <marker id="arrowhead-security" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+            <polygon points="0 0, 10 3.5, 0 7" class="m-security" />
+          </marker>
+          <marker id="arrowhead-dashed" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+            <polygon points="0 0, 10 3.5, 0 7" class="m-dashed" />
+          </marker>
+          <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+            <path d="M 40 0 L 0 0 0 40" class="c-grid" stroke-width="0.5"/>
+          </pattern>
+        <marker id="knowledge-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#62dcc0"/></marker></defs>
+
+        <!-- Background Grid -->
+        <rect width="100%" height="100%" fill="url(#grid)" />
+
+        <!-- Boundaries (behind everything) -->
+        <rect data-graph-role="structural-frame" data-composition-frame-kind="region" data-composition-frame-id="0" data-composition-frame-label="01  知识生产" x="24" y="50" width="276" height="402" rx="12" class="c-region" stroke-width="1"/>
+
+        <rect data-graph-role="structural-frame" data-composition-frame-kind="region" data-composition-frame-id="1" data-composition-frame-label="02  知识治理" x="356" y="50" width="276" height="402" rx="12" class="c-region" stroke-width="1"/>
+
+        <rect data-graph-role="structural-frame" data-composition-frame-kind="region" data-composition-frame-id="2" data-composition-frame-label="03  外部存储与获取" x="688" y="50" width="276" height="402" rx="12" class="c-region" stroke-width="1"/>
+
+        <rect data-graph-role="structural-frame" data-composition-frame-kind="region" data-composition-frame-id="3" data-composition-frame-label="04  RAG 消费与反馈" x="1020" y="50" width="276" height="402" rx="12" class="c-region" stroke-width="1"/>
+
+        <!-- Connection paths (before components for correct z-order) -->
+        <path data-edge-from="k_retro" data-edge-to="k_adopt" data-edge-key="0" data-edge-id="k_produce_0" data-composition-points="278,114;328,114;328,114;378,114" d="M 278 114 L 328 114 L 328 114 L 378 114" class="knowledge-edge a-emphasis" stroke-width="1.8" marker-end="url(#arrowhead-emphasis)"/>
+        <path data-edge-from="k_component" data-edge-to="k_adopt" data-edge-key="1" data-edge-id="k_produce_1" data-composition-points="278,253;328,253;328,114;378,114" d="M 278 253 L 320 253 Q 328 253 328 245 L 328 122 Q 328 114 336 114 L 378 114" class="knowledge-edge a-emphasis" stroke-width="1.8" marker-end="url(#arrowhead-emphasis)"/>
+        <path data-edge-from="k_business" data-edge-to="k_adopt" data-edge-key="2" data-edge-id="k_produce_2" data-composition-points="278,392;328,392;328,114;378,114" d="M 278 392 L 320 392 Q 328 392 328 384 L 328 122 Q 328 114 336 114 L 378 114" class="knowledge-edge a-emphasis" stroke-width="1.8" marker-end="url(#arrowhead-emphasis)"/>
+        <path data-edge-from="k_adopt" data-edge-to="k_organize" data-edge-key="3" data-edge-id="k_adopt_organize" data-composition-points="494,154;494,213" d="M 494 154 L 494 213" class="knowledge-edge a-emphasis" stroke-width="1.8" marker-end="url(#arrowhead-emphasis)"/>
+        <path data-edge-from="k_organize" data-edge-to="k_scope" data-edge-key="4" data-edge-id="k_organize_scope" data-composition-points="494,293;494,352" d="M 494 293 L 494 352" class="knowledge-edge a-emphasis" stroke-width="1.8" marker-end="url(#arrowhead-emphasis)"/>
+        <path data-edge-from="k_organize" data-edge-to="k_git" data-edge-label="发布知识" data-edge-key="5" data-edge-id="k_to_git" data-composition-points="610,253;660,253;660,114;710,114" d="M 610 253 L 652 253 Q 660 253 660 245 L 660 122 Q 660 114 668 114 L 710 114" class="knowledge-edge a-emphasis" stroke-width="1.8" marker-end="url(#arrowhead-emphasis)"/>
+        <path data-edge-from="k_git" data-edge-to="k_import" data-edge-key="6" data-edge-id="k_get" data-composition-points="826,154;826,213" d="M 826 154 L 826 213" class="a-emphasis" stroke-width="1.8" marker-end="url(#arrowhead-emphasis)"/>
+        <path data-edge-from="k_import" data-edge-to="k_index" data-edge-key="7" data-edge-id="k_build_index" data-composition-points="826,293;826,352" d="M 826 293 L 826 352" class="a-emphasis" stroke-width="1.8" marker-end="url(#arrowhead-emphasis)"/>
+        <path data-edge-from="k_index" data-edge-to="k_search" data-edge-label="建立检索" data-edge-key="8" data-edge-id="k_rag" data-composition-points="942,392;990,392;990,114;1042,114" d="M 942 392 L 982 392 Q 990 392 990 384 L 990 122 Q 990 114 998 114 L 1042 114" class="a-emphasis" stroke-width="1.8" marker-end="url(#arrowhead-emphasis)"/>
+        <path data-edge-from="k_search" data-edge-to="k_apply" data-edge-key="9" data-edge-id="k_use" data-composition-points="1158,154;1158,213" d="M 1158 154 L 1158 213" class="a-emphasis" stroke-width="1.8" marker-end="url(#arrowhead-emphasis)"/>
+        <path data-edge-from="k_apply" data-edge-to="k_feedback" data-edge-key="10" data-edge-id="k_learn" data-composition-points="1158,293;1158,352" d="M 1158 293 L 1158 352" class="knowledge-edge a-emphasis" stroke-width="1.8" marker-end="url(#arrowhead-emphasis)"/>
+        <path data-edge-from="k_feedback" data-edge-to="k_component" data-edge-label="新经验、知识缺口 → 再生产与治理" data-edge-key="11" data-edge-id="k_cycle" data-composition-points="1158,432;1158,478;306,478;306,312;162,312;162,293" d="M 1158 432 L 1158 470 Q 1158 478 1150 478 L 314 478 Q 306 478 306 470 L 306 320 Q 306 312 298 312 L 170 312 Q 162 312 162 304 L 162 293" class="knowledge-edge a-emphasis" stroke-width="1.8" marker-end="url(#arrowhead-emphasis)"/>
+
+        <!-- Components -->
+        <g id="node-k_retro" data-node-id="k_retro" data-node-label="交付经验复盘" tabindex="0" role="button" aria-label="聚焦交付经验复盘，首次交付后的修改 + 检视意见, 01  知识生产" aria-pressed="false" data-node-kind="backend" data-node-sublabel="首次交付后的修改 + 检视意见" data-node-tag="合入后自动生成待审草稿" data-node-context="01  知识生产" class="knowledge-node">
+          <title>交付经验复盘 · 首次交付后的修改 + 检视意见 · 01  知识生产 · 合入后自动生成待审草稿</title>
+          <rect x="46" y="74" width="232" height="80" rx="6" class="c-mask"/>
+          <rect x="46" y="74" width="232" height="80" rx="6" class="c-backend" stroke-width="1.5"/>
+          <g aria-hidden="true" data-semantic-sigil="backend" class="semantic-sigil s-backend" transform="translate(52 80) scale(0.6875)">
+            <path d="M6 3 3 8l3 5M10 3l3 5-3 5"/>
+          </g>
+          <text data-node-label="" data-detail-anchor="" x="162" y="112" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">交付经验复盘</text>
+        <text data-detail="context" x="162" y="128" class="t-muted" font-size="9" text-anchor="middle">首次交付后的修改 + 检视意见</text>
+        <text data-detail="fine" x="162" y="146" class="t-backend" font-size="7" text-anchor="middle">合入后自动生成待审草稿</text>
+        </g>
+
+        <g id="node-k_component" data-node-id="k_component" data-node-label="基础组件萃取" tabindex="0" role="button" aria-label="聚焦基础组件萃取，源码定义 + 跨仓真实调用, 01  知识生产" aria-pressed="false" data-node-kind="backend" data-node-sublabel="源码定义 + 跨仓真实调用" data-node-tag="按语言一键扫描组件仓" data-node-context="01  知识生产" class="knowledge-node">
+          <title>基础组件萃取 · 源码定义 + 跨仓真实调用 · 01  知识生产 · 按语言一键扫描组件仓</title>
+          <rect x="46" y="213" width="232" height="80" rx="6" class="c-mask"/>
+          <rect x="46" y="213" width="232" height="80" rx="6" class="c-backend" stroke-width="1.5"/>
+          <g aria-hidden="true" data-semantic-sigil="backend" class="semantic-sigil s-backend" transform="translate(52 219) scale(0.6875)">
+            <path d="M6 3 3 8l3 5M10 3l3 5-3 5"/>
+          </g>
+          <text data-node-label="" data-detail-anchor="" x="162" y="251" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">基础组件萃取</text>
+        <text data-detail="context" x="162" y="267" class="t-muted" font-size="9" text-anchor="middle">源码定义 + 跨仓真实调用</text>
+        <text data-detail="fine" x="162" y="285" class="t-backend" font-size="7" text-anchor="middle">按语言一键扫描组件仓</text>
+        </g>
+
+        <g id="node-k_business" data-node-id="k_business" data-node-label="资料与源码治理" tabindex="0" role="button" aria-label="聚焦资料与源码治理，业务资料 + 模块源码 + 团队 Skill, 01  知识生产" aria-pressed="false" data-node-kind="backend" data-node-sublabel="业务资料 + 模块源码 + 团队 Skill" data-node-tag="资料 + 源码治理 · 近期接入" data-node-context="01  知识生产" class="knowledge-node planned-node">
+          <title>资料与源码治理 · 业务资料 + 模块源码 + 团队 Skill · 01  知识生产 · 资料 + 源码治理 · 近期接入</title>
+          <rect x="46" y="352" width="232" height="80" rx="6" class="c-mask"/>
+          <rect x="46" y="352" width="232" height="80" rx="6" class="c-backend" stroke-width="1.5"/>
+          <g aria-hidden="true" data-semantic-sigil="backend" class="semantic-sigil s-backend" transform="translate(52 358) scale(0.6875)">
+            <path d="M6 3 3 8l3 5M10 3l3 5-3 5"/>
+          </g>
+          <text data-node-label="" data-detail-anchor="" x="162" y="390" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">资料与源码治理</text>
+        <text data-detail="context" x="162" y="406" class="t-muted" font-size="9" text-anchor="middle">业务资料 + 模块源码 + 团队 Skill</text>
+        <text data-detail="fine" x="162" y="424" class="t-backend" font-size="7" text-anchor="middle">资料 + 源码治理 · 近期接入</text>
+        </g>
+
+        <g id="node-k_adopt" data-node-id="k_adopt" data-node-label="人工审视与采纳" tabindex="0" role="button" aria-label="聚焦人工审视与采纳，可编辑 · 可放弃 · 可追溯, 02  知识治理" aria-pressed="false" data-node-kind="backend" data-node-sublabel="可编辑 · 可放弃 · 可追溯" data-node-tag="草稿经判断后再进入复用" data-node-context="02  知识治理" class="knowledge-node">
+          <title>人工审视与采纳 · 可编辑 · 可放弃 · 可追溯 · 02  知识治理 · 草稿经判断后再进入复用</title>
+          <rect x="378" y="74" width="232" height="80" rx="6" class="c-mask"/>
+          <rect x="378" y="74" width="232" height="80" rx="6" class="c-backend" stroke-width="1.5"/>
+          <g aria-hidden="true" data-semantic-sigil="backend" class="semantic-sigil s-backend" transform="translate(384 80) scale(0.6875)">
+            <path d="M6 3 3 8l3 5M10 3l3 5-3 5"/>
+          </g>
+          <text data-node-label="" data-detail-anchor="" x="494" y="112" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">人工审视与采纳</text>
+        <text data-detail="context" x="494" y="128" class="t-muted" font-size="9" text-anchor="middle">可编辑 · 可放弃 · 可追溯</text>
+        <text data-detail="fine" x="494" y="146" class="t-backend" font-size="7" text-anchor="middle">草稿经判断后再进入复用</text>
+        </g>
+
+        <g id="node-k_organize" data-node-id="k_organize" data-node-label="抽象与定时整理" tabindex="0" role="button" aria-label="聚焦抽象与定时整理，归纳共性 · 合并重复 · 保留例外, 02  知识治理" aria-pressed="false" data-node-kind="backend" data-node-sublabel="归纳共性 · 合并重复 · 保留例外" data-node-tag="整理记录可查，原文保留" data-node-context="02  知识治理" class="knowledge-node">
+          <title>抽象与定时整理 · 归纳共性 · 合并重复 · 保留例外 · 02  知识治理 · 整理记录可查，原文保留</title>
+          <rect x="378" y="213" width="232" height="80" rx="6" class="c-mask"/>
+          <rect x="378" y="213" width="232" height="80" rx="6" class="c-backend" stroke-width="1.5"/>
+          <g aria-hidden="true" data-semantic-sigil="backend" class="semantic-sigil s-backend" transform="translate(384 219) scale(0.6875)">
+            <path d="M6 3 3 8l3 5M10 3l3 5-3 5"/>
+          </g>
+          <text data-node-label="" data-detail-anchor="" x="494" y="251" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">抽象与定时整理</text>
+        <text data-detail="context" x="494" y="267" class="t-muted" font-size="9" text-anchor="middle">归纳共性 · 合并重复 · 保留例外</text>
+        <text data-detail="fine" x="494" y="285" class="t-backend" font-size="7" text-anchor="middle">整理记录可查，原文保留</text>
+        </g>
+
+        <g id="node-k_scope" data-node-id="k_scope" data-node-label="范围与来源管理" tabindex="0" role="button" aria-label="聚焦范围与来源管理，语言 · 业务模块 · 仓库 · 版本, 02  知识治理" aria-pressed="false" data-node-kind="backend" data-node-sublabel="语言 · 业务模块 · 仓库 · 版本" data-node-tag="规范 / 组件 / 业务 / 经验" data-node-context="02  知识治理" class="knowledge-node">
+          <title>范围与来源管理 · 语言 · 业务模块 · 仓库 · 版本 · 02  知识治理 · 规范 / 组件 / 业务 / 经验</title>
+          <rect x="378" y="352" width="232" height="80" rx="6" class="c-mask"/>
+          <rect x="378" y="352" width="232" height="80" rx="6" class="c-backend" stroke-width="1.5"/>
+          <g aria-hidden="true" data-semantic-sigil="backend" class="semantic-sigil s-backend" transform="translate(384 358) scale(0.6875)">
+            <path d="M6 3 3 8l3 5M10 3l3 5-3 5"/>
+          </g>
+          <text data-node-label="" data-detail-anchor="" x="494" y="390" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">范围与来源管理</text>
+        <text data-detail="context" x="494" y="406" class="t-muted" font-size="9" text-anchor="middle">语言 · 业务模块 · 仓库 · 版本</text>
+        <text data-detail="fine" x="494" y="424" class="t-backend" font-size="7" text-anchor="middle">规范 / 组件 / 业务 / 经验</text>
+        </g>
+
+        <g id="node-k_git" data-node-id="k_git" data-node-label="发布到外部知识仓" tabindex="0" role="button" aria-label="聚焦发布到外部知识仓，Markdown · 自动发布 · 版本, 03  外部存储与获取" aria-pressed="false" data-node-kind="database" data-node-sublabel="Markdown · 自动发布 · 版本" data-node-tag="自动发布 · 近期接入" data-node-context="03  外部存储与获取">
+          <title>发布到外部知识仓 · Markdown · 自动发布 · 版本 · 03  外部存储与获取 · 自动发布 · 近期接入</title>
+          <rect x="710" y="74" width="232" height="80" rx="6" class="c-mask"/>
+          <rect x="710" y="74" width="232" height="80" rx="6" class="c-database" stroke-width="1.5"/>
+          <g aria-hidden="true" data-semantic-sigil="database" class="semantic-sigil s-database" transform="translate(716 80) scale(0.6875)">
+            <ellipse cx="8" cy="4" rx="5" ry="2"/>
+            <path d="M3 4v8c0 1.1 2.2 2 5 2s5-.9 5-2V4M3 8c0 1.1 2.2 2 5 2s5-.9 5-2"/>
+          </g>
+          <text data-node-label="" data-detail-anchor="" x="826" y="112" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">发布到外部知识仓</text>
+        <text data-detail="context" x="826" y="128" class="t-muted" font-size="9" text-anchor="middle">Markdown · 自动发布 · 版本</text>
+        <text data-detail="fine" x="826" y="146" class="t-database" font-size="7" text-anchor="middle">自动发布 · 近期接入</text>
+        </g>
+
+        <g id="node-k_import" data-node-id="k_import" data-node-label="从外部仓库获取" tabindex="0" role="button" aria-label="聚焦从外部仓库获取，选仓库 / 分支 / 文件或文件夹, 03  外部存储与获取" aria-pressed="false" data-node-kind="external" data-node-sublabel="选仓库 / 分支 / 文件或文件夹" data-node-tag="保留相对路径与来源信息" data-node-context="03  外部存储与获取">
+          <title>从外部仓库获取 · 选仓库 / 分支 / 文件或文件夹 · 03  外部存储与获取 · 保留相对路径与来源信息</title>
+          <rect x="710" y="213" width="232" height="80" rx="6" class="c-mask"/>
+          <rect x="710" y="213" width="232" height="80" rx="6" class="c-external" stroke-width="1.5"/>
+          <g aria-hidden="true" data-semantic-sigil="external" class="semantic-sigil s-external" transform="translate(716 219) scale(0.6875)">
+            <rect x="2.5" y="5" width="8.5" height="8" rx="1.5"/>
+            <path d="M8 2.5h5.5V8M13.5 2.5 7.5 8.5"/>
+          </g>
+          <text data-node-label="" data-detail-anchor="" x="826" y="251" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">从外部仓库获取</text>
+        <text data-detail="context" x="826" y="267" class="t-muted" font-size="9" text-anchor="middle">选仓库 / 分支 / 文件或文件夹</text>
+        <text data-detail="fine" x="826" y="285" class="t-external" font-size="7" text-anchor="middle">保留相对路径与来源信息</text>
+        </g>
+
+        <g id="node-k_index" data-node-id="k_index" data-node-label="分节与检索索引" tabindex="0" role="button" aria-label="聚焦分节与检索索引，语义分节 · 原文定位 · 可重建, 03  外部存储与获取" aria-pressed="false" data-node-kind="database" data-node-sublabel="语义分节 · 原文定位 · 可重建" data-node-tag="原文是资产，索引服务检索" data-node-context="03  外部存储与获取">
+          <title>分节与检索索引 · 语义分节 · 原文定位 · 可重建 · 03  外部存储与获取 · 原文是资产，索引服务检索</title>
+          <rect x="710" y="352" width="232" height="80" rx="6" class="c-mask"/>
+          <rect x="710" y="352" width="232" height="80" rx="6" class="c-database" stroke-width="1.5"/>
+          <g aria-hidden="true" data-semantic-sigil="database" class="semantic-sigil s-database" transform="translate(716 358) scale(0.6875)">
+            <ellipse cx="8" cy="4" rx="5" ry="2"/>
+            <path d="M3 4v8c0 1.1 2.2 2 5 2s5-.9 5-2V4M3 8c0 1.1 2.2 2 5 2s5-.9 5-2"/>
+          </g>
+          <text data-node-label="" data-detail-anchor="" x="826" y="390" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">分节与检索索引</text>
+        <text data-detail="context" x="826" y="406" class="t-muted" font-size="9" text-anchor="middle">语义分节 · 原文定位 · 可重建</text>
+        <text data-detail="fine" x="826" y="424" class="t-database" font-size="7" text-anchor="middle">原文是资产，索引服务检索</text>
+        </g>
+
+        <g id="node-k_search" data-node-id="k_search" data-node-label="按需检索 · RAG" tabindex="0" role="button" aria-label="聚焦按需检索 · RAG，knowledge：搜索 → 展开 → 核对, 04  RAG 消费与反馈" aria-pressed="false" data-node-kind="frontend" data-node-sublabel="knowledge：搜索 → 展开 → 核对" data-node-tag="按当前问题查，不整本注入" data-node-context="04  RAG 消费与反馈">
+          <title>按需检索 · RAG · knowledge：搜索 → 展开 → 核对 · 04  RAG 消费与反馈 · 按当前问题查，不整本注入</title>
+          <rect x="1042" y="74" width="232" height="80" rx="6" class="c-mask"/>
+          <rect x="1042" y="74" width="232" height="80" rx="6" class="c-frontend" stroke-width="1.5"/>
+          <g aria-hidden="true" data-semantic-sigil="frontend" class="semantic-sigil s-frontend" transform="translate(1048 80) scale(0.6875)">
+            <rect x="2" y="3" width="12" height="10" rx="2"/>
+            <path d="M2 6.5h12"/>
+            <circle cx="4.1" cy="4.8" r=".7" class="sigil-fill"/>
+            <circle cx="6.3" cy="4.8" r=".7" class="sigil-fill"/>
+          </g>
+          <text data-node-label="" data-detail-anchor="" x="1158" y="112" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">按需检索 · RAG</text>
+        <text data-detail="context" x="1158" y="128" class="t-muted" font-size="9" text-anchor="middle">knowledge：搜索 → 展开 → 核对</text>
+        <text data-detail="fine" x="1158" y="146" class="t-frontend" font-size="7" text-anchor="middle">按当前问题查，不整本注入</text>
+        </g>
+
+        <g id="node-k_apply" data-node-id="k_apply" data-node-label="用于计划与代码" tabindex="0" role="button" aria-label="聚焦用于计划与代码，组件选型 · 实现 · 测试 · 修复, 04  RAG 消费与反馈" aria-pressed="false" data-node-kind="frontend" data-node-sublabel="组件选型 · 实现 · 测试 · 修复" data-node-tag="把“查到”变成“用对”" data-node-context="04  RAG 消费与反馈">
+          <title>用于计划与代码 · 组件选型 · 实现 · 测试 · 修复 · 04  RAG 消费与反馈 · 把“查到”变成“用对”</title>
+          <rect x="1042" y="213" width="232" height="80" rx="6" class="c-mask"/>
+          <rect x="1042" y="213" width="232" height="80" rx="6" class="c-frontend" stroke-width="1.5"/>
+          <g aria-hidden="true" data-semantic-sigil="frontend" class="semantic-sigil s-frontend" transform="translate(1048 219) scale(0.6875)">
+            <rect x="2" y="3" width="12" height="10" rx="2"/>
+            <path d="M2 6.5h12"/>
+            <circle cx="4.1" cy="4.8" r=".7" class="sigil-fill"/>
+            <circle cx="6.3" cy="4.8" r=".7" class="sigil-fill"/>
+          </g>
+          <text data-node-label="" data-detail-anchor="" x="1158" y="251" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">用于计划与代码</text>
+        <text data-detail="context" x="1158" y="267" class="t-muted" font-size="9" text-anchor="middle">组件选型 · 实现 · 测试 · 修复</text>
+        <text data-detail="fine" x="1158" y="285" class="t-frontend" font-size="7" text-anchor="middle">把“查到”变成“用对”</text>
+        </g>
+
+        <g id="node-k_feedback" data-node-id="k_feedback" data-node-label="反馈回到知识生产" tabindex="0" role="button" aria-label="聚焦反馈回到知识生产，交付复盘 · 缺口补充 · 纠错, 04  RAG 消费与反馈" aria-pressed="false" data-node-kind="backend" data-node-sublabel="交付复盘 · 缺口补充 · 纠错" data-node-tag="从这次交付改善下一次开发" data-node-context="04  RAG 消费与反馈" class="knowledge-node">
+          <title>反馈回到知识生产 · 交付复盘 · 缺口补充 · 纠错 · 04  RAG 消费与反馈 · 从这次交付改善下一次开发</title>
+          <rect x="1042" y="352" width="232" height="80" rx="6" class="c-mask"/>
+          <rect x="1042" y="352" width="232" height="80" rx="6" class="c-backend" stroke-width="1.5"/>
+          <g aria-hidden="true" data-semantic-sigil="backend" class="semantic-sigil s-backend" transform="translate(1048 358) scale(0.6875)">
+            <path d="M6 3 3 8l3 5M10 3l3 5-3 5"/>
+          </g>
+          <text data-node-label="" data-detail-anchor="" x="1158" y="390" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">反馈回到知识生产</text>
+        <text data-detail="context" x="1158" y="406" class="t-muted" font-size="9" text-anchor="middle">交付复盘 · 缺口补充 · 纠错</text>
+        <text data-detail="fine" x="1158" y="424" class="t-backend" font-size="7" text-anchor="middle">从这次交付改善下一次开发</text>
+        </g>
+
+        <!-- Connection labels -->
+
+
+
+
+
+        <g data-detail="context" data-edge-from="k_organize" data-edge-to="k_git" data-edge-label="发布知识" data-edge-key="5" data-edge-id="k_to_git" class="knowledge-edge">
+          <rect x="637.8" y="172" width="48.4" height="14" rx="3" class="c-mask"/>
+          <text x="662" y="182" class="t-backend" font-size="8" text-anchor="middle">发布知识</text>
+        </g>
+
+
+        <g data-detail="context" data-edge-from="k_index" data-edge-to="k_search" data-edge-label="建立检索" data-edge-key="8" data-edge-id="k_rag">
+          <rect x="967.8" y="249" width="48.4" height="14" rx="3" class="c-mask"/>
+          <text x="992" y="259" class="t-backend" font-size="8" text-anchor="middle">建立检索</text>
+        </g>
+
+
+        <g data-detail="context" data-edge-from="k_feedback" data-edge-to="k_component" data-edge-label="新经验、知识缺口 → 再生产与治理" data-edge-key="11" data-edge-id="k_cycle" class="knowledge-edge">
+          <rect x="610.6" y="472" width="158.79999999999998" height="14" rx="3" class="c-mask"/>
+          <text x="690" y="482" class="t-backend" font-size="8" text-anchor="middle">新经验、知识缺口 → 再生产与治理</text>
+        </g>
+
+        <!-- Boundary labels (foreground masks keep routes out of titles) -->
+        <g data-graph-role="structural-frame-label" data-composition-frame-id="0" data-composition-frame-kind="region" data-composition-frame-label="01  知识生产">
+          <rect data-graph-role="structural-frame-label-mask" x="28" y="54" width="74.8" height="16" rx="3" class="c-mask"/>
+          <text data-boundary-label="" x="32" y="67" class="t-cloud" font-size="9" font-weight="600">01  知识生产</text>
+        </g>
+
+        <g data-graph-role="structural-frame-label" data-composition-frame-id="1" data-composition-frame-kind="region" data-composition-frame-label="02  知识治理">
+          <rect data-graph-role="structural-frame-label-mask" x="360" y="54" width="74.8" height="16" rx="3" class="c-mask"/>
+          <text data-boundary-label="" x="364" y="67" class="t-cloud" font-size="9" font-weight="600">02  知识治理</text>
+        </g>
+
+        <g data-graph-role="structural-frame-label" data-composition-frame-id="2" data-composition-frame-kind="region" data-composition-frame-label="03  外部存储与获取">
+          <rect data-graph-role="structural-frame-label-mask" x="692" y="54" width="107.2" height="16" rx="3" class="c-mask"/>
+          <text data-boundary-label="" x="696" y="67" class="t-cloud" font-size="9" font-weight="600">03  外部存储与获取</text>
+        </g>
+
+        <g data-graph-role="structural-frame-label" data-composition-frame-id="3" data-composition-frame-kind="region" data-composition-frame-label="04  RAG 消费与反馈">
+          <rect data-graph-role="structural-frame-label-mask" x="1024" y="54" width="107.2" height="16" rx="3" class="c-mask"/>
+          <text data-boundary-label="" x="1028" y="67" class="t-cloud" font-size="9" font-weight="600">04  RAG 消费与反馈</text>
+        </g>
+
+        <!-- Legend -->
+
+      </svg>

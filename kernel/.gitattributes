@@ -1,0 +1,10 @@
+# Keep source releases small. Share assets remain available in the repository.
+docs/share/ export-ignore
+
+# Preserve third-party source byte-for-byte. Generated bundles may contain
+# whitespace that is meaningful to embedded template literals.
+# -text 禁止 EOL 转换:Windows 默认 autocrlf=true 的 git 检出会把 bash 脚本转成
+# CRLF(comet-state.sh 立即死于 `set: pipefail\r`),且四个组件的目录级 SHA-256
+# 全部对不上 manifest——完好的插件被 envcheck 误判"源码损坏"。
+runtime/vendor/** -whitespace -text
+runtime/bin/openspec -text

@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>demo · 问题会话 · MR 检视页签</title>
+<link rel="stylesheet" href="./assets/index-Dd_Ob7YO.css">
+<style>html,body{margin:0;padding:0}</style>
+</head>
+<body>
+
+<!-- ===== 问题会话工作台(原型:真实构建 CSS + 手搭 DOM,类名与组件源码逐字一致)
+     放在 web/public/ 下,构建时原样拷进 dist,不怕被清;css hash 变了要手改链接。 ===== -->
+<section class="workspace-overlay task-workspace-v2 workspace-studio px-4 [--studio-accent:var(--accent)] [--studio-tint:var(--accent-soft)] [--workspace-tab-color:var(--accent)]"
+  role="dialog" aria-label="问题会话:客服后台无法登录">
+
+  <!-- 头部 -->
+  <header class="ws-head">
+    <button type="button" class="ws-back" title="返回问题列表(Esc)">←</button>
+    <div class="ws-identity">
+      <strong>客服后台无法登录,提示会话超时</strong>
+      <div class="ws-identity-line">
+        <span class="group/badge inline-flex h-5 w-fit shrink-0 items-center justify-center gap-1 overflow-hidden rounded-4xl border border-transparent px-2 py-0.5 text-xs font-medium whitespace-nowrap transition-all bg-active-soft text-active">运行中</span>
+        <span class="text-xs text-muted-foreground">提交 MR·跑绿 · 第 2 轮</span>
+        <span class="text-xs text-muted-foreground" title="网管环境(密码在平台加密保管,不上屏)">网管环境 192.0.2.21 · 端口 8443</span>
+        <span class="select-text rounded-full bg-primary/10 px-[7px] py-px font-mono text-xs font-bold text-primary">DTS-20260912-017</span>
+      </div>
+    </div>
+    <div class="ws-progress">
+      <span class="task-progress" aria-label="当前阶段:提交 MR·跑绿">
+        <span class="task-progress-caption">
+          <span>当前进度</span>
+          <strong>提交 MR·跑绿</strong>
+          <em class="task-progress-count">5/5</em>
+          <em class="rounded-full border border-attention/40 bg-attention/10 px-2 py-0.5 text-xs font-bold text-attention">第 2 轮</em>
+        </span>
+        <span class="task-phase-track">
+          <span class="task-phase past is-done" title="获取 DTS 单信息 · 已完成"><i aria-hidden></i><span>获取 DTS 单信息</span></span>
+          <span class="task-phase past is-done" title="拉取代码仓 · 已完成"><i aria-hidden></i><span>拉取代码仓</span></span>
+          <span class="task-phase past is-done" title="问题分析 · 已完成"><i aria-hidden></i><span>问题分析</span></span>
+          <span class="task-phase past is-done" title="问题修复 · 已完成"><i aria-hidden></i><span>问题修复</span></span>
+          <span class="task-phase current" title="提交 MR·跑绿 · 进行中(当前)"><i aria-hidden></i><span>提交 MR·跑绿</span></span>
+        </span>
+      </span>
+    </div>
+    <div class="ws-head-controls">
+      <button type="button" class="group/button inline-flex shrink-0 items-center justify-center rounded-lg border border-transparent bg-clip-padding text-sm font-medium whitespace-nowrap transition-all outline-none select-none border-border bg-background hover:bg-muted hover:text-foreground h-8 gap-1 rounded-[min(var(--radius-md),12px)] px-2.5 text-sm">导出现场记录</button>
+      <button type="button" class="group/button inline-flex shrink-0 items-center justify-center rounded-lg border border-transparent bg-clip-padding text-sm font-medium whitespace-nowrap transition-all outline-none select-none bg-destructive/10 text-destructive hover:bg-destructive/20 h-8 gap-1 rounded-[min(var(--radius-md),12px)] px-2.5 text-sm">终止会话</button>
+    </div>
+  </header>
+
+  <div class="ws-body max-[1100px]:grid-cols-[minmax(0,1fr)]">
+    <!-- 左栏:工作区 -->
+    <section aria-label="会话工作区" class="ws-evidence flex min-w-0 flex-col gap-3.5 overflow-y-auto px-[22px] pb-7">
+      <section aria-label="会话内容" class="flex min-h-80 min-w-0 flex-1 flex-col gap-2.5 min-[1101px]:max-h-[calc(100dvh-150px)]">
+
+        <div style="display:contents" data-slot="tabs" data-orientation="horizontal">
+          <div class="ws-pane-head" aria-label="问题工作台视图">
+            <div><strong>MR 检视</strong></div>
+            <div data-slot="tabs-list" data-variant="line" role="tablist" aria-label="会话工作区内容"
+              class="group/tabs-list inline-flex w-fit items-center justify-center rounded-lg p-[3px] text-muted-foreground group-data-horizontal/tabs:h-8 data-[variant=line]:rounded-none gap-1 bg-transparent h-auto justify-start ws-source-switch">
+
+              <button type="button" role="tab" data-slot="tabs-trigger" aria-selected="false"
+                class="relative inline-flex h-auto flex-none items-center justify-center gap-1.5 rounded-md border border-transparent px-1.5 py-0.5 text-sm font-medium whitespace-nowrap text-foreground/60 transition-all hover:text-foreground after:absolute after:bg-foreground after:opacity-0 after:transition-opacity group-data-horizontal/tabs:after:inset-x-0 group-data-horizontal/tabs:after:bottom-[-5px] group-data-horizontal/tabs:after:h-0.5 group-data-[variant=line]/tabs-list:bg-transparent group-data-[variant=line]/tabs-list:data-active:bg-transparent group-data-[variant=line]/tabs-list:data-active:shadow-none group-data-[variant=line]/tabs-list:data-active:after:opacity-100 data-active:bg-background data-active:text-foreground [--workspace-tab-color:#2f8a5f] data-active:text-[color:color-mix(in_srgb,var(--workspace-tab-color)_62%,var(--text-strong))] data-active:border-[color:color-mix(in_srgb,var(--workspace-tab-color)_34%,var(--line))] data-active:bg-[color:color-mix(in_srgb,var(--workspace-tab-color)_9%,var(--surface))]"><span>元信息</span></button>
+
+              <button type="button" role="tab" data-slot="tabs-trigger" aria-selected="false"
+                class="relative inline-flex h-auto flex-none items-center justify-center gap-1.5 rounded-md border border-transparent px-1.5 py-0.5 text-sm font-medium whitespace-nowrap text-foreground/60 transition-all hover:text-foreground after:absolute after:bg-foreground after:opacity-0 after:transition-opacity group-data-horizontal/tabs:after:inset-x-0 group-data-horizontal/tabs:after:bottom-[-5px] group-data-horizontal/tabs:after:h-0.5 group-data-[variant=line]/tabs-list:bg-transparent group-data-[variant=line]/tabs-list:data-active:bg-transparent group-data-[variant=line]/tabs-list:data-active:shadow-none group-data-[variant=line]/tabs-list:data-active:after:opacity-100 data-active:bg-background data-active:text-foreground [--workspace-tab-color:#d28a31] data-active:text-[color:color-mix(in_srgb,var(--workspace-tab-color)_62%,var(--text-strong))] data-active:border-[color:color-mix(in_srgb,var(--workspace-tab-color)_34%,var(--line))] data-active:bg-[color:color-mix(in_srgb,var(--workspace-tab-color)_9%,var(--surface))]"><span>DTS单据</span></button>
+
+              <button type="button" role="tab" data-slot="tabs-trigger" aria-selected="false"
+                class="relative inline-flex h-auto flex-none items-center justify-center gap-1.5 rounded-md border border-transparent px-1.5 py-0.5 text-sm font-medium whitespace-nowrap text-foreground/60 transition-all hover:text-foreground after:absolute after:bg-foreground after:opacity-0 after:transition-opacity group-data-horizontal/tabs:after:inset-x-0 group-data-horizontal/tabs:after:bottom-[-5px] group-data-horizontal/tabs:after:h-0.5 group-data-[variant=line]/tabs-list:bg-transparent group-data-[variant=line]/tabs-list:data-active:bg-transparent group-data-[variant=line]/tabs-list:data-active:shadow-none group-data-[variant=line]/tabs-list:data-active:after:opacity-100 data-active:bg-background data-active:text-foreground [--workspace-tab-color:#20a28f] data-active:text-[color:color-mix(in_srgb,var(--workspace-tab-color)_62%,var(--text-strong))] data-active:border-[color:color-mix(in_srgb,var(--workspace-tab-color)_34%,var(--line))] data-active:bg-[color:color-mix(in_srgb,var(--workspace-tab-color)_9%,var(--surface))]"><span>分析报告</span><i aria-hidden class="ws-tab-dot size-[7px] min-w-0 rounded-full bg-(--workspace-tab-color) p-0"></i></button>
+
+              <button type="button" role="tab" data-slot="tabs-trigger" aria-selected="false"
+                class="relative inline-flex h-auto flex-none items-center justify-center gap-1.5 rounded-md border border-transparent px-1.5 py-0.5 text-sm font-medium whitespace-nowrap text-foreground/60 transition-all hover:text-foreground after:absolute after:bg-foreground after:opacity-0 after:transition-opacity group-data-horizontal/tabs:after:inset-x-0 group-data-horizontal/tabs:after:bottom-[-5px] group-data-horizontal/tabs:after:h-0.5 group-data-[variant=line]/tabs-list:bg-transparent group-data-[variant=line]/tabs-list:data-active:bg-transparent group-data-[variant=line]/tabs-list:data-active:shadow-none group-data-[variant=line]/tabs-list:data-active:after:opacity-100 data-active:bg-background data-active:text-foreground [--workspace-tab-color:#3b83d5] data-active:text-[color:color-mix(in_srgb,var(--workspace-tab-color)_62%,var(--text-strong))] data-active:border-[color:color-mix(in_srgb,var(--workspace-tab-color)_34%,var(--line))] data-active:bg-[color:color-mix(in_srgb,var(--workspace-tab-color)_9%,var(--surface))]"><span>工作区变更</span></button>
+
+              <button type="button" role="tab" data-slot="tabs-trigger" aria-selected="false"
+                class="relative inline-flex h-auto flex-none items-center justify-center gap-1.5 rounded-md border border-transparent px-1.5 py-0.5 text-sm font-medium whitespace-nowrap text-foreground/60 transition-all hover:text-foreground after:absolute after:bg-foreground after:opacity-0 after:transition-opacity group-data-horizontal/tabs:after:inset-x-0 group-data-horizontal/tabs:after:bottom-[-5px] group-data-horizontal/tabs:after:h-0.5 group-data-[variant=line]/tabs-list:bg-transparent group-data-[variant=line]/tabs-list:data-active:bg-transparent group-data-[variant=line]/tabs-list:data-active:shadow-none group-data-[variant=line]/tabs-list:data-active:after:opacity-100 data-active:bg-background data-active:text-foreground [--workspace-tab-color:#7566df] data-active:text-[color:color-mix(in_srgb,var(--workspace-tab-color)_62%,var(--text-strong))] data-active:border-[color:color-mix(in_srgb,var(--workspace-tab-color)_34%,var(--line))] data-active:bg-[color:color-mix(in_srgb,var(--workspace-tab-color)_9%,var(--surface))]"><span>对话现场</span></button>
+
+              <button type="button" role="tab" data-slot="tabs-trigger" aria-selected="true" data-active
+                class="relative inline-flex h-auto flex-none items-center justify-center gap-1.5 rounded-md border border-transparent px-1.5 py-0.5 text-sm font-medium whitespace-nowrap text-foreground/60 transition-all hover:text-foreground after:absolute after:bg-foreground after:opacity-0 after:transition-opacity group-data-horizontal/tabs:after:inset-x-0 group-data-horizontal/tabs:after:bottom-[-5px] group-data-horizontal/tabs:after:h-0.5 group-data-[variant=line]/tabs-list:bg-transparent group-data-[variant=line]/tabs-list:data-active:bg-transparent group-data-[variant=line]/tabs-list:data-active:shadow-none group-data-[variant=line]/tabs-list:data-active:after:opacity-100 data-active:bg-background data-active:text-foreground [--workspace-tab-color:#c2554f] data-active:text-[color:color-mix(in_srgb,var(--workspace-tab-color)_62%,var(--text-strong))] data-active:border-[color:color-mix(in_srgb,var(--workspace-tab-color)_34%,var(--line))] data-active:bg-[color:color-mix(in_srgb,var(--workspace-tab-color)_9%,var(--surface))] on"><span>MR 检视</span><i aria-hidden class="ws-tab-dot size-[7px] min-w-0 rounded-full bg-(--workspace-tab-color) p-0"></i></button>
+            </div>
+          </div>
+
+          <!-- MR 检视签内容:按仓分组;自行答复可勾选代点已解决;忽略=本地扔+远端了结 -->
+          <div data-slot="tabs-content" role="tabpanel" style="display:contents">
+            <section class="grid gap-2.5" aria-label="MR 检视批注">
+              <div class="flex flex-wrap items-center justify-between gap-2">
+                <div class="flex items-center gap-1.5">
+                  <button type="button" class="h-auto flex-none gap-1.5 rounded-full border px-2.5 py-1 text-xs font-medium border-ink bg-accent-soft text-ink hover:text-ink">待判断与处理中<i class="inline-grid h-4 min-w-4 place-items-center rounded-full bg-muted px-1 font-mono text-[11px] not-italic tabular-nums">3</i></button>
+                  <button type="button" class="h-auto flex-none gap-1.5 rounded-full border px-2.5 py-1 text-xs font-medium border-line text-muted-foreground">本地已闭环<i class="inline-grid h-4 min-w-4 place-items-center rounded-full bg-muted px-1 font-mono text-[11px] not-italic tabular-nums">2</i></button>
+                </div>
+                <button type="button" class="group/button inline-flex shrink-0 items-center justify-center rounded-lg border border-transparent bg-clip-padding text-sm font-medium whitespace-nowrap transition-all outline-none select-none bg-primary text-primary-foreground hover:bg-primary/80 h-8 gap-1 rounded-[min(var(--radius-md),12px)] px-2.5 text-sm">提交 3 条修改意见</button>
+              </div>
+              <p class="m-0 text-xs leading-relaxed text-muted-foreground">责任人先判断：Agent处理连同补充要求批量交办；自行答复可勾选同时在 CodeHub 标已解决；忽略也会代点已解决。远端以 CodeHub 为准。</p>
+
+              <!-- 仓分组:customer-web -->
+              <div class="grid gap-2">
+                <div class="flex items-center gap-2">
+                  <span class="font-mono text-xs font-bold tracking-wide text-ink">customer-web</span>
+                  <i class="rounded-full bg-surface-3 px-2 py-0.5 not-italic text-xs text-muted-foreground">1 条</i>
+                </div>
+                <ol class="m-0 flex list-none flex-col gap-2 p-0">
+                  <li class="grid gap-1.5 rounded-lg bg-surface-2 p-2.5 text-[13px]">
+                    <div class="flex flex-wrap items-center justify-between gap-2">
+                      <code class="font-mono text-xs text-muted-foreground">张伟 · web/src/auth/session.ts:87</code>
+                      <span class="group/badge inline-flex h-5 w-fit shrink-0 items-center justify-center gap-1 overflow-hidden rounded-4xl border border-transparent px-2 py-0.5 text-xs font-medium whitespace-nowrap transition-all bg-attention-soft text-attention">待你判断</span>
+                    </div>
+                    <p class="m-0 leading-relaxed">登录超时阈值写死 30 秒,弱网与跨洋专线场景会大面积误伤;建议改为可配置项并默认放宽到 120 秒,同时超时文案要区分「网络慢」和「会话过期」两种情况。</p>
+                    <div class="flex flex-wrap items-center gap-1.5">
+                      <a class="text-xs text-ink underline underline-offset-2 hover:text-ink-hover" href="#" onclick="return false">打开 MR</a>
+                      <button type="button" class="group/button inline-flex shrink-0 items-center justify-center rounded-lg border border-transparent bg-clip-padding text-sm font-medium whitespace-nowrap transition-all outline-none select-none hover:bg-muted hover:text-foreground h-6 px-1.5 text-xs">Agent处理</button>
+                      <button type="button" class="group/button inline-flex shrink-0 items-center justify-center rounded-lg border border-transparent bg-clip-padding text-sm font-medium whitespace-nowrap transition-all outline-none select-none hover:bg-muted hover:text-foreground h-6 px-1.5 text-xs">自行答复</button>
+                      <button type="button" title="本地忽略并留痕,同时在 CodeHub 把这条讨论标记为已解决" class="group/button inline-flex shrink-0 items-center justify-center rounded-lg border border-transparent bg-clip-padding text-sm font-medium whitespace-nowrap transition-all outline-none select-none hover:bg-muted hover:text-foreground h-6 px-1.5 text-xs">忽略</button>
+                    </div>
+                  </li>
+                </ol>
+              </div>
+
+              <!-- 仓分组:gateway-core(李强卡演示「自行答复」展开态:勾选代点已解决) -->
+              <div class="grid gap-2">
+                <div class="flex items-center gap-2">
+                  <span class="font-mono text-xs font-bold tracking-wide text-ink">gateway-core</span>
+                  <i class="rounded-full bg-surface-3 px-2 py-0.5 not-italic text-xs text-muted-foreground">2 条</i>
+                </div>
+                <ol class="m-0 flex list-none flex-col gap-2 p-0">
+                  <li class="grid gap-1.5 rounded-lg bg-surface-2 p-2.5 text-[13px]">
+                    <div class="flex flex-wrap items-center justify-between gap-2">
+                      <code class="font-mono text-xs text-muted-foreground">李强 · src/gateway/proxy.go:203</code>
+                      <span class="group/badge inline-flex h-5 w-fit shrink-0 items-center justify-center gap-1 overflow-hidden rounded-4xl border border-transparent px-2 py-0.5 text-xs font-medium whitespace-nowrap transition-all bg-attention-soft text-attention">待你判断</span>
+                    </div>
+                    <p class="m-0 leading-relaxed">代理层重试没有上限,上游抖动时会把连接池打满、放大故障;至少加指数退避,并限制单请求最多重试 2 次。</p>
+                    <div class="flex flex-wrap items-center gap-1.5">
+                      <a class="text-xs text-ink underline underline-offset-2 hover:text-ink-hover" href="#" onclick="return false">打开 MR</a>
+                      <button type="button" class="group/button inline-flex shrink-0 items-center justify-center rounded-lg border border-transparent bg-clip-padding text-sm font-medium whitespace-nowrap transition-all outline-none select-none border-ink bg-accent-soft text-ink h-6 px-1.5 text-xs">自行答复</button>
+                      <button type="button" title="本地忽略并留痕,同时在 CodeHub 把这条讨论标记为已解决" class="group/button inline-flex shrink-0 items-center justify-center rounded-lg border border-transparent bg-clip-padding text-sm font-medium whitespace-nowrap transition-all outline-none select-none hover:bg-muted hover:text-foreground h-6 px-1.5 text-xs">忽略</button>
+                    </div>
+                    <div class="grid gap-1.5">
+                      <textarea rows="2" class="min-h-0 w-full rounded-md border border-border bg-surface p-2 text-[13px] outline-none focus:border-ring" placeholder="写下你的处理说明,不会发到远端 MR">已按建议加了指数退避,单请求最多重试 2 次,这轮 MR 里能看到。</textarea>
+                      <label class="flex items-center gap-1.5 text-xs text-muted-foreground">
+                        <input type="checkbox" class="accent-primary" checked>
+                        同时在 CodeHub 把这条讨论标记为已解决
+                      </label>
+                      <div class="flex gap-1.5">
+                        <button type="button" class="group/button inline-flex shrink-0 items-center justify-center rounded-lg border border-transparent bg-clip-padding text-sm font-medium whitespace-nowrap transition-all outline-none select-none bg-primary text-primary-foreground hover:bg-primary/80 h-6 px-2 text-xs">保存</button>
+                        <button type="button" class="group/button inline-flex shrink-0 items-center justify-center rounded-lg border border-transparent bg-clip-padding text-sm font-medium whitespace-nowrap transition-all outline-none select-none hover:bg-muted hover:text-foreground h-6 px-2 text-xs">取消</button>
+                      </div>
+                    </div>
+                  </li>
+
+                  <li class="grid gap-1.5 rounded-lg bg-surface-2 p-2.5 text-[13px]">
+                    <div class="flex flex-wrap items-center justify-between gap-2">
+                      <code class="font-mono text-xs text-muted-foreground">王芳 · src/taskService.go:512</code>
+                      <span class="group/badge inline-flex h-5 w-fit shrink-0 items-center justify-center gap-1 overflow-hidden rounded-4xl border border-transparent px-2 py-0.5 text-xs font-medium whitespace-nowrap transition-all bg-active-soft text-active">已交办 · 待核对结果</span>
+                    </div>
+                    <p class="m-0 leading-relaxed">错误日志把用户手机号明文落盘,先脱敏再写;历史日志要有清理方案,不能只管新增。</p>
+                    <p class="m-0 whitespace-pre-wrap border-l-2 border-l-line-strong pl-2.5 text-xs text-muted-foreground">责任人补充:已让 AI 按掩码方案修改,UT 重跑中。</p>
+                    <div class="flex flex-wrap items-center gap-1.5">
+                      <a class="text-xs text-ink underline underline-offset-2 hover:text-ink-hover" href="#" onclick="return false">打开 MR</a>
+                    </div>
+                  </li>
+                </ol>
+              </div>
+            </section>
+          </div>
+        </div>
+      </section>
+    </section>
+
+    <!-- 右栏:协作流(示意) -->
+    <section aria-label="与 Agent 协作" class="ws-side min-w-0 max-[1100px]:order-first max-[1100px]:max-h-[46vh]">
+      <div class="flex h-full min-h-0 flex-col gap-2 rounded-xl border border-border bg-surface p-3">
+        <div class="flex items-center justify-between text-xs text-muted-foreground">
+          <strong class="text-sm text-text-strong">与 Agent 协作</strong>
+          <span>自动直播</span>
+        </div>
+        <div class="flex min-h-0 flex-1 flex-col justify-end gap-2 overflow-y-auto text-[13px]">
+          <div class="max-w-[85%] self-start rounded-2xl rounded-bl-md bg-surface-2 px-3 py-2 leading-relaxed">MR 流水线两仓均在跑,全绿后进入验绿收口;检视意见 5 条已同步到「MR 检视」页签。</div>
+          <div class="max-w-[85%] self-end rounded-2xl rounded-br-md bg-primary/10 px-3 py-2 leading-relaxed">王芳那条脱敏的意见先出方案再动手,不要直接改。</div>
+          <div class="max-w-[85%] self-start rounded-2xl rounded-bl-md bg-surface-2 px-3 py-2 leading-relaxed">收到:先给脱敏方案(掩码规则+历史日志清理),方案过目后再改代码。</div>
+        </div>
+        <div class="flex items-center gap-2 rounded-lg border border-border bg-surface-2 px-3 py-2 text-muted-foreground">
+          <span class="flex-1">回复 Agent…</span>
+          <span class="rounded-md bg-primary px-2 py-1 text-xs text-primary-foreground">发送</span>
+        </div>
+      </div>
+    </section>
+  </div>
+</section>
+
+</body>
+</html>

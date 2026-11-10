@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# 推送前跑 scripts/gate.sh(类型 + 秒级契约测试)。启用:git config core.hooksPath .githooks
+# 跳过一次:MFC_SKIP_GATE=1 git push(闸门本身坏了才用,并在提交里说明)。
+if [ "${MFC_SKIP_GATE:-}" = "1" ]; then
+  echo "[gate] MFC_SKIP_GATE=1,本次跳过闸门" >&2
+  exit 0
+fi
+exec "$(git rev-parse --show-toplevel)/scripts/gate.sh"

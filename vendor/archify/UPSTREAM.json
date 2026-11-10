@@ -1,0 +1,7 @@
+{
+  "repository": "https://github.com/tt-a1i/archify",
+  "commit": "10722002bb8777ecb639d93c49586fae4adf3ae4",
+  "version": "2.17.0-dev.1",
+  "license": "MIT",
+  "runtime": "Unmodified assets, renderers and schemas; direct typed renderer entry points, no CLI update check or package installation."
+}

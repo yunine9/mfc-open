@@ -1,0 +1,145 @@
+{
+  "schema_version": 1,
+  "case_fields": [
+    "case",
+    "operation_family",
+    "command",
+    "context",
+    "expected"
+  ],
+  "cases": [
+    {
+      "case": "blocked_recursive_delete_outside_task_temp",
+      "operation_family": "filesystem",
+      "command": {"argv": ["rm", "-rf", "build"]},
+      "context": {"working_directory": "/repo", "task_owned_temp_dir": "/repo/.tmp/task-7", "source_edit_confirmed": true, "authorized_manifest": {"authorized": true, "files": ["build/cache"]}, "preexisting_dirty_files": []},
+      "expected": {"allowed": false}
+    },
+    {
+      "case": "blocked_git_reset_hard",
+      "operation_family": "git_destructive",
+      "command": {"argv": ["git", "reset", "--hard", "HEAD"]},
+      "context": {"working_directory": "/repo", "task_owned_temp_dir": "/repo/.tmp/task-7", "source_edit_confirmed": true, "authorized_manifest": {"authorized": true, "files": []}, "preexisting_dirty_files": []},
+      "expected": {"allowed": false}
+    },
+    {
+      "case": "allowed_git_add_dot",
+      "operation_family": "git_staging",
+      "command": {"argv": ["git", "add", "."]},
+      "context": {"working_directory": "/repo", "task_owned_temp_dir": "/repo/.tmp/task-7", "source_edit_confirmed": true, "authorized_manifest": {"authorized": true, "files": ["src/a.cpp"]}, "preexisting_dirty_files": []},
+      "expected": {"allowed": true}
+    },
+    {
+      "case": "allowed_git_add_all",
+      "operation_family": "git_staging",
+      "command": {"argv": ["git", "add", "-A"]},
+      "context": {"working_directory": "/repo", "task_owned_temp_dir": "/repo/.tmp/task-7", "source_edit_confirmed": true, "authorized_manifest": {"authorized": true, "files": ["src/a.cpp"]}, "preexisting_dirty_files": []},
+      "expected": {"allowed": true}
+    },
+    {
+      "case": "allowed_git_add_directory_pathspec",
+      "operation_family": "git_staging",
+      "command": {"argv": ["git", "add", "src/"]},
+      "context": {"working_directory": "/repo", "task_owned_temp_dir": "/repo/.tmp/task-7", "source_edit_confirmed": true, "authorized_manifest": {"authorized": true, "files": ["src/a.cpp"]}, "preexisting_dirty_files": []},
+      "expected": {"allowed": true}
+    },
+    {
+      "case": "allowed_git_commit_all",
+      "operation_family": "git_commit",
+      "command": {"argv": ["git", "commit", "-a", "-m", "update"]},
+      "context": {"working_directory": "/repo", "task_owned_temp_dir": "/repo/.tmp/task-7", "source_edit_confirmed": true, "authorized_manifest": {"authorized": true, "files": ["src/a.cpp"]}, "preexisting_dirty_files": []},
+      "expected": {"allowed": true}
+    },
+    {
+      "case": "allowed_git_commit_without_authorized_manifest",
+      "operation_family": "git_commit",
+      "command": {"argv": ["git", "commit", "-m", "update"]},
+      "context": {"working_directory": "/repo", "task_owned_temp_dir": "/repo/.tmp/task-7", "source_edit_confirmed": true, "authorized_manifest": {"authorized": false, "files": ["src/a.cpp"]}, "preexisting_dirty_files": []},
+      "expected": {"allowed": true}
+    },
+    {
+      "case": "blocked_git_push_without_authorized_manifest",
+      "operation_family": "git_publish",
+      "command": {"argv": ["git", "push", "origin", "main"]},
+      "context": {"working_directory": "/repo", "task_owned_temp_dir": "/repo/.tmp/task-7", "source_edit_confirmed": true, "authorized_manifest": {"authorized": false, "files": ["src/a.cpp"]}, "preexisting_dirty_files": []},
+      "expected": {"allowed": false}
+    },
+    {
+      "case": "blocked_protected_mae_flow_control_edit",
+      "operation_family": "protected_control",
+      "command": {"argv": ["sed", "-i", "", "s/a/b/", ".mae-flow.yml"]},
+      "context": {"working_directory": "/repo", "task_owned_temp_dir": "/repo/.tmp/task-7", "source_edit_confirmed": true, "authorized_manifest": {"authorized": true, "files": [".mae-flow.yml"]}, "preexisting_dirty_files": []},
+      "expected": {"allowed": false}
+    },
+    {
+      "case": "allowed_source_edit_without_step_authorization",
+      "operation_family": "source_edit",
+      "command": {"argv": ["apply_patch", "src/a.cpp"]},
+      "context": {"working_directory": "/repo", "task_owned_temp_dir": "/repo/.tmp/task-7", "source_edit_confirmed": false, "authorized_manifest": {"authorized": true, "files": ["src/a.cpp"]}, "preexisting_dirty_files": []},
+      "expected": {"allowed": true}
+    },
+    {
+      "case": "allowed_preexisting_dirty_file_smuggling",
+      "operation_family": "git_staging",
+      "command": {"argv": ["git", "add", "src/a.cpp", "docs/user-notes.md"]},
+      "context": {"working_directory": "/repo", "task_owned_temp_dir": "/repo/.tmp/task-7", "source_edit_confirmed": true, "authorized_manifest": {"authorized": true, "files": ["src/a.cpp"]}, "preexisting_dirty_files": ["docs/user-notes.md"]},
+      "expected": {"allowed": true}
+    },
+    {
+      "case": "allowed_authorized_source_edit",
+      "operation_family": "source_edit",
+      "command": {"argv": ["apply_patch", "src/a.cpp"]},
+      "context": {"working_directory": "/repo", "task_owned_temp_dir": "/repo/.tmp/task-7", "source_edit_confirmed": true, "authorized_manifest": {"authorized": true, "files": ["src/a.cpp"]}, "preexisting_dirty_files": []},
+      "expected": {"allowed": true}
+    },
+    {
+      "case": "allowed_exact_file_git_add",
+      "operation_family": "git_staging",
+      "command": {"argv": ["git", "add", "src/a.cpp", "tests/a_test.cpp"]},
+      "context": {"working_directory": "/repo", "task_owned_temp_dir": "/repo/.tmp/task-7", "source_edit_confirmed": true, "authorized_manifest": {"authorized": true, "files": ["src/a.cpp", "tests/a_test.cpp"]}, "preexisting_dirty_files": []},
+      "expected": {"allowed": true}
+    },
+    {
+      "case": "allowed_windows_exact_file_git_add",
+      "operation_family": "git_staging",
+      "command": {"argv": ["git", "add", "C:\\work\\repo\\src\\a.cpp"]},
+      "context": {"working_directory": "C:\\work\\repo", "task_owned_temp_dir": "C:\\work\\repo\\.tmp\\task-7", "source_edit_confirmed": true, "authorized_manifest": {"authorized": true, "files": ["C:\\work\\repo\\src\\a.cpp"]}, "preexisting_dirty_files": []},
+      "expected": {"allowed": true}
+    },
+    {
+      "case": "allowed_read_only_git",
+      "operation_family": "git_read_only",
+      "command": {"argv": ["git", "status", "--short"]},
+      "context": {"working_directory": "/repo", "task_owned_temp_dir": "/repo/.tmp/task-7", "source_edit_confirmed": false, "authorized_manifest": {"authorized": false, "files": []}, "preexisting_dirty_files": ["docs/user-notes.md"]},
+      "expected": {"allowed": true}
+    },
+    {
+      "case": "allowed_build_command",
+      "operation_family": "build",
+      "command": {"argv": ["cmake", "--build", "build"]},
+      "context": {"working_directory": "/repo", "task_owned_temp_dir": "/repo/.tmp/task-7", "source_edit_confirmed": false, "authorized_manifest": {"authorized": false, "files": []}, "preexisting_dirty_files": []},
+      "expected": {"allowed": true}
+    },
+    {
+      "case": "allowed_user_owned_dirty_file_untouched",
+      "operation_family": "source_edit",
+      "command": {"argv": ["apply_patch", "src/a.cpp"]},
+      "context": {"working_directory": "/repo", "task_owned_temp_dir": "/repo/.tmp/task-7", "source_edit_confirmed": true, "authorized_manifest": {"authorized": true, "files": ["src/a.cpp"]}, "preexisting_dirty_files": ["docs/user-notes.md"]},
+      "expected": {"allowed": true}
+    },
+    {
+      "case": "allowed_malformed_non_dangerous_command",
+      "operation_family": "malformed_non_dangerous",
+      "command": {"argv": ["git", "status", "--definitely-not-an-option"]},
+      "context": {"working_directory": "/repo", "task_owned_temp_dir": "/repo/.tmp/task-7", "source_edit_confirmed": false, "authorized_manifest": {"authorized": false, "files": []}, "preexisting_dirty_files": []},
+      "expected": {"allowed": true}
+    },
+    {
+      "case": "allowed_immediate_exit",
+      "operation_family": "immediate_exit",
+      "command": {"argv": ["exit", "0"]},
+      "context": {"working_directory": "/repo", "task_owned_temp_dir": "/repo/.tmp/task-7", "source_edit_confirmed": false, "authorized_manifest": {"authorized": false, "files": []}, "preexisting_dirty_files": []},
+      "expected": {"allowed": true}
+    }
+  ]
+}

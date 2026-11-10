@@ -1,0 +1,1 @@
+"""Quality application use cases."""

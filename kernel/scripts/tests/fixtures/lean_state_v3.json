@@ -1,0 +1,15 @@
+{
+  "schema_version": 3,
+  "engine": "lean-v1",
+  "ticket": "REQ-7",
+  "path": "full",
+  "phase": "startup",
+  "commit_pace": "continuous",
+  "status": "active",
+  "artifacts": [],
+  "decisions": [],
+  "risks": [],
+  "capabilities": [],
+  "delivery_files": [],
+  "initial_dirty": []
+}

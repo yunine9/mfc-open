@@ -1,0 +1,56 @@
+node_modules
+*.log
+.probe/
+.tasks/
+.local/
+.pilot/
+.pi/
+.agents/
+.ui-fixtures/
+.knowledge-preview-*/
+# 原型稿与截图(设计过程中的临时产物,不进仓)
+.prototype/
+# 本机 ZCode 配置
+.zcodeignore
+web/dist/
+web/*.tsbuildinfo
+/*.tsbuildinfo
+# 内核在仓根落的临时工作目录(probe/用例跑内核时生成)
+.mae-flow-work/
+.mae-flow.json*
+.mae-flow.json.exited
+.mae-flow-history.jsonl
+openspec/config.yaml
+.zcode/
+__pycache__/
+
+# codegraph index cache
+.codegraph/
+
+# CodeAgentCLI 本地配置/缓存
+.cac/
+
+# 嵌套的外部仓库(不应导出)
+repo/
+
+# 变更导出包
+changes-*.zip
+changes-*/
+
+# 本机部署脚本不进入代码仓
+/scripts/deploy.sh
+
+# 原型脚手架(2026-09-18 曾随 621bb2fe 误提交,PR#313 已从 main 清除)
+.prototype-issue-fixtures/
+
+# 运行时状态:环境台账密封目录(src/environmentRegistry.ts)与实例锁(src/instanceLock.ts),
+# 均落在 <dataDir>(开发时为仓根),属机器本地生成物
+.environment-registry/
+instance.lock
+
+# 本机打包产物不进仓(mfc-deploy.tar.gz / ops-tools.7z 曾搭车误提交,2026-09-18 移除)
+/*.tar.gz
+/*.7z
+
+# video-agent-kit 插件的机器本地标记(内容指向本机插件缓存路径)
+.video_agent/

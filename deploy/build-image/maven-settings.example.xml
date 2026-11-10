@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<settings xmlns="http://maven.apache.org/SETTINGS/1.2.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.2.0 https://maven.apache.org/xsd/settings-1.2.0.xsd">
+  <!-- The cache location is also enforced by MAVEN_OPTS in the image. -->
+  <localRepository>/cache/maven/repository</localRepository>
+
+  <!--
+    Add the approved internal read-only mirror here in the deployment copy.
+    Do not put reusable usernames, passwords or tokens in this file: Agent and
+    repository build scripts share the container identity. Prefer a network
+    proxy / machine identity outside the task container. Mount the completed
+    settings.xml at /etc/mae-flow/maven/settings.xml:ro.
+  -->
+</settings>

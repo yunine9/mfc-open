@@ -1,0 +1,205 @@
+{
+  "schema": "mae-flow-playbook-catalog/1",
+  "standard": {
+    "id": "mae-flow.standard",
+    "version": "2.0.0"
+  },
+  "defaults": {
+    "knowledge_loading": "indexed_on_demand",
+    "customizable": [
+      "optional_activities",
+      "resource_selection",
+      "task_instructions"
+    ],
+    "locked": [
+      "阶段输入输出与退出条件",
+      "真实执行证据与反伪造门禁",
+      "人工决策与风险承担",
+      "Git、写入和外部交付权限"
+    ]
+  },
+  "playbooks": [
+    {
+      "id": "platform.startup",
+      "version": "1.1.0",
+      "title": "可靠开工",
+      "summary": "采用下单事实完成配置核对，选择合适的交付路径，并建立安全的任务分支。",
+      "phase": "启动",
+      "steps": ["config_confirm", "workflow_select", "branch_create"],
+      "activities": [
+        {"id": "reuse-order-facts", "title": "复用下单事实", "description": "已有配置直接采用，缺失信息才询问，避免让用户重复回答。", "required": true},
+        {"id": "confirm-complete-config", "title": "完整配置确认", "description": "把完整配置和具体取值交给用户一次确认。", "required": true},
+        {"id": "create-task-branch", "title": "建立任务分支", "description": "创建并验证与本单绑定的交付分支。", "required": true},
+        {"id": "environment-readiness", "title": "提前核对开发环境", "description": "在正式探索前确认仓库构建入口与关键依赖是否可用，避免后续基于不完整环境猜测。", "required": false}
+      ],
+      "resources": [
+        {"id": "order-facts", "kind": "platform", "name": "下单事实", "usage": "required", "locked": true},
+        {"id": "human-confirmation", "kind": "platform", "name": "结构化人工确认", "usage": "when_needed", "locked": true},
+        {"id": "git-branch-gate", "kind": "platform", "name": "Git 分支门禁", "usage": "required", "locked": true}
+      ],
+      "outputs": ["已确认配置", "交付方式", "任务分支"]
+    },
+    {
+      "id": "platform.requirement-clarification",
+      "version": "1.1.0",
+      "title": "需求澄清与边界收敛",
+      "summary": "先查材料和代码事实，只把真正需要拍板的业务歧义交给用户。",
+      "phase": "澄清需求",
+      "steps": ["grill_ask", "grill"],
+      "activities": [
+        {"id": "multi-angle-precheck", "title": "多维度预检", "description": "从范围、角色、异常、兼容性和验收等维度识别真实缺口。", "required": true},
+        {"id": "facts-before-questions", "title": "事实优先查证", "description": "代码和文档能够回答的问题不占用用户决策。", "required": true},
+        {"id": "group-decisions", "title": "成组拍板", "description": "彼此独立的问题每次集中呈现 3～4 个；有前后依赖或高影响的决定单独询问，并给出依据和建议。", "required": true},
+        {"id": "compatibility-matrix", "title": "兼容性矩阵", "description": "对存量调用方、数据格式或版本组合逐项列出兼容风险与验证方式。", "required": false},
+        {"id": "failure-scenarios", "title": "异常场景清单", "description": "把失败、超时、重试和降级等异常路径单独收敛，避免只讨论理想流程。", "required": false}
+      ],
+      "resources": [
+        {"id": "clarification-guidance", "kind": "guidance", "name": "需求澄清方法", "ref": "guidance/grill.md", "usage": "required"},
+        {"id": "grill-critic", "kind": "agent", "name": "Grill Critic", "usage": "required", "locked": true},
+        {"id": "human-confirmation", "kind": "platform", "name": "结构化人工确认", "usage": "when_needed", "locked": true}
+      ],
+      "outputs": ["澄清工作表", "用户决定台账", "需求澄清结论"]
+    },
+    {
+      "id": "platform.review-triage",
+      "version": "1.1.0",
+      "title": "评审意见裁决",
+      "summary": "逐条核实评审意见，区分真实缺陷、可依据反驳项和需要回到规格层的问题。",
+      "phase": "澄清需求",
+      "steps": ["rf_triage"],
+      "activities": [
+        {"id": "verify-each-comment", "title": "逐条核实", "description": "先以代码和证据验证意见，不做表演式接受。", "required": true},
+        {"id": "record-verdict", "title": "明确裁决", "description": "每条意见落为修复、反驳或回规格轮次。", "required": true},
+        {"id": "cross-comment-root-cause", "title": "合并同源问题", "description": "识别多条意见背后的共同根因，避免逐条打补丁造成新的不一致。", "required": false}
+      ],
+      "resources": [
+        {"id": "review-guidance", "kind": "guidance", "name": "评审意见处理方法", "ref": "guidance/review.md", "usage": "required"},
+        {"id": "human-confirmation", "kind": "platform", "name": "结构化人工确认", "usage": "required", "locked": true}
+      ],
+      "outputs": ["逐条闭环的评审意见"]
+    },
+    {
+      "id": "platform.specification",
+      "version": "1.1.0",
+      "title": "可验证规格定稿",
+      "summary": "把需求原文、澄清决定和相关业务知识收敛为可观察、可验收的范围合同。",
+      "phase": "定规格",
+      "steps": ["open", "hf_open", "tw_open", "design"],
+      "activities": [
+        {"id": "search-domain-knowledge", "title": "按关键词检索领域知识", "description": "只读取与本单相关的业务真相源，避免全量灌入上下文。", "required": true},
+        {"id": "observable-contract", "title": "形成可观察合同", "description": "明确范围、行为、验收条件和不在范围。", "required": true},
+        {"id": "spec-review", "title": "规格检视", "description": "展示完整可检视材料，未决项闭环后才进入设计。", "required": true},
+        {"id": "example-table", "title": "输入输出示例表", "description": "用典型、边界和异常样例把易误解的行为钉成可检查的输入输出。", "required": false}
+      ],
+      "resources": [
+        {"id": "domain-knowledge-index", "kind": "knowledge", "name": "业务模块与领域知识索引", "usage": "on_demand"},
+        {"id": "local-spec-validation", "kind": "platform", "name": "本地 Spec 校验", "usage": "required", "locked": true},
+        {"id": "content-bound-review", "kind": "platform", "name": "内容绑定检视", "usage": "required", "locked": true}
+      ],
+      "outputs": ["本单 Spec", "验收条件", "范围边界"]
+    },
+    {
+      "id": "platform.story-design",
+      "version": "1.1.0",
+      "title": "Story 与实施边界设计",
+      "summary": "将已确认的 WHAT 转换为业务 Story、文件职责和可实施的任务边界。",
+      "phase": "写设计",
+      "steps": ["story", "story_ask"],
+      "activities": [
+        {"id": "story-and-implementation", "title": "生成 Story 与实施附录", "description": "保持业务叙事清楚，同时明确文件结构、接口和任务边界。", "required": true},
+        {"id": "joint-design-review", "title": "一次联合设计检视", "description": "由独立检视角色发现真实设计缺口，避免循环表演式重审。", "required": true},
+        {"id": "human-design-approval", "title": "用户检视定稿", "description": "完整展示产物和未决项，确认后再进入编码。", "required": true},
+        {"id": "dependency-map", "title": "依赖与影响图", "description": "对跨模块、跨仓或关键上下游关系增加一份可核对的依赖与影响说明。", "required": false}
+      ],
+      "resources": [
+        {"id": "story-guidance", "kind": "guidance", "name": "Story 设计方法", "ref": "guidance/story-design.md", "usage": "required"},
+        {"id": "story-generator", "kind": "agent", "name": "Story Generator", "usage": "required", "locked": true},
+        {"id": "craft-reviewer", "kind": "agent", "name": "Craft Reviewer", "usage": "required", "locked": true}
+      ],
+      "outputs": ["Story", "实施附录", "设计检视结论"]
+    },
+    {
+      "id": "platform.construction",
+      "version": "1.1.0",
+      "title": "完整实现与自查",
+      "summary": "在宽编码阶段完成实现、编译自检、测试、精简和规格符合性核对，顺序由 Agent 根据风险决定。",
+      "phase": "写代码",
+      "steps": ["build"],
+      "activities": [
+        {"id": "risk-first-implementation", "title": "风险优先分块实现", "description": "优先处理不确定性最高的接缝，逐块完成并自查。", "required": true},
+        {"id": "repository-native-checks", "title": "按仓库真实入口自检", "description": "允许增量编译和单测作为反馈，但不把本地结果伪装成交付证据。", "required": true},
+        {"id": "tests-and-engineering-standards", "title": "测试与工程规范", "description": "按选中的 Skill 或仓内既有写法补齐测试，并完成精简和规范检查。", "required": true},
+        {"id": "spec-traceability", "title": "规格逐条核对", "description": "每项验收条件都能指向实现位置和真实验证依据。", "required": true},
+        {"id": "impact-scan", "title": "受影响面扫描", "description": "动手前列出关键调用方、数据格式和兼容接缝，完成后逐项回查。", "required": false},
+        {"id": "environment-warmup", "title": "先把开发环境跑完整", "description": "探索早期先执行仓库真实编译入口，拉齐依赖并确认可观察行为，减少基于残缺环境的猜测。", "required": false},
+        {"id": "boundary-test-matrix", "title": "边界测试矩阵", "description": "除主路径外，显式覆盖空值、边界值、兼容输入和失败路径。", "required": false}
+      ],
+      "resources": [
+        {"id": "construction-guidance", "kind": "guidance", "name": "编码实施方法", "ref": "guidance/construction.md", "usage": "on_demand"},
+        {"id": "quality-guidance", "kind": "guidance", "name": "质量出口口径", "ref": "guidance/quality.md", "usage": "on_demand"},
+        {"id": "review-guidance", "kind": "guidance", "name": "评审意见处理方法", "ref": "guidance/review.md", "usage": "on_demand"},
+        {"id": "code-taste-standard", "kind": "standard", "name": "编码基准", "ref": "standards/code-taste-v1.md", "usage": "required"},
+        {"id": "comment-standard", "kind": "standard", "name": "注释规范", "ref": "standards/comment-standard-v1.md", "usage": "required"},
+        {"id": "selected-skills", "kind": "skill", "name": "本任务已选 Skill", "usage": "on_demand"},
+        {"id": "knowledge-index", "kind": "knowledge", "name": "业务与工程知识索引", "usage": "on_demand"},
+        {"id": "workspace-tools", "kind": "tool", "name": "代码检索、文件编辑、容器命令与子 Agent", "usage": "when_needed"}
+      ],
+      "outputs": ["完整代码改动", "配套测试", "任务分支提交", "出门自查结论"]
+    },
+    {
+      "id": "platform.knowledge-archive",
+      "version": "1.1.0",
+      "title": "业务知识增量归档",
+      "summary": "只沉淀本次交付真正新增或修正的领域事实，没有知识变化时明确记录 unchanged。",
+      "phase": "检视与验证",
+      "steps": ["domain_archive", "archive_confirm", "archive"],
+      "activities": [
+        {"id": "identify-knowledge-delta", "title": "识别知识增量", "description": "区分可复用领域事实和只属于本次实现的过程信息。", "required": true},
+        {"id": "archive-or-unchanged", "title": "归档或明确无变化", "description": "有增量则校验后归档，没有增量则留下可审计结论。", "required": true},
+        {"id": "reusable-example", "title": "提炼可复用示例", "description": "当本次实现形成稳定范式时，补充一份最小示例供后续任务按需引用。", "required": false}
+      ],
+      "resources": [
+        {"id": "domain-truth", "kind": "knowledge", "name": "领域真相源", "usage": "on_demand"},
+        {"id": "knowledge-validation", "kind": "platform", "name": "领域知识校验与归档", "usage": "required", "locked": true}
+      ],
+      "outputs": ["领域知识增量或 unchanged 结论"]
+    },
+    {
+      "id": "platform.delivery",
+      "version": "1.2.0",
+      "title": "受控交付与出口验证",
+      "summary": "编码过程中可自由编译和运行 UT；以精确交付清单、绑定 SHA 的权威流水线和人工检视完成交付。独立 Build-Fix 按需使用，基线预热保留。",
+      "phase": "检视与验证",
+      "steps": ["delivery_review", "push", "external_verify", "delivery_watch", "feedback_triage", "moonlight_review"],
+      "activities": [
+        {"id": "exact-delivery-scope", "title": "确认精确交付范围", "description": "只提交本单真实增量，不夹带过程文件和平台注入目录。", "required": true},
+        {"id": "real-prepush-verification", "title": "按需独立验证", "description": "Agent 在编码过程中按改动影响自由编译和运行 UT，记录命令、范围、版本与结果；需要时主动请求独立 Build-Fix，不在交付前强制补跑。基线预热不代表改动已验证。", "required": false},
+        {"id": "sha-bound-pipeline", "title": "绑定 SHA 的流水线核销", "description": "编译、UT、CodeCheck 和远端提交必须属于同一交付版本。", "required": true},
+        {"id": "human-review-and-merge", "title": "等待人工检视与合入", "description": "平台不冒充检视人，也不自动替用户合入。", "required": true},
+        {"id": "delivery-diff-narrative", "title": "交付差异说明", "description": "对本次新增、排除和修复回程中的范围变化给出一份简短可追溯说明。", "required": false}
+      ],
+      "resources": [
+        {"id": "quality-guidance", "kind": "guidance", "name": "质量出口口径", "ref": "guidance/quality.md", "usage": "on_demand"},
+        {"id": "prepush-agent", "kind": "platform", "name": "按需 Build-Fix Agent", "usage": "on_demand"},
+        {"id": "host-git-push", "kind": "platform", "name": "Git 宿主推送", "usage": "required", "locked": true},
+        {"id": "pipeline-and-mr", "kind": "platform", "name": "权威流水线与 MR", "usage": "required", "locked": true}
+      ],
+      "outputs": ["精确交付清单", "实际验证结果（独立 Build-Fix 按需）", "远端 SHA", "流水线与 MR 状态"]
+    },
+    {
+      "id": "platform.merged",
+      "version": "1.0.0",
+      "title": "合入收口",
+      "summary": "MR 合入是持续检视环的唯一出口：宿主以远端真实合入事实收口，任务终态与内核 end 同步。",
+      "phase": "已合入",
+      "steps": ["end"],
+      "activities": [
+        {"id": "merged-close", "title": "以合入事实收口", "description": "只认远端 MR 的真实合入状态，不信任务自述；收口后不再接收新反馈。", "required": true}
+      ],
+      "resources": [
+        {"id": "pipeline-and-mr", "kind": "platform", "name": "权威流水线与 MR", "usage": "required", "locked": true}
+      ],
+      "outputs": ["合入事实与终态"]
+    }
+  ]
+}

@@ -1,0 +1,55 @@
+{
+  "schema": 1,
+  "generated_at": "2026-08-02",
+  "components": {
+    "comet": {
+      "version": "0.3.9",
+      "source": "npm:@rpamis/comet@0.3.9",
+      "license": "runtime/vendor/comet/LICENSE",
+      "mode": "selected official Chinese phase skills and compatibility shell scripts",
+      "sha256": "2957d5a01345e100036326ae755028f0ef33cb021fca09f512d644e0e564967b"
+    },
+    "openspec": {
+      "version": "1.6.0",
+      "source": "npm:@fission-ai/openspec@1.6.0",
+      "license": "runtime/vendor/openspec/LICENSE",
+      "mode": "single-entry esbuild bundled CLI, official schema and generated workflow skills",
+      "sha256": "35ae60d06a203d8416cdfc15e2cbf986cdce44c7cff5f6d48a2af378d6ef8c5f"
+    },
+    "superpowers": {
+      "commit": "3dcbd5c4b48e02263fbf4a3c01e3fe4f81d584d9",
+      "source": "https://github.com/obra/superpowers",
+      "license": "runtime/vendor/superpowers/LICENSE",
+      "mode": "complete upstream skills directory",
+      "sha256": "6b7d4beb56a237c42f0b48a4eeb2fbb27bc0f2f51a9113fa0beb67d6630b1be8"
+    },
+    "ponytail": {
+      "commit": "16f29800fd2681bdf24f3eb4ccffe38be3baec6b",
+      "source": "https://github.com/DietrichGebert/ponytail",
+      "license": "runtime/vendor/ponytail/LICENSE",
+      "mode": "complete upstream skills directory",
+      "sha256": "f7be89723fe90f0e0d3ffaff5ed01fe8f07a6d3e85543d875f5537395fbc1164"
+    },
+    "lizard": {
+      "version": "1.23.0",
+      "commit": "06284ec87c1966fee4ddbf3f068ccf89b987b0f8",
+      "source": "https://github.com/terryyin/lizard/tree/1.23.0",
+      "license": "runtime/vendor/lizard/LICENSE.txt",
+      "mode": "selected analyzer core and C/C++, Java, JavaScript/TypeScript, Python readers",
+      "sha256": "92b32bf6502b80441f2bd1ab923de39d120d046a5c8d41520953965ba6a08f4d"
+    }
+  },
+  "runtime_guidance": {
+    "directory": "runtime/guidance",
+    "loader": "scripts/mae_flow_core/orchestration/native_guidance.py",
+    "names": [
+      "grill",
+      "story-design",
+      "construction",
+      "review",
+      "quality"
+    ],
+    "preservation": "runtime/guidance/capability-preservation.json",
+    "loads_vendor_prompt_text": false
+  }
+}

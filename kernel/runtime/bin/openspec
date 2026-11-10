@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+set -e
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+NODE_BIN="${MAE_FLOW_NODE:-node}"
+
+# Git Bash normally accepts Windows executables directly. Some enterprise
+# images only resolve an absolute C:\... path after cygpath conversion.
+if [ ! -x "$NODE_BIN" ] && command -v cygpath >/dev/null 2>&1; then
+    CONVERTED_NODE="$(cygpath -u "$NODE_BIN" 2>/dev/null || true)"
+    if [ -n "$CONVERTED_NODE" ] && [ -x "$CONVERTED_NODE" ]; then
+        NODE_BIN="$CONVERTED_NODE"
+    fi
+fi
+
+exec "$NODE_BIN" "$SCRIPT_DIR/../vendor/openspec/dist/core/artifact-graph/openspec.mjs" "$@"

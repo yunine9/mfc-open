@@ -1,0 +1,12 @@
+import { moduleType, moduleDot, moduleLegend } from './moduleRoles.ts';
+import { join } from 'node:path';
+import { pathToFileURL } from 'node:url';
+export async function compile(data: any, out: string) {
+  const { default: ELK } = await import(pathToFileURL(join(out,'node_modules/elkjs/lib/elk.bundled.js')).href);
+  if (!Array.isArray(data.modules) || !data.modules.length || !Array.isArray(data.relations)) throw Error('Missing modules/relations');
+  const width=(m:any)=>Math.max(260,[...m.name].length*18+36,[...m.summary].length*12+36);
+  const ids = new Set(data.modules.map((m:any) => m.id));
+  if(ids.size !== data.modules.length || data.relations.some((e:any)=>!ids.has(e.from)||!ids.has(e.to))) throw Error('Duplicate ID or unknown endpoint');
+  const graph = await new ELK().layout({id:'root', layoutOptions:{'elk.algorithm':'layered','elk.direction':'RIGHT','elk.edgeRouting':'ORTHOGONAL','elk.spacing.nodeNode':'90','elk.layered.spacing.nodeNodeBetweenLayers':'160','elk.padding':'[top=80,left=60,bottom=80,right=60]','elk.spacing.edgeNode':'35','elk.layered.spacing.edgeNodeBetweenLayers':'35'}, children:data.modules.map((m:any)=>({id:m.id,width:width(m),height:100,layoutOptions:{'elk.portConstraints':'FIXED_POS'},ports:[{id:m.id+'-out',x:width(m),y:50,width:0,height:0},{id:m.id+'-in',x:0,y:50,width:0,height:0}]})),edges:data.relations.map((e:any,i:number)=>({id:`r${i}`,sources:[e.from+'-out'],targets:[e.to+'-in'],labels:[{text:e.label,width:Math.max(80,e.label.length*12),height:22}]}))});
+  return {schema_version:1,diagram_type:'architecture',meta:{legend:moduleLegend,title:data.title,locale:'zh-CN',subtitle:'模块职责与协作 · 连线不代表任务串行',viewBox:[Math.max(1000,graph.width+80),Math.max(540,graph.height+100)]},components:graph.children.map((n:any)=>{const m=data.modules.find((m:any)=>m.id===n.id);return {id:n.id,type:moduleType(m.type),...(!m.type?{tag:'类型待明确'}:{}),label:m.name,sublabel:m.summary,pos:[n.x,n.y],size:[n.width,n.height]};}),connections:data.relations.map((e:any,i:number)=>{const edge=graph.edges.find((x:any)=>x.id===`r${i}`);const section=edge.sections[0];const label=edge.labels?.[0];return {id:`r${i}`,from:e.from,to:e.to,label:e.label,fromSide:'right',toSide:'left',via:(section.bendPoints||[]).map((p:any)=>[p.x,p.y]),...(label?{labelAt:[label.x+label.width/2,label.y+14]}:{})};}),cards:data.modules.map((m:any)=>({dot:moduleDot(m.type),title:m.name,items:[`职责：${m.responsibility}`,`接口：${m.interfaces}`,`验收：${m.acceptance}`,`依据：${m.evidence}`]}))};
+}

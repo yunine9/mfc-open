@@ -1,0 +1,38 @@
+{
+  "schema": "mae-flow-phases/1",
+  "_comment": [
+    "步骤 → 展示阶段的唯一来源。内核看板、桌面通知、执行方案词表和 Cloud 进度条都读这一份;",
+    "谁都不许在别处再抄一张(2026-09-02 实锤:Cloud 曾自带两套阶段词表,老任务停在哪套显示哪套,",
+    "点阶段名弹方案还因为名字对不上退底版告警)。",
+    "环节不减(用户拍板:前面的流程一个都不能少):只把原来的「交付」改叫「检视与验证」——",
+    "「MR 创建只是微不足道的一步」,从归档、最终检视、推送起直到合入,都是流水线告警、平台批注、",
+    "MR 检视意见不断进环、修复、核验;再加一段终态「已合入」独占 end。",
+    "placeholders 是给 Cloud 用的:内核尚未开工 / 分析主任务不跑内核 / 已收工时,按任务状态占哪一段,",
+    "名字在这里指定,Cloud 侧不写任何阶段字面量。",
+    "漏掉任何 flow.json 步骤都会被 test_panel_notify 的覆盖断言拦下。"
+  ],
+  "phases": [
+    {"name": "启动",
+     "steps": ["config_confirm", "workflow_select", "branch_create"]},
+    {"name": "澄清需求",
+     "steps": ["grill", "grill_ask", "rf_triage"]},
+    {"name": "定规格",
+     "steps": ["open", "hf_open", "tw_open", "design"]},
+    {"name": "写设计",
+     "steps": ["story", "story_ask"]},
+    {"name": "写代码",
+     "steps": ["build"]},
+    {"name": "检视与验证",
+     "steps": ["archive", "archive_confirm", "domain_archive",
+               "delivery_review", "push", "external_verify",
+               "delivery_watch", "feedback_triage", "moonlight_review"]},
+    {"name": "已合入",
+     "steps": ["end"]}
+  ],
+  "placeholders": {
+    "queued": "启动",
+    "analysis": "澄清需求",
+    "delivering": "写代码",
+    "terminal": "已合入"
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "max_lines": {
+    "hooks/dispatch.py": 326,
+    "scripts/mae-flow.py": 10
+  },
+  "max_complexity": {
+    "scripts/mae_flow_core/command_dispatch.py": {
+      "action_route": 1,
+      "flow_route": 1,
+      "invoke": 3
+    },
+    "scripts/mae_flow_core/cli_commands/advancement.py": {
+      "advance": 19
+    },
+    "scripts/mae_flow_core/cli_commands/done_status.py": {
+      "cmd_done": 6
+    },
+    "scripts/mae_flow_core/cli_commands/gate.py": {
+      "cmd_gate": 24,
+      "_gate_edit": 10,
+      "_gate_bash_writes": 23
+    },
+    "scripts/mae_flow_core/cli_commands/codecheck_commands.py": {},
+    "scripts/mae_flow_core/cli_commands/moonlight_commands.py": {
+      "cmd_moonlight": 50,
+      "_moonlight_blocked": 4,
+      "_moonlight_push_failed": 4,
+      "_moonlight_finalize": 5
+    },
+    "scripts/mae_flow_core/cli_commands/dispatch.py": {
+      "main": 6,
+      "_load_dispatch_state": 4,
+      "_dispatch_global_command": 14,
+      "_dispatch_story_localize": 4,
+      "_dispatch_init": 2,
+      "_dispatch_moonlight_start": 2,
+      "_dispatch_action": 2,
+      "_dispatch_runtime_mode": 8,
+      "_dispatch_flow_command": 3
+    }
+  }
+}

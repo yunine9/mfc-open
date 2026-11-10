@@ -1,0 +1,30 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {"hooks": [{"type": "command",
+                  "command": "R=\"$CODEAGENT3_PLUGIN_ROOT\"; if [ -f \"$R/hooks/dispatch.py\" ]; then exec python \"$R/hooks/dispatch.py\" sessionstart; else exit 0; fi", "timeout": 15}]}
+    ],
+    "UserPromptSubmit": [
+      {"hooks": [{"type": "command",
+                  "command": "R=\"$CODEAGENT3_PLUGIN_ROOT\"; if [ -f \"$R/hooks/dispatch.py\" ]; then exec python \"$R/hooks/dispatch.py\" userprompt; else exit 0; fi", "timeout": 15}]}
+    ],
+    "PreToolUse": [
+      {"matcher": "Edit|Write|MultiEdit|Bash|AskUserQuestion|Task|Agent",
+       "hooks": [{"type": "command",
+                  "command": "R=\"$CODEAGENT3_PLUGIN_ROOT\"; if [ -f \"$R/hooks/dispatch.py\" ]; then exec python \"$R/hooks/dispatch.py\" pretooluse; else exit 0; fi", "timeout": 15}]}
+    ],
+    "PostToolUse": [
+      {"matcher": "Write|Edit|MultiEdit|AskUserQuestion|Bash|Task|Agent",
+       "hooks": [{"type": "command",
+                  "command": "R=\"$CODEAGENT3_PLUGIN_ROOT\"; if [ -f \"$R/hooks/dispatch.py\" ]; then exec python \"$R/hooks/dispatch.py\" posttooluse; else exit 0; fi", "timeout": 15}]}
+    ],
+    "SubagentStop": [
+      {"hooks": [{"type": "command",
+                  "command": "R=\"$CODEAGENT3_PLUGIN_ROOT\"; if [ -f \"$R/hooks/dispatch.py\" ]; then exec python \"$R/hooks/dispatch.py\" subagentstop; else exit 0; fi", "timeout": 15}]}
+    ],
+    "Stop": [
+      {"hooks": [{"type": "command",
+                  "command": "R=\"$CODEAGENT3_PLUGIN_ROOT\"; if [ -f \"$R/hooks/dispatch.py\" ]; then exec python \"$R/hooks/dispatch.py\" stop; else exit 0; fi", "timeout": 15}]}
+    ]
+  }
+}

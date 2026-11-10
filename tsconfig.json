@@ -1,0 +1,43 @@
+{
+  "//": "零构建仍要类型检查:tsx 直跑不看类型,写错字段名会静默变 undefined(实测踩过 task.delivery/task.summary.delivery)。npm run typecheck 是唯一用途,不产出文件。web/ 有自己的 tsconfig。lib 刻意**不带 DOM**:根侧是 Node 程序,带上 DOM 之后 name/status/origin/location/close/self 这些浏览器全局会凭空存在,把裸变量名打错从编译错误变成静默通过——正是本仓最想拦的那类坑。唯一要 DOM 的是契约测试(它 import web/src/api.ts,而 api.ts 按 DOM fetch 书写),已拆到 tsconfig.contract.json 单独跑,不拿整个根程序陪绑。paths 映射 @/*→web/src:shadcn 化后 web 组件内部用 @/ 别名,根侧 tests/scripts 直连 web 组件做 node 冒烟/预览时,tsx 按根 tsconfig 解析,没有这条映射 require 直接 MODULE_NOT_FOUND(2026-09-11 ui/Modal→Dialog 迁移实测)。node_modules 解析按文件目录向上走会自然落到 web/node_modules,不受影响。",
+  "compilerOptions": {
+    "noEmit": true,
+    "allowImportingTsExtensions": true,
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "target": "es2022",
+    "lib": [
+      "es2023"
+    ],
+    "skipLibCheck": true,
+    "jsx": "react-jsx",
+    "types": [
+      "node"
+    ],
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./web/src/*"]
+    },
+    "strictNullChecks": true,
+    "noImplicitThis": true,
+    "useUnknownInCatchVariables": false
+  },
+  "include": [
+    "src/**/*.ts",
+    "tests/**/*.ts",
+    "scripts/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "web",
+    "kernel",
+    ".pilot",
+    "tests/issueDescriptionMdHtml.test.ts",
+    "tests/issueFlowContract.test.ts",
+    "tests/rootErrorBoundary.test.ts",
+    "tests/uiDialogSmoke.test.ts",
+    "tests/workflowLibraryUi.test.ts",
+    "tests/composerGitDiffUi.test.ts",
+    "scripts/settings-preview.ts"
+  ]
+}

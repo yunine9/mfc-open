@@ -1,0 +1,63 @@
+{
+  "schema": 1,
+  "behavior_baseline": "phase9",
+  "final_targets": {
+    "max_entrypoint_lines": {
+      "scripts/mae-flow.py": 1500,
+      "hooks/dispatch.py": 800
+    },
+    "max_business_module_lines": 500,
+    "max_policy_complexity": 15,
+    "private_monolith_test_imports": 0
+  },
+  "required_verifications": {
+    "architecture": [
+      "python scripts/tests/test_architecture.py"
+    ],
+    "fault_injection": [
+      "python scripts/tests/test_fault_injection.py"
+    ],
+    "resource_warnings": [
+      "python -W error::ResourceWarning scripts/tests/test_state_core.py",
+      "python -W error::ResourceWarning scripts/tests/test_quality_task_cards.py"
+    ],
+    "selftest": [
+      "python scripts/selftest.py"
+    ],
+    "unit_tests": [
+      "python -m unittest discover -s scripts/tests -p 'test_*.py'"
+    ]
+  },
+  "stages": [
+    {"id": 0, "name": "oracle"},
+    {"id": 1, "name": "evidence"},
+    {"id": 2, "name": "guard-permit-ownership"},
+    {"id": 3, "name": "delivery"},
+    {"id": 4, "name": "quality"},
+    {"id": 5, "name": "hook-agent-contracts"},
+    {"id": 6, "name": "cli-commands"},
+    {"id": 7, "name": "adapters-cleanup"},
+    {"id": 8, "name": "large-core-split"},
+    {"id": 9, "name": "final-proof"}
+  ],
+  "domains": [
+    "runtime",
+    "workflow",
+    "evidence",
+    "gate",
+    "ownership",
+    "delivery",
+    "quality",
+    "hook",
+    "state",
+    "platform"
+  ],
+  "observables": [
+    "stdout",
+    "stderr",
+    "returncode",
+    "files",
+    "state",
+    "git"
+  ]
+}

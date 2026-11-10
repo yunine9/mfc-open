@@ -1,0 +1,400 @@
+{
+ "start": "config_confirm",
+ "state_file": ".mae-flow.json",
+ "compatibility_entries": [
+  "archive",
+  "archive_confirm",
+  "design",
+  "grill_ask",
+  "story_ask"
+ ],
+ "source_patterns": [
+  "(^|/)(service|src|include|lib|app|modules?)/"
+ ],
+ "specs_truth": "(^|/)(?:docs/specs|openspec/specs)/",
+ "steps": {
+  "config_confirm": {
+   "title": "配置确认",
+   "user_ack": true,
+   "require_sets": [
+    "工号",
+    "基线分支",
+    "单号",
+    "单号类型",
+    "需求文档",
+    "编译方式",
+    "UT生成方式",
+    "UT运行命令"
+   ],
+   "next": "workflow_select"
+  },
+  "workflow_select": {
+   "title": "交付方式选择",
+   "user_ack": true,
+   "choice_key": "workflow",
+   "choices": [
+    "full",
+    "hotfix",
+    "tweak",
+    "review"
+   ],
+   "new_order_choices": [
+    "full",
+    "hotfix",
+    "tweak"
+   ],
+   "choice_answers": {
+    "full": [
+     "完整开发"
+    ],
+    "hotfix": [
+     "已定位问题修复"
+    ],
+    "tweak": [
+     "局部修改"
+    ],
+    "review": [
+     "处理评审意见"
+    ]
+   },
+   "choice_descriptions": {
+    "full": "做新功能或较大改动，需求和方案还需要一起梳理",
+    "hotfix": "问题原因和怎么改已经明确，直接修复并验证",
+    "tweak": "只改一小块，目标和范围都很清楚，比如文案、配置或少量代码",
+    "review": "已经有评审或流水线意见，需要逐条核对并修改现有交付"
+   },
+   "next": "branch_create"
+  },
+  "branch_create": {
+   "title": "创建工作分支",
+   "evidence": [
+    {
+     "type": "branch_ok"
+    }
+   ],
+   "next_by": "workflow",
+   "next": {
+    "full": "grill",
+    "hotfix": "hf_open",
+    "tweak": "tw_open",
+    "review": "rf_triage"
+   },
+   "next_default": "full"
+  },
+  "rf_triage": {
+   "title": "处理评审意见 — 意见裁决",
+   "evidence": [
+    {
+     "type": "glob",
+     "any": [
+      ".mae-flow-work/{单号}/review.md"
+     ]
+    },
+    {
+     "type": "content_free",
+     "file": ".mae-flow-work/{单号}/review.md",
+     "patterns": [
+      "待裁决"
+     ],
+     "note": "裁决未闭环:文档残留「待裁决」。每条意见须经 AskUserQuestion 拿用户确认后改为 修复(已确认)/反驳(已确认)/转规格轮次(已确认)"
+    },
+    {
+     "type": "agent_ran",
+     "agent": "ASKUSER"
+    }
+   ],
+   "next": "build"
+  },
+  "grill_ask": {
+   "title": "需求澄清询问",
+   "user_ack": true,
+   "choice_key": "grill",
+   "choices": [
+    "yes",
+    "no"
+   ],
+   "choice_answers": {
+    "yes": [
+     "做需求质询",
+     "做质询"
+    ],
+    "no": [
+     "跳过需求质询",
+     "跳过"
+    ]
+   },
+   "next": {
+    "yes": "grill",
+    "no": "open"
+   }
+  },
+  "grill": {
+   "title": "需求澄清(逐题拍板)",
+   "evidence": [
+    {
+     "type": "glob",
+     "any": [
+      ".mae-flow-work/{单号}/grill-prep.md"
+     ]
+    },
+    {
+     "type": "content_free",
+     "file": ".mae-flow-work/{单号}/grill-prep.md",
+     "patterns": [
+      "待填",
+      "\\{\\{"
+     ],
+     "note": "备课工作表未填完:残留「待填」或「{{占位}}」。8 维每维必须替换掉全部 {{…}} 占位——给出实质结论(有缺口→候选题四要素齐全 / 不适用→具体依据),禁止快速划过某一维后重试"
+    },
+    {
+     "type": "glob",
+     "any": [
+      ".mae-flow-work/{单号}/decisions.md"
+     ]
+    },
+    {
+     "type": "glob",
+     "any": [
+      ".mae-flow-work/{单号}/grill.md"
+     ]
+    },
+    {
+     "type": "agent_ran",
+     "agent": "ASKUSER"
+    },
+    {
+     "type": "agent_ran",
+     "agent": "GRILL_PREP"
+    },
+    {
+     "type": "agent_ran",
+     "agent": "GRILL_FINAL"
+    }
+   ],
+   "next": "open"
+  },
+  "open": {
+   "title": "本地 Spec 确认",
+   "user_ack": true,
+   "approval_subject": {
+    "kind": "artifacts",
+    "artifacts": [
+     "spec"
+    ]
+   },
+   "confirmation_answers": [
+    "Spec 无需再调整，确认生成 Story",
+    "Spec 内容已确认，生成 Story"
+   ],
+   "evidence": [
+    {
+     "type": "local_spec_valid"
+    },
+    {
+     "type": "glob",
+     "any": [
+      ".mae-flow-work/{单号}/grill.md"
+     ]
+    }
+   ],
+   "next": "story"
+  },
+  "design": {
+   "title": "旧版方案设计恢复入口",
+   "next": "story"
+  },
+  "story_ask": {
+   "title": "旧版 Story 选择恢复入口",
+   "next": "story"
+  },
+  "story": {
+   "title": "Story 与实施附录生成及一次设计检视",
+   "user_ack": true,
+   "approval_subject": {
+    "kind": "artifacts",
+    "artifacts": [
+     "story",
+     "implementation"
+    ]
+   },
+   "confirmation_answers": [
+    "Story 与实施附录无需再调整，确认进入编码",
+    "Story 与实施附录已确认，进入编码实现"
+   ],
+   "evidence": [
+    {
+     "type": "glob",
+     "any": [
+      ".mae-flow-work/{单号}/story.md"
+     ]
+    },
+    {
+     "type": "glob",
+     "any": [
+      ".mae-flow-work/{单号}/implementation.md"
+     ]
+    },
+    {
+     "type": "agent_ran",
+     "agent": "STORY",
+     "statuses": [
+      "DONE"
+     ]
+    },
+    {
+     "type": "agent_ran",
+     "agent": "REVIEWER"
+    },
+    {
+     "type": "content_free",
+     "file": ".mae-flow-work/{单号}/story.md",
+     "exclude_markdown_sections": ["5 Story转测自检表"],
+     "patterns": [
+      "待确认"
+     ],
+     "note": "Story 仍有待确认内容；先展示给用户拍板，再完成本步骤唯一一次确认。"
+    },
+    {
+     "type": "content_free",
+     "file": ".mae-flow-work/{单号}/implementation.md",
+     "patterns": [
+      "待确认"
+     ],
+     "note": "实施附录仍有待确认内容；先展示给用户拍板，再完成本步骤唯一一次确认。"
+    }
+   ],
+   "next": "build"
+  },
+  "hf_open": {
+   "title": "已定位问题修复 — 确认修改范围",
+   "user_ack": true,
+   "approval_subject": {
+    "kind": "artifacts",
+    "artifacts": [
+     "spec"
+    ]
+   },
+   "confirmation_answers": [
+    "修改范围无需再调整，确认进入编码",
+    "确认范围并继续"
+   ],
+   "evidence": [
+    {
+     "type": "local_spec_valid"
+    }
+   ],
+   "next": "build"
+  },
+  "tw_open": {
+   "title": "局部修改 — 确认修改范围",
+   "user_ack": true,
+   "approval_subject": {
+    "kind": "artifacts",
+    "artifacts": [
+     "spec"
+    ]
+   },
+   "confirmation_answers": [
+    "修改范围无需再调整，确认进入编码",
+    "确认范围并继续"
+   ],
+   "evidence": [
+    {
+     "type": "local_spec_valid"
+    }
+   ],
+   "next": "build"
+  },
+  "build": {
+   "title": "自由实现与定稿",
+   "clear_hint": true,
+   "evidence": [],
+   "next": "domain_archive"
+  },
+  "domain_archive": {
+   "title": "领域知识归档",
+   "allow_specs_write": true,
+   "evidence": [
+    {
+     "type": "domain_archive_complete"
+    }
+   ],
+   "next": "delivery_review"
+  },
+  "delivery_review": {
+   "title": "最终代码增量检视",
+   "approval_subject": {
+    "kind": "worktree"
+   },
+   "confirmation_answers": [
+    "交付增量无需调整，确认推送",
+    "代码无需调整，按清单交付"
+   ],
+   "evidence": [
+    {
+     "type": "delivery_manifest_committed"
+    }
+   ],
+   "next": "push"
+  },
+  "archive_confirm": {
+   "title": "旧规格定稿确认恢复",
+   "next": "domain_archive"
+  },
+  "archive": {
+   "title": "旧规格定稿恢复",
+   "next": "domain_archive"
+  },
+  "push": {
+   "title": "推送分支",
+   "dynamic_next": [
+    "moonlight_review",
+    "external_verify"
+   ],
+   "evidence": [
+    {
+     "type": "pushed"
+    }
+   ],
+   "next": "end"
+  },
+  "external_verify": {
+   "title": "等待权威流水线",
+   "evidence": [
+    {
+     "type": "pipeline_obligations_passed"
+    }
+   ],
+   "dynamic_next": [
+    "moonlight_review",
+    "delivery_watch",
+    "feedback_triage"
+   ],
+   "next": "end"
+  },
+  "delivery_watch": {
+   "title": "持续检视 — 等待反馈或合入",
+   "dynamic_next": [
+    "feedback_triage",
+    "end"
+   ],
+   "next": "feedback_triage"
+  },
+  "feedback_triage": {
+   "title": "持续检视 — 处理本轮反馈",
+   "clear_hint": true,
+   "dynamic_next": [
+    "delivery_watch"
+   ],
+   "next": "build"
+  },
+  "moonlight_review": {
+   "title": "月光宝盒 — 等待早晨检查",
+   "next": "end"
+  },
+  "end": {
+   "title": "交付完成",
+   "terminal": true
+  }
+ }
+}

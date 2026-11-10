@@ -1,0 +1,57 @@
+# Windows 是唯一生产目标,但开发在 Mac——本工作流把全部发版门检查
+# (selftest 内含 state_core/specengine/capabilities 三套 + 两个探针,
+# specengine 在有 node 的环境会额外跑 13 个与内嵌 CLI 的差分对拍)
+# 放到真实 Windows 上跑:真反斜杠路径、真 Git for Windows/bash.exe、
+# CRLF 检出与 cp936 控制台语义,都是 Mac 上"过了也不算数"的面。
+name: selftest
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  selftest:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-latest, ubuntu-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Run selftest (full release gate)
+        shell: bash
+        # 失败项打成 ::error:: annotations——GitHub 的 job 日志端点要 admin
+        # 权限,annotations 走 checks API 公开可读,远程诊断全靠它。
+        run: |
+          # GitHub 的 shell: bash 默认 -e -o pipefail:selftest 失败会让脚本
+          # 第一行直接终止,annotation 代码永远到不了——先关掉。
+          set +e +o pipefail
+          python scripts/selftest.py 2>&1 | tee selftest.log
+          status=${PIPESTATUS[0]}
+          if [ "$status" -ne 0 ]; then
+            grep "❌" selftest.log | head -10 | while IFS= read -r line; do
+              echo "::error::${line}"
+            done
+            # 日志尾部(硬崩 traceback)
+            tail -60 selftest.log | python -c "import sys; body=sys.stdin.read(); print('::error::LOG_TAIL:' + body.replace('%','%25').replace('\r','%0D').replace('\n','%0A'))"
+            # 子套件失败详情:逐套单跑,各自尾部打独立 annotation(selftest 聚合
+            # 输出里子套件 detail 会被正常回显淹没,远程诊断拿不到具体断言)
+            for t in scripts/tests/test_state_core.py scripts/tests/test_specengine.py scripts/tests/test_capabilities.py scripts/tests/test_task_scope.py scripts/tests/probe_gate_smoke.py scripts/tests/probe_spec_semantics.py; do
+              if ! python "$t" > sub.log 2>&1; then
+                name=$(basename "$t")
+                tail -40 sub.log | python -c "import sys; body=sys.stdin.read(); print('::error::' + '$name' + ':' + body.replace('%','%25').replace('\r','%0D').replace('\n','%0A'))"
+              fi
+            done
+          fi
+          exit "$status"
+        env:
+          # 双保险:selftest/探针自带 stdout 自愈,此处再钉 UTF-8,
+          # 避免 Windows runner 代码页差异干扰断言输出比较。
+          PYTHONUTF8: '1'

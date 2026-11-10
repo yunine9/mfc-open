@@ -1,0 +1,423 @@
+{
+  "schema": 1,
+  "capabilities": [
+    {
+      "source": "comet",
+      "capability": "Comet 开启阶段规则",
+      "new_home": "runtime/guidance/grill.md and story-design.md",
+      "semantic_tests": [
+        "scripts/tests/test_native_guidance.py:NativeGuidanceSemanticTests.test_requirement_branching_observable_what_and_internal_checklist"
+      ],
+      "status": "thin-replacement"
+    },
+    {
+      "source": "comet",
+      "capability": "Comet 小改规则",
+      "new_home": "runtime/guidance/construction.md",
+      "semantic_tests": [
+        "scripts/tests/test_native_guidance.py:NativeGuidanceSemanticTests.test_focused_tweak_stays_fast_and_upgrades_by_semantic_risk",
+        "scripts/tests/test_native_guidance.py:NativeGuidanceSemanticTests.test_story_and_construction_define_engineering_boundaries",
+        "scripts/tests/test_native_guidance.py:NativeGuidanceSemanticTests.test_testability_seams_are_created_during_coding"
+      ],
+      "status": "thin-replacement"
+    },
+    {
+      "source": "comet",
+      "capability": "Comet 归档阶段规则",
+      "new_home": "cutover migration diagnostics; Delivery owns final user authorization",
+      "semantic_tests": [],
+      "status": "migration-only"
+    },
+    {
+      "source": "comet",
+      "capability": "Comet 构建阶段规则",
+      "new_home": "runtime/guidance/construction.md",
+      "semantic_tests": [
+        "scripts/tests/test_native_guidance.py:NativeGuidanceSemanticTests.test_construction_records_and_reconciles_implementation_deviations",
+        "scripts/tests/test_native_guidance.py:NativeGuidanceSemanticTests.test_story_and_construction_define_engineering_boundaries",
+        "scripts/tests/test_native_guidance.py:NativeGuidanceSemanticTests.test_testability_seams_are_created_during_coding"
+      ],
+      "status": "thin-replacement"
+    },
+    {
+      "source": "comet",
+      "capability": "Comet 设计阶段规则",
+      "new_home": "runtime/guidance/story-design.md",
+      "semantic_tests": [
+        "scripts/tests/test_native_guidance.py:NativeGuidanceSemanticTests.test_spec_is_what_and_story_is_how",
+        "scripts/tests/test_native_guidance.py:NativeGuidanceSemanticTests.test_story_and_construction_define_engineering_boundaries",
+        "scripts/tests/test_native_guidance.py:NativeGuidanceSemanticTests.test_testability_seams_are_created_during_coding"
+      ],
+      "status": "thin-replacement"
+    },
+    {
+      "source": "comet",
+      "capability": "Comet 问题修复根因检查",
+      "new_home": "runtime/guidance/review.md",
+      "semantic_tests": [
+        "scripts/tests/test_native_guidance.py:NativeGuidanceSemanticTests.test_root_cause_and_review_first_verification_survive"
+      ],
+      "status": "preserved"
+    },
+    {
+      "source": "comet",
+      "capability": "Comet 问题修复规则",
+      "new_home": "runtime/guidance/review.md and construction.md",
+      "semantic_tests": [
+        "scripts/tests/test_native_guidance.py:NativeGuidanceSemanticTests.test_root_cause_and_review_first_verification_survive"
+      ],
+      "status": "thin-replacement"
+    },
+    {
+      "source": "comet",
+      "capability": "Comet 验证阶段规则",
+      "new_home": "runtime/guidance/quality.md",
+      "semantic_tests": [
+        "scripts/tests/test_native_guidance.py:NativeGuidanceSemanticTests.test_quality_is_opaque_one_shot_and_behavior_driven",
+        "scripts/tests/test_native_guidance.py:NativeGuidanceSemanticTests.test_root_cause_and_review_first_verification_survive"
+      ],
+      "status": "thin-replacement"
+    },
+    {
+      "source": "comet",
+      "capability": "完整增量集成正确性审查",
+      "new_home": "runtime/guidance/review.md",
+      "semantic_tests": [
+        "scripts/tests/test_native_guidance.py:NativeGuidanceSemanticTests.test_reviewer_cadence_and_conditional_integration_are_semantic"
+      ],
+      "status": "thin-replacement"
+    },
+    {
+      "source": "comet",
+      "capability": "state guards handoff hashes and archive ownership",
+      "new_home": "runtime/vendor/comet for migration diagnostics only",
+      "semantic_tests": [],
+      "status": "migration-only"
+    },
+    {
+      "source": "openspec",
+      "capability": "OpenSpec 变更创建",
+      "new_home": "native Spec and Story artifacts after production cutover",
+      "semantic_tests": [],
+      "status": "migration-only"
+    },
+    {
+      "source": "openspec",
+      "capability": "OpenSpec 规格符合检查",
+      "new_home": "runtime/guidance/review.md and quality.md",
+      "semantic_tests": [
+        "scripts/tests/test_native_guidance.py:NativeGuidanceSemanticTests.test_review_compares_final_change_for_completeness_correctness_and_coherence"
+      ],
+      "status": "thin-replacement"
+    },
+    {
+      "source": "openspec",
+      "capability": "OpenSpec 需求探索",
+      "new_home": "runtime/guidance/grill.md",
+      "semantic_tests": [
+        "scripts/tests/test_native_guidance.py:NativeGuidanceSemanticTests.test_requirement_branching_observable_what_and_internal_checklist"
+      ],
+      "status": "thin-replacement"
+    },
+    {
+      "source": "openspec",
+      "capability": "current and changed observable behavior",
+      "new_home": "runtime/guidance/grill.md and story-design.md",
+      "semantic_tests": [
+        "scripts/tests/test_native_guidance.py:NativeGuidanceSemanticTests.test_requirement_branching_observable_what_and_internal_checklist",
+        "scripts/tests/test_native_guidance.py:NativeGuidanceSemanticTests.test_spec_is_what_and_story_is_how"
+      ],
+      "status": "preserved"
+    },
+    {
+      "source": "openspec",
+      "capability": "CLI schema artifact graph and archive lifecycle",
+      "new_home": "runtime/vendor/openspec for migration diagnostics only",
+      "semantic_tests": [],
+      "status": "migration-only"
+    },
+    {
+      "source": "openspec",
+      "capability": "fixed artifact graph and report formats",
+      "new_home": "natural-language native artifacts without a format gate",
+      "semantic_tests": [],
+      "status": "friction-removed"
+    },
+    {
+      "source": "ponytail",
+      "capability": "Ponytail 复杂度审查",
+      "new_home": "runtime/guidance/review.md and construction.md",
+      "semantic_tests": [
+        "scripts/tests/test_native_guidance.py:NativeGuidanceSemanticTests.test_story_and_construction_define_engineering_boundaries",
+        "scripts/tests/test_native_guidance.py:NativeGuidanceSemanticTests.test_root_cause_and_review_first_verification_survive"
+      ],
+      "status": "thin-replacement"
+    },
+    {
+      "source": "ponytail",
+      "capability": "Ponytail 精简纪律",
+      "new_home": "runtime/guidance/construction.md",
+      "semantic_tests": [
+        "scripts/tests/test_native_guidance.py:NativeGuidanceSemanticTests.test_story_and_construction_define_engineering_boundaries"
+      ],
+      "status": "preserved"
+    },
+    {
+      "source": "ponytail",
+      "capability": "mechanical file and line minimization",
+      "new_home": "semantic-risk selection and the simplest fitting design",
+      "semantic_tests": [],
+      "status": "friction-removed"
+    },
+    {
+      "source": "superpowers",
+      "capability": "Superpowers 完成前验证",
+      "new_home": "runtime/guidance/quality.md",
+      "semantic_tests": [
+        "scripts/tests/test_native_guidance.py:NativeGuidanceSemanticTests.test_root_cause_and_review_first_verification_survive"
+      ],
+      "status": "preserved"
+    },
+    {
+      "source": "superpowers",
+      "capability": "Superpowers 实现计划",
+      "new_home": "runtime/guidance/story-design.md and construction.md",
+      "semantic_tests": [
+        "scripts/tests/test_native_guidance.py:NativeGuidanceSemanticTests.test_story_and_construction_define_engineering_boundaries",
+        "scripts/tests/test_native_guidance.py:NativeGuidanceSemanticTests.test_testability_seams_are_created_during_coding"
+      ],
+      "status": "thin-replacement"
+    },
+    {
+      "source": "superpowers",
+      "capability": "Superpowers 方案讨论",
+      "new_home": "external host capability; Grill alone owns Mae requirement divergence",
+      "semantic_tests": [],
+      "status": "friction-removed"
+    },
+    {
+      "source": "superpowers",
+      "capability": "Superpowers 正确性审查",
+      "new_home": "runtime/guidance/review.md and quality.md",
+      "semantic_tests": [
+        "scripts/tests/test_native_guidance.py:NativeGuidanceSemanticTests.test_reviewer_cadence_and_conditional_integration_are_semantic",
+        "scripts/tests/test_native_guidance.py:NativeGuidanceSemanticTests.test_root_cause_and_review_first_verification_survive"
+      ],
+      "status": "thin-replacement"
+    },
+    {
+      "source": "superpowers",
+      "capability": "Superpowers 系统化调试",
+      "new_home": "runtime/guidance/review.md and quality.md",
+      "semantic_tests": [
+        "scripts/tests/test_native_guidance.py:NativeGuidanceSemanticTests.test_root_cause_and_review_first_verification_survive"
+      ],
+      "status": "preserved"
+    },
+    {
+      "source": "superpowers",
+      "capability": "Superpowers 评审意见处理",
+      "new_home": "runtime/guidance/review.md",
+      "semantic_tests": [
+        "scripts/tests/test_native_guidance.py:NativeGuidanceSemanticTests.test_root_cause_and_review_first_verification_survive"
+      ],
+      "status": "preserved"
+    },
+    {
+      "source": "superpowers",
+      "capability": "Superpowers 连续执行",
+      "new_home": "Mae phase cursor; guidance does not own orchestration",
+      "semantic_tests": [],
+      "status": "friction-removed"
+    },
+    {
+      "source": "superpowers",
+      "capability": "mandatory test-first development",
+      "new_home": "runtime/guidance/story-design.md and construction.md create test seams without prescribing a coding ritual",
+      "semantic_tests": [],
+      "status": "friction-removed"
+    },
+    {
+      "source": "superpowers",
+      "capability": "fixed retries subagent routing and revision identifiers",
+      "new_home": "semantic one-shot review and quality policies",
+      "semantic_tests": [],
+      "status": "friction-removed"
+    },
+    {
+      "source": "file:flow/steps/grill.md",
+      "capability": "Interactive Grill",
+      "new_home": "runtime/guidance/grill.md",
+      "semantic_tests": [
+        "scripts/tests/test_native_guidance.py:NativeGuidanceSemanticTests.test_grill_separates_interactive_and_read_only_modes",
+        "scripts/tests/test_native_guidance.py:NativeGuidanceSemanticTests.test_requirement_branching_observable_what_and_internal_checklist"
+      ],
+      "status": "preserved"
+    },
+    {
+      "source": "file:flow/steps/grill.md",
+      "capability": "fact lookup one-question cadence and recommended answers",
+      "new_home": "runtime/guidance/grill.md",
+      "semantic_tests": [
+        "scripts/tests/test_native_guidance.py:NativeGuidanceSemanticTests.test_requirement_branching_observable_what_and_internal_checklist"
+      ],
+      "status": "preserved"
+    },
+    {
+      "source": "file:flow/steps/grill.md",
+      "capability": "coverage dimensions",
+      "new_home": "runtime/guidance/grill.md internal checklist",
+      "semantic_tests": [
+        "scripts/tests/test_native_guidance.py:NativeGuidanceSemanticTests.test_requirement_branching_observable_what_and_internal_checklist"
+      ],
+      "status": "thin-replacement"
+    },
+    {
+      "source": "file:flow/steps/grill.md",
+      "capability": "required worksheet card and fixed closing report",
+      "new_home": "none; useful questions and decisions are carried directly",
+      "semantic_tests": [],
+      "status": "friction-removed"
+    },
+    {
+      "source": "lizard",
+      "capability": "function discovery and structural parsing",
+      "new_home": "Lightcheck runtime",
+      "semantic_tests": [
+        "scripts/tests/test_lightcheck.py:LightCheckTests.test_cpp_java_javascript_python_cover_all_four_rules"
+      ],
+      "status": "preserved"
+    },
+    {
+      "source": "role:grill-critic-agent",
+      "capability": "Grill critic",
+      "new_home": "runtime/guidance/grill.md",
+      "semantic_tests": [
+        "scripts/tests/test_native_guidance.py:NativeGuidanceSemanticTests.test_grill_separates_interactive_and_read_only_modes"
+      ],
+      "status": "thin-replacement"
+    },
+    {
+      "source": "role:story-generator-agent",
+      "capability": "Story generator",
+      "new_home": "runtime/guidance/story-design.md",
+      "semantic_tests": [
+        "scripts/tests/test_native_guidance.py:NativeGuidanceSemanticTests.test_spec_is_what_and_story_is_how",
+        "scripts/tests/test_native_guidance.py:NativeGuidanceSemanticTests.test_story_and_construction_define_engineering_boundaries",
+        "scripts/tests/test_native_guidance.py:NativeGuidanceSemanticTests.test_testability_seams_are_created_during_coding"
+      ],
+      "status": "thin-replacement"
+    },
+    {
+      "source": "role:story-generator-agent",
+      "capability": "Task Analyst",
+      "new_home": "runtime/guidance/story-design.md and construction.md",
+      "semantic_tests": [
+        "scripts/tests/test_native_guidance.py:NativeGuidanceSemanticTests.test_story_and_construction_define_engineering_boundaries",
+        "scripts/tests/test_native_guidance.py:NativeGuidanceSemanticTests.test_testability_seams_are_created_during_coding"
+      ],
+      "status": "thin-replacement"
+    },
+    {
+      "source": "role:craft-reviewer-agent",
+      "capability": "PLAN Reviewer",
+      "new_home": "runtime/guidance/review.md Design Reviewer focus",
+      "semantic_tests": [
+        "scripts/tests/test_native_guidance.py:NativeGuidanceSemanticTests.test_reviewer_cadence_and_conditional_integration_are_semantic",
+        "scripts/tests/test_native_guidance.py:NativeGuidanceSemanticTests.test_story_and_construction_define_engineering_boundaries"
+      ],
+      "status": "thin-replacement"
+    },
+    {
+      "source": "design-provenance:lean-story-review",
+      "capability": "Design Reviewer",
+      "new_home": "runtime/guidance/review.md",
+      "semantic_tests": [
+        "scripts/tests/test_native_guidance.py:NativeGuidanceSemanticTests.test_reviewer_cadence_and_conditional_integration_are_semantic"
+      ],
+      "status": "thin-replacement"
+    },
+    {
+      "source": "role:craft-reviewer-agent",
+      "capability": "CODE Reviewer",
+      "new_home": "runtime/guidance/review.md",
+      "semantic_tests": [
+        "scripts/tests/test_native_guidance.py:NativeGuidanceSemanticTests.test_reviewer_cadence_and_conditional_integration_are_semantic",
+        "scripts/tests/test_native_guidance.py:NativeGuidanceSemanticTests.test_root_cause_and_review_first_verification_survive"
+      ],
+      "status": "preserved"
+    },
+    {
+      "source": "role:story-generator-agent",
+      "capability": "test-design agent",
+      "new_home": "runtime/guidance/quality.md",
+      "semantic_tests": [
+        "scripts/tests/test_native_guidance.py:NativeGuidanceSemanticTests.test_quality_is_opaque_one_shot_and_behavior_driven"
+      ],
+      "status": "thin-replacement"
+    },
+    {
+      "source": "main-agent",
+      "capability": "整体生产代码实现",
+      "new_home": "runtime/guidance/construction.md",
+      "semantic_tests": [
+        "scripts/tests/test_native_guidance.py:NativeGuidanceSemanticTests.test_story_and_construction_define_engineering_boundaries",
+        "scripts/tests/test_native_guidance.py:NativeGuidanceSemanticTests.test_testability_seams_are_created_during_coding"
+      ],
+      "status": "thin-replacement"
+    },
+    {
+      "source": "design-provenance:2026-08-25-choreography-slim",
+      "capability": "compile agent",
+      "new_home": "configured opaque Build capability after production cutover",
+      "semantic_tests": [],
+      "status": "migration-only",
+      "notes": "compile-agent 已退役:编译由主 Agent 在宽 build 步自由完成,出口验收在 prepush+权威流水线。"
+    },
+    {
+      "source": "role:codecheck-fix-agent",
+      "capability": "CodeCheck fixer",
+      "new_home": "runtime/guidance/quality.md advisory dispositions without an automatic fixer",
+      "semantic_tests": [],
+      "status": "friction-removed"
+    },
+    {
+      "source": "role:ut-generator-agent",
+      "capability": "UT generator",
+      "new_home": "runtime/guidance/quality.md and the configured UT capability",
+      "semantic_tests": [
+        "scripts/tests/test_native_guidance.py:NativeGuidanceSemanticTests.test_quality_is_opaque_one_shot_and_behavior_driven"
+      ],
+      "status": "thin-replacement"
+    }
+  ],
+  "design_provenance": {
+    "lean-story-review": {
+      "description": "Design Reviewer is introduced by the approved lean redesign; its Story phase contract now lives in flow/phases/story.md and flow/steps/story.md (the original redesign spec under docs/ was a historical process artifact, removed 2026-08-08).",
+      "sources": [
+        "flow/phases/story.md",
+        "flow/steps/story.md"
+      ]
+    },
+    "2026-08-25-choreography-slim": {
+      "description": "编码段编排瘦身:任务卡/质量小循环/四步验证退役,compile-agent 一并退役;编译由主 Agent 在宽 build 步自由完成,出口验收在 prepush+权威流水线+MR 检视。",
+      "sources": [
+        "flow/steps/build.md",
+        "flow/phases/construction.md",
+        "flow/phases/quality.md"
+      ]
+    }
+  },
+  "dormant_capability_packs": {
+    "archive": "comet 归档阶段规则;归档已换轨为 domain_archive 领域真相事务,注入会请回退役状态机",
+    "build": "comet/openspec 阶段规则已退役;writing-plans、executing-plans、systematic-debugging 的实质已手工融入 IMPLEMENTATION 模板、build 停机纪律与编码基准第 15 条;ponytail 纪律由 verify_ponytail 步自己注入",
+    "design": "design 步已是兼容入口;方案讨论由 Interactive Grill 承担",
+    "hotfix-open": "comet hotfix 与 OpenSpec 变更创建均已退役;hf_open 用本地 Spec",
+    "open": "同上;open 步用 local_spec 校验,不再创建 OpenSpec change",
+    "review-fix": "receiving-code-review 实质已进 rf_triage 与两个返工步;systematic-debugging 进编码基准",
+    "tweak-build": "systematic-debugging 进编码基准;ponytail 纪律由其本步注入",
+    "tweak-open": "comet 小改规则与 OpenSpec 变更创建均已退役;tw_open 用本地 Spec",
+    "verify": "comet 验证状态机已退役(要求写 .comet.yaml,与 Edit Gate 绝对拦截直接冲突);requesting-code-review 指挥 verify 阶段再派审查子代理,违反预检只跑一轮;openspec-verify-change 的规格符合实质已换成 verify_spec 的逐条对齐矩阵;verification-before-completion 的证据铁律已压缩进 verify_spec/tw_verify 正文与 guidance/quality.md",
+    "ponytail-review": "2026-08-25 编排瘦身:编码段编排步骤退役,方法论精华已蒸馏进 flow/steps/build.md 的出门清单;完整规则按需由模型自行读取,不再逐步内嵌注入。"
+  }
+}

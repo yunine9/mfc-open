@@ -1,0 +1,27 @@
+{
+  "//": "前后端契约测试单独一个程序。它 import web/src/api.ts 做逐字段对账,而 api.ts 是浏览器代码(fetch/Response),没有 DOM 就全线报错。为它一个文件给整个根程序开 DOM 的代价太大——浏览器全局名会让根侧打错的裸变量名静默通过,所以隔离在这里。根程序见 tsconfig.json(exclude 掉了这个文件)。",
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "lib": [
+      "es2023",
+      "DOM",
+      "DOM.Iterable"
+    ],
+    "types": [
+      "node"
+    ]
+  },
+  "include": [
+    "tests/issueDescriptionMdHtml.test.ts",
+    "tests/issueFlowContract.test.ts",
+    "tests/rootErrorBoundary.test.ts",
+    "tests/uiModal.test.ts",
+    "scripts/ui-preview.ts",
+    "types/contract-dom-json.d.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "kernel",
+    ".pilot"
+  ]
+}

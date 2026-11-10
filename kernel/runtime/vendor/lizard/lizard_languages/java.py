@@ -1,0 +1,252 @@
+'''
+Language parser for Java
+'''
+
+from lizard_languages.code_reader import CodeStateMachine
+from .clike import CLikeReader, CLikeStates, CLikeNestingStackStates
+
+
+class JavaReader(CLikeReader):
+    # pylint: disable=R0903
+
+    ext = ['java']
+    language_names = ['java']
+
+    def __init__(self, context):
+        super(JavaReader, self).__init__(context)
+        self.parallel_states = [
+                JavaStates(context),
+                CLikeNestingStackStates(context)]
+
+
+class JavaStates(CLikeStates):  # pylint: disable=R0903
+    def __init__(self, context):
+        super(JavaStates, self).__init__(context)
+        self.class_name = None
+        self.is_record = False
+        self.in_record_constructor = False
+        self.in_method_body = False
+        self.handling_dot_class = False
+        self.handling_method_ref = False
+
+    def _consume_java_expression_tokens(self, token):
+        """Skip tokens that are not class declarations: Foo.class, Type::meth."""
+        if token == "::":
+            self.handling_method_ref = True
+            return True
+        if self.handling_method_ref:
+            self.handling_method_ref = False
+            return True
+        if token == "." and not self.handling_dot_class:
+            self.handling_dot_class = True
+            return True
+        if self.handling_dot_class:
+            self.handling_dot_class = False
+            if token == "class":
+                return True
+        return False
+
+    def _state_old_c_params(self, token):
+        if token == '{':
+            self._state_dec_to_imp(token)
+
+    def _state_imp(self, token):
+        # When entering a function implementation, set the flag
+        self.in_method_body = True
+
+        def callback():
+            # When exiting the function implementation, clear the flag
+            self.in_method_body = False
+            self.next(self._state_global)
+        self.sub_state(JavaFunctionBodyStates(self.context), callback, token)
+
+    def try_new_function(self, name):
+        # Don't create a function for record compact constructor
+        if self.is_record and name == self.class_name:
+            self.in_record_constructor = True
+            self._state = self._state_record_compact_constructor
+            return
+        self.context.try_new_function(name)
+        self._state = self._state_function
+        if self.class_name and self.context.current_function:
+            self.context.current_function.name = f"{self.class_name}::{name}"
+
+    def _try_start_a_class(self, token):
+        if token in ("class", "enum"):
+            self.class_name = None
+            self.is_record = False
+            self.in_record_constructor = False
+            self._state = self._state_class_declaration
+            return True
+        if token == "record":
+            # "record" is a contextual keyword. Inside method bodies it is always
+            # an identifier. At class/global level it is only a keyword when the
+            # following token is an identifier (the record type name); otherwise
+            # it is an identifier (field or method name).
+            if self.in_method_body:
+                return False
+            self._state = self._state_after_record_keyword
+            return True
+        return False
+
+    def _state_after_record_keyword(self, token):
+        if token and (token[0].isalpha() or token[0] == '_'):
+            self.class_name = None
+            self.is_record = True
+            self.in_record_constructor = False
+            self._state = self._state_class_declaration
+            self._state(token)
+            return
+        self.try_new_function("record")
+        self._state(token)
+
+    def _state_global(self, token):
+        if self._consume_java_expression_tokens(token):
+            return
+        if token == '@':
+            self._state = self._state_decorator
+            return
+        if self._try_start_a_class(token):
+            return
+        if not self.in_record_constructor:  # Only process as potential function if not in record constructor
+            super(JavaStates, self)._state_global(token)
+
+    def _state_decorator(self, _):
+        self._state = self._state_post_decorator
+
+    @CodeStateMachine.read_inside_brackets_then("()", "_state_global")
+    def _state_annotation_arguments(self, token):
+        """Skip (...) after @Name so inner tokens are not parsed as methods."""
+        pass
+
+    def _state_post_decorator(self, token):
+        if token == '.':
+            self._state = self._state_decorator
+        elif token == '(':
+            self.next(self._state_annotation_arguments, token)
+        else:
+            self._state = self._state_global
+            self._state(token)
+
+    def _state_class_declaration(self, token):
+        if token == '{':
+            def callback():
+                self._state = self._state_global
+            self.sub_state(JavaClassBodyStates(self.class_name, self.is_record, self.context), callback, token)
+        elif token == '(':  # Record parameters
+            self._state = self._state_record_parameters
+        elif token[0].isalpha():
+            if not self.class_name:  # Only set class name if not already set
+                self.class_name = token
+
+    def _state_record_parameters(self, token):
+        if token == ')':
+            self._state = self._state_class_declaration
+
+    def _state_record_compact_constructor(self, token):
+        if token == '{':
+            self._state = self._state_record_constructor_body
+            return
+        self._state = self._state_global
+        self._state(token)
+
+    def _state_record_constructor_body(self, token):
+        if token == '}':
+            self.in_record_constructor = False
+            self._state = self._state_global
+
+
+class JavaFunctionBodyStates(JavaStates):
+    def __init__(self, context):
+        super(JavaFunctionBodyStates, self).__init__(context)
+        self.in_method_body = True
+        self.ignore_tokens = False  # Additional flag to ignore tokens that could confuse the parser
+
+    @CodeStateMachine.read_inside_brackets_then("{}", "_state_dummy")
+    @CodeStateMachine.read_inside_brackets_then("()", "_state_dummy")
+    def _state_global(self, token):
+        if self._consume_java_expression_tokens(token):
+            return
+
+        # Special handling for tokens that could confuse the parser
+        if self.ignore_tokens:
+            self.ignore_tokens = False
+            return
+
+        if token == "new":
+            self.next(self._state_new)
+        else:
+            # Always try to parse class declarations, even in method bodies
+            # This ensures that local classes are properly detected
+            if self._try_start_a_class(token):
+                return
+
+            if self.br_count == 0:
+                self.statemachine_return()
+
+    def _state_dummy(self, _):
+        pass
+
+    def _state_new(self, token):
+        self.next(self._state_new_parameters)
+
+    def _state_new_parameters(self, token):
+        if token == "(":
+            self.sub_state(JavaFunctionBodyStates(self.context), None, token)
+            return
+        if token == "{":
+            def callback():
+                self.next(self._state_global)
+            self.sub_state(JavaClassBodyStates("(anonymous)", False, self.context), callback, token)
+            return
+        self.next(self._state_global, token)
+
+
+class JavaClassBodyStates(JavaStates):
+    def __init__(self, class_name, is_record, context):
+        super(JavaClassBodyStates, self).__init__(context)
+        self.class_name = class_name
+        self.is_record = is_record
+        self._after_static_keyword = False
+        # Nesting depth of unhandled braces seen inside the class body, e.g.
+        # array/field initializers `= { ... }`. The class's own opening brace
+        # is not counted (detected by last_token == None on the first call).
+        self._body_brace_depth = 0
+
+    def _handle_class_body_brace(self, token):
+        """Return True when `token` closes the enclosing class body."""
+        if token == '{':
+            if self.last_token is not None:
+                self._body_brace_depth += 1
+            return False
+        if token == '}':
+            if self._body_brace_depth > 0:
+                self._body_brace_depth -= 1
+                return False
+            return True
+        return False
+
+    def _state_global(self, token):
+        if self._after_static_keyword:
+            self._after_static_keyword = False
+            if token == '{':
+                self.sub_state(JavaFunctionBodyStates(self.context), lambda: None, token)
+                return
+            JavaStates._state_global(self, 'static')
+            JavaStates._state_global(self, token)
+            if self._handle_class_body_brace(token):
+                self.statemachine_return()
+            return
+
+        if token == 'static':
+            self._after_static_keyword = True
+            return
+
+        # Instance initializer block: { ... } after '{', '}', or ';' at class body level
+        if token == '{' and self.last_token in ('{', '}', ';'):
+            self.sub_state(JavaFunctionBodyStates(self.context), lambda: None, token)
+            return
+
+        super()._state_global(token)
+        if self._handle_class_body_brace(token):
+            self.statemachine_return()

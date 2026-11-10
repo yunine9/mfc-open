@@ -1,0 +1,359 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1320 506" role="group" lang="zh-CN" aria-labelledby="archify-diagram-title archify-diagram-description" data-preset="blueprint" data-quality-profile="standard"><style>:root,svg{--text:#eff6ff;--text-muted:#adbed3;--text-dim:#64819e;--grid:#183049;--mask:#10233a;--frontend-fill:#102d46;--frontend-stroke:#4fc8fc;--backend-fill:#0c302d;--backend-stroke:#62dcc0;--database-fill:#182c47;--database-stroke:#a0b8ff;--cloud-fill:#23213b;--cloud-stroke:#b5a2ff;--security-fill:#24203e;--security-stroke:#b5a2ff;--messagebus-fill:#133b3b;--messagebus-stroke:#62dcc0;--external-fill:#1c263a;--external-stroke:#a4b5d6;--arrow:#7897b8;--arrow-emphasis:#58d0ff;--bg:#081322;font-family:Inter,"Microsoft YaHei","PingFang SC",system-ui,sans-serif;color-scheme:dark}
+*{box-sizing:border-box}body{margin:0;background:#081322;color:var(--text);height:100vh;overflow:hidden}button{font:inherit;cursor:pointer;color:inherit}button:focus-visible,[data-node-id]:focus-visible{outline:2px solid #77d3ff;outline-offset:4px}button:disabled{cursor:default;opacity:.4}[hidden]{display:none!important}.shell{height:100vh;max-width:2400px;margin:auto;display:grid;grid-template-rows:auto auto auto minmax(0,1fr) auto auto;gap:15px;padding:28px 40px 18px;background:radial-gradient(ellipse at 78% 5%,#12304c66,transparent 42%),radial-gradient(ellipse at 5% 88%,#12372e33,transparent 40%)}.masthead{display:flex;justify-content:space-between;align-items:center;gap:24px}.identity{display:flex;align-items:center;gap:18px}.brand-mark{font-family:Arial,sans-serif;width:54px;height:58px;border:1px solid #5ad4ff60;border-radius:17px;background:linear-gradient(150deg,#254b7180,#15394d30);display:grid;place-items:center;font-size:37px;line-height:1;font-weight:900;color:#78d7ff;box-shadow:0 0 26px #3baeff18}.eyebrow{color:#80d5ff;font-size:14px;letter-spacing:3px;font-weight:800}.eyebrow span{font-size:10px;color:#7c96b0;letter-spacing:2px;margin-left:14px}h1{font-size:32px;letter-spacing:.2px;margin:6px 0 0;font-weight:650}.headline-side{display:flex;flex-direction:column;gap:9px;text-align:right}.headline-side strong{font-size:17px;font-weight:500;color:#d5e7fa}.headline-side>span{font-size:13px;color:#86a4bc}.human-strip{display:flex;align-items:center;gap:25px;min-height:46px;padding:0 18px;border:1px solid #2d4b64;border-radius:11px;background:linear-gradient(90deg,#14364e70,#14233b30);font-size:14px;color:#bed0e5}.human-label{color:#e9f8ff;font-weight:650;padding-right:22px;border-right:1px solid #38556e;display:flex;align-items:center;gap:10px}.human-label i{width:7px;height:7px;background:#62d7ff;border-radius:50%;box-shadow:0 0 15px #62d7ff}.human-strip b{color:#526d84}.human-strip em{font-size:12px;font-style:normal;margin-left:auto;color:#7ca4bd}.scene-nav{display:flex;justify-content:space-between;align-items:center;gap:20px}.scene-nav [role=tablist]{display:flex;gap:5px}.scene-nav button{border:1px solid transparent;background:transparent;border-radius:8px;padding:9px 16px;color:#8fa9c4;font-size:14px;transition:background .2s,color .2s}.scene-nav button:hover{background:#21354b;color:white}.scene-nav button[aria-selected=true]{background:#18344c;border-color:#345972;color:#e6f5ff;box-shadow:inset 0 1px #8bdbff0e}.controls{display:flex;gap:8px}.controls button{border-color:#2a435b;color:#c0d1e5;padding:8px 13px}.controls button.play{color:#b9eeff;border-color:#3d718e;background:#13354d}.dot{display:inline-block;width:6px;height:6px;border-radius:50%;margin-right:8px;vertical-align:middle}.cyan{background:#55caff}.mint{background:#62dcc0}.violet{background:#b5a2ff}.stage{position:relative;min-height:0;border:1px solid #29425a;border-radius:16px;overflow:hidden;background:linear-gradient(160deg,#0e2134,#091622 70%);isolation:isolate;box-shadow:0 16px 64px #0002,inset 0 1px #9bd8ff0c}.stage:before{content:"";position:absolute;inset:0;background-image:linear-gradient(#3b668010 1px,transparent 1px),linear-gradient(90deg,#3b668010 1px,transparent 1px);background-size:28px 28px;pointer-events:none;z-index:-1}.stage-glow{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 40%,#25586a16,transparent 60%);z-index:-1}#diagram{height:100%;padding:7px 16px 29px;transition:opacity .35s,filter .35s}#diagram>svg{display:block;width:100%;height:100%;overflow:visible}.stage-key{position:absolute;bottom:11px;left:24px;display:flex;gap:22px;font-size:11px;color:#809cb6}.interact-hint{position:absolute;bottom:11px;right:24px;color:#7d97b0;font-size:11px}.narration{display:flex;align-items:center;gap:28px;padding:14px 20px;background:#13243a80;border:1px solid #243b52;border-radius:12px;min-height:84px}.chapter{flex:none;width:158px}.chapter>span{font-size:11px;letter-spacing:1px;color:#80b8db}.progress-track{margin-top:13px;height:3px;background:#293a50;border-radius:3px;overflow:hidden}.progress-track i{display:block;height:100%;width:12%;background:linear-gradient(90deg,#63c9ff,#6ee2c4);transition:width .25s}.narrative-copy{flex:1}.narrative-copy h2{font-size:19px;font-weight:600;margin:0 0 7px}.narrative-copy p{margin:0;font-size:13px;line-height:1.7;color:#a2bbd1}.story-controls{display:flex;gap:7px}.story-controls button{border:1px solid #38536c;border-radius:9px;background:#183047;width:36px;height:36px;color:#b4d2ed}.story-controls button:hover{background:#2b516f}footer{display:flex;justify-content:space-between;align-items:center;color:#5f7d98;font-size:11px;letter-spacing:.6px}footer b{margin:0 7px;font-weight:400}footer>span:first-child{color:#94afc6;font-size:12px;letter-spacing:2px}
+/* The diagram geometry and semantic IDs below come from the unmodified Archify renderer. */
+svg .c-grid{stroke:#23435c;fill:none;opacity:.18}svg .c-mask{fill:var(--mask);stroke:none}svg .c-frontend{fill:var(--frontend-fill);stroke:var(--frontend-stroke)}svg .c-backend{fill:var(--backend-fill);stroke:var(--backend-stroke)}svg .c-database{fill:var(--database-fill);stroke:var(--database-stroke)}svg .c-cloud{fill:var(--cloud-fill);stroke:var(--cloud-stroke)}svg .c-security{fill:var(--security-fill);stroke:var(--security-stroke)}svg .c-messagebus{fill:var(--messagebus-fill);stroke:var(--messagebus-stroke)}svg .c-external{fill:var(--external-fill);stroke:var(--external-stroke)}svg .t-primary{fill:var(--text)}svg .t-muted{fill:var(--text-muted)}svg .t-dim{fill:var(--text-dim)}svg .t-frontend{fill:var(--frontend-stroke)}svg .t-backend{fill:var(--backend-stroke)}svg .t-database{fill:var(--database-stroke)}svg .t-cloud,svg .t-security{fill:#b5a2ff}svg .t-external{fill:#a4b5d6}svg .a-default{stroke:var(--arrow);fill:none}svg .a-emphasis{stroke:var(--arrow-emphasis);fill:none}svg .a-security{stroke:#b5a2ff;fill:none;stroke-dasharray:5,5}svg .a-dashed{stroke:#a0b8ff;fill:none;stroke-dasharray:4,4}svg .m-default{fill:var(--arrow)}svg .m-emphasis{fill:var(--arrow-emphasis)}svg .m-security{fill:#b5a2ff}svg .m-dashed{fill:#a0b8ff}svg .c-region{fill:#1b36511a;stroke:#31516b;stroke-width:.7;stroke-dasharray:none}svg [data-boundary-label]{fill:#c1d9ed;font-size:11px;font-weight:500;letter-spacing:.6px}svg [data-node-id]{cursor:pointer;transition:opacity .25s,filter .25s}svg [data-node-id] rect{rx:8;stroke-width:1}svg [data-node-id] text[data-node-label]{font-size:17px;font-weight:650}svg [data-node-id] text[data-detail=context]{font-size:9px}svg [data-node-id] text[data-detail=fine]{font-size:8.5px}svg [data-node-id]:hover rect:not(.c-mask){stroke-width:2;filter:drop-shadow(0 0 6px #8fe4ff50)}svg .semantic-sigil{fill:none;stroke:currentColor;stroke-width:1.3;stroke-linecap:round;stroke-linejoin:round;opacity:.75}svg .s-frontend{color:#64d1ff}svg .s-backend{color:#74e9cc}svg .s-cloud,svg .s-security{color:#b5a2ff}svg .s-external{color:#a4b5d6}svg .semantic-sigil .sigil-fill{fill:currentColor;stroke:none}svg [data-edge-id]{transition:opacity .25s,stroke .25s}svg path.knowledge-edge{stroke:#62dcc0;marker-end:url(#knowledge-arrow)}svg g.knowledge-edge text{fill:#83e7ce}svg [data-node-id].dim,svg [data-edge-id].dim{opacity:.14}svg [data-node-id].active rect:not(.c-mask){stroke-width:2.1;filter:drop-shadow(0 0 7px #64d1ff55)}svg [data-node-id].knowledge-node.active rect:not(.c-mask){filter:drop-shadow(0 0 8px #62dcc050)}svg path.active{stroke-width:2.7}svg .flow-particle{stroke-width:2.8;stroke-linecap:round;fill:none;stroke-dasharray:8 64;pointer-events:none;animation:travel 2.8s linear infinite;filter:drop-shadow(0 0 3px currentColor);opacity:.85}@keyframes travel{to{stroke-dashoffset:-144}}
+#detail{position:absolute;right:22px;top:22px;width:340px;background:#132740f5;border:1px solid #4c789a;border-radius:14px;padding:28px;box-shadow:0 20px 80px #0007;backdrop-filter:blur(15px);animation:arrive .2s ease-out}#detail button{position:absolute;right:12px;top:10px;background:none;border:0;font-size:24px;color:#9fb5ca}#detail small{color:#69d1fb;letter-spacing:2px;font-size:11px}#detail h2{font-size:23px;margin:13px 0}#detail p{font-size:15px;line-height:1.9;color:#c0d2e3;margin:0}#detail-foot{border-top:1px solid #35536e;margin-top:20px;padding-top:15px;font-size:12px;line-height:1.8;color:#88acc4}@keyframes arrive{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+#philosophy{position:absolute;inset:0;padding:28px 38px;background:radial-gradient(ellipse at 50% 0,#21324b,#0b1a2b 80%);animation:arrive .2s ease-out;display:flex;flex-direction:column;justify-content:center}.philosophy-title{text-align:center;margin-bottom:22px}.philosophy-title>span{font-size:10px;letter-spacing:3px;color:#8fafd4}.philosophy-title h2{font-weight:600;font-size:30px;margin:10px 0}.philosophy-title p{color:#9cb3ca;font-size:14px}.principles{display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:1330px;width:100%;margin:0 auto}.principles article{border:1px solid #3a4d66;background:linear-gradient(120deg,#2036508c,#10203580);border-radius:12px;padding:20px 24px}.principles article>span{font-size:11px;color:#86c3e9;letter-spacing:1px}.principles article:nth-child(3)>span{color:#74dbc2}.principles h3{font-size:20px;font-weight:550;margin:10px 0}.principles p{font-size:14px;line-height:1.85;color:#aac1d6;margin:0 0 14px}.principles small{display:block;font-size:11px;color:#779ebc;border-top:1px solid #35516a;padding-top:11px}
+@media (max-height:820px){.shell{padding:18px 26px 12px;gap:9px}h1{font-size:26px}.human-strip{min-height:38px;font-size:12px;gap:16px}.masthead .brand-mark{width:45px;height:48px;font-size:30px}.headline-side strong{font-size:14px}.scene-nav button{padding:6px 13px;font-size:12px}.narration{min-height:66px;padding:9px 16px}.narrative-copy h2{font-size:16px}.narrative-copy p{font-size:12px}.philosophy-title{margin-bottom:8px}.philosophy-title h2{font-size:25px}.philosophy-title p{margin:8px 0}.principles{gap:11px}.principles article{padding:12px 18px}.principles h3{font-size:17px;margin:8px 0}.principles p{font-size:12px;margin-bottom:8px}.principles small{padding-top:8px}#philosophy{padding:20px 30px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+svg rect[data-composition-frame-id="0"]{fill:#1a46601a;stroke:#416785}svg rect[data-composition-frame-id="1"]{fill:#124b391a;stroke:#386b63}svg rect[data-composition-frame-id="2"]{fill:#352b4b1a;stroke:#514b73}svg g[data-composition-frame-id="1"] text{fill:#92e8d0}svg g[data-composition-frame-id="2"] text{fill:#c5b6f5}.human-strip>span,.human-strip>em{white-space:nowrap}
+
+.controls #zoom-level{align-self:center;min-width:40px;text-align:center;font-size:12px;color:#94b9d4}.controls #zoom-in,.controls #zoom-out{font-size:18px;padding:4px 10px}.stage.presenting #diagram{margin-right:370px}.stage.presenting .interact-hint{display:none}#auto-explanation{position:absolute;right:22px;top:50%;transform:translateY(-50%);width:326px;padding:26px;border:1px solid #43758f;border-radius:16px;background:linear-gradient(140deg,#1a354c,#102438);box-shadow:0 16px 60px #0004}#auto-step{font-size:12px;letter-spacing:1px;color:#80d8e9}#auto-explanation h2{font-size:24px;line-height:1.55;margin:18px 0}#auto-explanation p{font-size:16px;line-height:1.95;color:#c3d6e7;margin:0}.auto-actions{display:flex;gap:10px;margin-top:24px}.auto-actions button{border:1px solid #42647d;background:#1c3d55;border-radius:8px;padding:9px 14px;font-size:14px}.auto-actions button:hover{background:#2c5470}.stage.presenting .narrative-copy{opacity:.8}#auto-explanation.arriving h2,#auto-explanation.arriving p{animation:arrive .2s ease-out}.stage.presenting #diagram>svg{overflow:hidden}
+@media(max-height:820px){.stage.presenting #diagram{margin-right:305px}#auto-explanation{right:16px;width:279px;padding:20px}#auto-explanation h2{font-size:20px;margin:12px 0}#auto-explanation p{font-size:14px;line-height:1.85}.auto-actions{margin-top:16px}.controls{gap:5px}}
+
+/* 详细讲解拥有独立阅读区域；短提要不挤压图，长正文不遮挡操作。 */
+.stage.presenting #diagram{margin-right:440px}
+.stage.presenting #philosophy{right:440px;overflow:auto}
+#auto-explanation{z-index:2;width:396px;max-height:calc(100% - 36px);display:flex;flex-direction:column;padding:24px}
+#auto-step,#auto-explanation h2,.reading-hint,.auto-actions{flex:none}
+#auto-explanation h2{font-size:22px;line-height:1.5;margin:14px 0}
+#auto-explanation #auto-body{min-height:0;overflow-y:auto;white-space:pre-line;scrollbar-width:thin;line-height:1.8;padding-right:6px}
+#auto-body:focus-visible{outline:2px solid #77d3ff;outline-offset:3px}
+.reading-hint{font-size:12px;color:#8fb3cd;margin-top:14px}
+.auto-actions{margin-top:14px}
+@media(max-height:820px){.stage.presenting #diagram{margin-right:380px}.stage.presenting #philosophy{right:380px;padding:18px}#auto-explanation{width:350px;right:15px;padding:18px;max-height:calc(100% - 24px)}#auto-explanation h2{font-size:19px;margin:10px 0}#auto-explanation #auto-body{font-size:15px;line-height:1.75}.reading-hint{margin-top:10px}.auto-actions{margin-top:10px}.stage.presenting .philosophy-title h2{font-size:22px}.stage.presenting .principles article{padding:12px}.stage.presenting .principles h3{font-size:16px}}
+
+/* 能力域大框内呈现小能力；每个视图有独立的 Archify 布局。 */
+svg [data-boundary-label]{font-size:12px;font-weight:600;letter-spacing:.2px}
+svg [data-node-id] text[data-detail=context]{font-size:11px}
+svg [data-node-id] text[data-detail=fine]{font-size:9px}
+svg .planned-node rect:not(.c-mask){stroke:#d9b985;stroke-dasharray:5 4}
+svg .planned-node text[data-detail=fine]{fill:#d9b985}
+.stage.inspecting #diagram{margin-right:400px}
+#detail{width:356px;max-height:calc(100% - 44px);overflow-y:auto;z-index:2}
+@media(max-height:820px){.stage.inspecting #diagram{margin-right:345px}#detail{right:15px;top:15px;width:315px;max-height:calc(100% - 30px);padding:22px}#detail h2{font-size:20px}#detail p{font-size:14px}}
+svg .t-database{fill:var(--database-stroke)}svg .s-database{color:var(--database-stroke)}
+</style><rect width="100%" height="100%" fill="#081322"/>
+        <title id="archify-diagram-title">交付视图 · 从首次交付到 MR 迭代闭环</title>
+        <desc id="archify-diagram-description">MAE Flow · 能力架构</desc>
+        <!-- Definitions -->
+        <defs>
+          <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+            <polygon points="0 0, 10 3.5, 0 7" class="m-default" />
+          </marker>
+          <marker id="arrowhead-emphasis" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+            <polygon points="0 0, 10 3.5, 0 7" class="m-emphasis" />
+          </marker>
+          <marker id="arrowhead-security" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+            <polygon points="0 0, 10 3.5, 0 7" class="m-security" />
+          </marker>
+          <marker id="arrowhead-dashed" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+            <polygon points="0 0, 10 3.5, 0 7" class="m-dashed" />
+          </marker>
+          <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+            <path d="M 40 0 L 0 0 0 40" class="c-grid" stroke-width="0.5"/>
+          </pattern>
+        <marker id="knowledge-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#62dcc0"/></marker></defs>
+
+        <!-- Background Grid -->
+        <rect width="100%" height="100%" fill="url(#grid)" />
+
+        <!-- Boundaries (behind everything) -->
+        <rect data-graph-role="structural-frame" data-composition-frame-kind="region" data-composition-frame-id="0" data-composition-frame-label="01  分析与开发" x="20" y="48" width="244" height="402" rx="12" class="c-region" stroke-width="1"/>
+
+        <rect data-graph-role="structural-frame" data-composition-frame-kind="region" data-composition-frame-id="1" data-composition-frame-label="02  首次交付" x="288" y="48" width="244" height="402" rx="12" class="c-region" stroke-width="1"/>
+
+        <rect data-graph-role="structural-frame" data-composition-frame-kind="region" data-composition-frame-id="2" data-composition-frame-label="03  MR LOOP · 观察、判断、修复与复验" x="566" y="48" width="434" height="402" rx="12" class="c-region" stroke-width="1"/>
+
+        <rect data-graph-role="structural-frame" data-composition-frame-kind="region" data-composition-frame-id="3" data-composition-frame-label="04  合入与知识回流" x="1056" y="48" width="244" height="402" rx="12" class="c-region" stroke-width="1"/>
+
+        <!-- Connection paths (before components for correct z-order) -->
+        <path data-edge-from="d_plan" data-edge-to="d_code" data-edge-key="0" data-edge-id="d_plan_code" data-composition-points="142,152;142,211" d="M 142 152 L 142 211" class="a-emphasis" stroke-width="1.8" marker-end="url(#arrowhead-emphasis)"/>
+        <path data-edge-from="d_code" data-edge-to="d_verify" data-edge-key="1" data-edge-id="d_code_verify" data-composition-points="142,291;142,350" d="M 142 291 L 142 350" class="a-emphasis" stroke-width="1.8" marker-end="url(#arrowhead-emphasis)"/>
+        <path data-edge-from="d_verify" data-edge-to="d_scope" data-edge-key="2" data-edge-id="d_ready" data-composition-points="242,390;275,390;275,112;310,112" d="M 242 390 L 267 390 Q 275 390 275 382 L 275 120 Q 275 112 283 112 L 310 112" class="a-emphasis" stroke-width="1.8" marker-end="url(#arrowhead-emphasis)"/>
+        <path data-edge-from="d_scope" data-edge-to="d_mr" data-edge-key="3" data-edge-id="d_scope_mr" data-composition-points="410,152;410,211" d="M 410 152 L 410 211" class="a-emphasis" stroke-width="1.8" marker-end="url(#arrowhead-emphasis)"/>
+        <path data-edge-from="d_mr" data-edge-to="d_report" data-edge-key="4" data-edge-id="d_summary" data-composition-points="410,291;410,350" d="M 410 291 L 410 350" class="a-emphasis" stroke-width="1.8" marker-end="url(#arrowhead-emphasis)"/>
+        <path data-edge-from="d_mr" data-edge-to="d_watch" data-edge-key="5" data-edge-id="d_published" data-composition-points="510,251;548,251;548,112;584,112" d="M 510 251 L 540 251 Q 548 251 548 243 L 548 120 Q 548 112 556 112 L 584 112" class="a-emphasis" stroke-width="1.8" marker-end="url(#arrowhead-emphasis)"/>
+        <path data-edge-from="d_watch" data-edge-to="d_gate" data-edge-label="失败" data-edge-key="6" data-edge-id="d_fail" data-composition-points="674,152;674,211" d="M 674 152 L 674 211" class="a-emphasis" stroke-width="1.8" marker-end="url(#arrowhead-emphasis)"/>
+        <path data-edge-from="d_gate" data-edge-to="d_push" data-edge-key="7" data-edge-id="d_repair" data-composition-points="674,291;674,350" d="M 674 291 L 674 350" class="a-emphasis" stroke-width="1.8" marker-end="url(#arrowhead-emphasis)"/>
+        <path data-edge-from="d_push" data-edge-to="d_watch" data-edge-label="LOOP · 新版本复验" data-edge-key="8" data-edge-id="d_repeat" data-composition-points="674,430;674,472;554,472;554,112;584,112" d="M 674 430 L 674 464 Q 674 472 666 472 L 562 472 Q 554 472 554 464 L 554 120 Q 554 112 562 112 L 584 112" class="a-emphasis" stroke-width="1.8" marker-end="url(#arrowhead-emphasis)"/>
+        <path data-edge-from="d_watch" data-edge-to="d_comments" data-edge-key="9" data-edge-id="d_collect" data-composition-points="764,112;802,112" d="M 764 112 L 802 112" class="a-emphasis" stroke-width="1.8" marker-end="url(#arrowhead-emphasis)"/>
+        <path data-edge-from="d_comments" data-edge-to="d_triage" data-edge-key="10" data-edge-id="d_judge" data-composition-points="892,152;892,211" d="M 892 152 L 892 211" class="a-emphasis" stroke-width="1.8" marker-end="url(#arrowhead-emphasis)"/>
+        <path data-edge-from="d_triage" data-edge-to="d_review" data-edge-key="11" data-edge-id="d_assign" data-composition-points="892,291;892,350" d="M 892 291 L 892 350" class="a-emphasis" stroke-width="1.8" marker-end="url(#arrowhead-emphasis)"/>
+        <path data-edge-from="d_review" data-edge-to="d_push" data-edge-key="12" data-edge-id="d_submit_review" data-composition-points="802,390;764,390" d="M 802 390 L 764 390" class="a-emphasis" stroke-width="1.8" marker-end="url(#arrowhead-emphasis)"/>
+        <path data-edge-from="d_watch" data-edge-to="d_merge" data-edge-label="MR 实际合入" data-edge-key="13" data-edge-id="d_merged" data-composition-points="674,72;674,22;1178,22;1178,72" d="M 674 72 L 674 30 Q 674 22 682 22 L 1170 22 Q 1178 22 1178 30 L 1178 72" class="a-emphasis" stroke-width="1.8" marker-end="url(#arrowhead-emphasis)"/>
+        <path data-edge-from="d_merge" data-edge-to="d_notify" data-edge-key="14" data-edge-id="d_know" data-composition-points="1178,152;1178,211" d="M 1178 152 L 1178 211" class="a-emphasis" stroke-width="1.8" marker-end="url(#arrowhead-emphasis)"/>
+        <path data-edge-from="d_notify" data-edge-to="d_retro" data-edge-key="15" data-edge-id="d_retrospect" data-composition-points="1178,291;1178,350" d="M 1178 291 L 1178 350" class="knowledge-edge a-emphasis" stroke-width="1.8" marker-end="url(#arrowhead-emphasis)"/>
+
+        <!-- Components -->
+        <g id="node-d_plan" data-node-id="d_plan" data-node-label="澄清与模块拆分" tabindex="0" role="button" aria-label="聚焦澄清与模块拆分，Spec · Story · 职责与依赖, 01  分析与开发" aria-pressed="false" data-node-kind="frontend" data-node-sublabel="Spec · Story · 职责与依赖" data-node-tag="有公共依赖先准备，独立任务并行" data-node-context="01  分析与开发">
+          <title>澄清与模块拆分 · Spec · Story · 职责与依赖 · 01  分析与开发 · 有公共依赖先准备，独立任务并行</title>
+          <rect x="42" y="72" width="200" height="80" rx="6" class="c-mask"/>
+          <rect x="42" y="72" width="200" height="80" rx="6" class="c-frontend" stroke-width="1.5"/>
+          <g aria-hidden="true" data-semantic-sigil="frontend" class="semantic-sigil s-frontend" transform="translate(48 78) scale(0.6875)">
+            <rect x="2" y="3" width="12" height="10" rx="2"/>
+            <path d="M2 6.5h12"/>
+            <circle cx="4.1" cy="4.8" r=".7" class="sigil-fill"/>
+            <circle cx="6.3" cy="4.8" r=".7" class="sigil-fill"/>
+          </g>
+          <text data-node-label="" data-detail-anchor="" x="142" y="110" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">澄清与模块拆分</text>
+        <text data-detail="context" x="142" y="126" class="t-muted" font-size="9" text-anchor="middle">Spec · Story · 职责与依赖</text>
+        <text data-detail="fine" x="142" y="144" class="t-frontend" font-size="7" text-anchor="middle">有公共依赖先准备，独立任务并行</text>
+        </g>
+
+        <g id="node-d_code" data-node-id="d_code" data-node-label="知识辅助实现" tabindex="0" role="button" aria-label="聚焦知识辅助实现，实施计划 · 代码 · UT, 01  分析与开发" aria-pressed="false" data-node-kind="frontend" data-node-sublabel="实施计划 · 代码 · UT" data-node-tag="组件与规范按需查阅" data-node-context="01  分析与开发">
+          <title>知识辅助实现 · 实施计划 · 代码 · UT · 01  分析与开发 · 组件与规范按需查阅</title>
+          <rect x="42" y="211" width="200" height="80" rx="6" class="c-mask"/>
+          <rect x="42" y="211" width="200" height="80" rx="6" class="c-frontend" stroke-width="1.5"/>
+          <g aria-hidden="true" data-semantic-sigil="frontend" class="semantic-sigil s-frontend" transform="translate(48 217) scale(0.6875)">
+            <rect x="2" y="3" width="12" height="10" rx="2"/>
+            <path d="M2 6.5h12"/>
+            <circle cx="4.1" cy="4.8" r=".7" class="sigil-fill"/>
+            <circle cx="6.3" cy="4.8" r=".7" class="sigil-fill"/>
+          </g>
+          <text data-node-label="" data-detail-anchor="" x="142" y="249" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">知识辅助实现</text>
+        <text data-detail="context" x="142" y="265" class="t-muted" font-size="9" text-anchor="middle">实施计划 · 代码 · UT</text>
+        <text data-detail="fine" x="142" y="283" class="t-frontend" font-size="7" text-anchor="middle">组件与规范按需查阅</text>
+        </g>
+
+        <g id="node-d_verify" data-node-id="d_verify" data-node-label="首次编译与测试" tabindex="0" role="button" aria-label="聚焦首次编译与测试，真实命令 · 结果 · 失败证据, 01  分析与开发" aria-pressed="false" data-node-kind="frontend" data-node-sublabel="真实命令 · 结果 · 失败证据" data-node-tag="失败反馈进入当前修复" data-node-context="01  分析与开发">
+          <title>首次编译与测试 · 真实命令 · 结果 · 失败证据 · 01  分析与开发 · 失败反馈进入当前修复</title>
+          <rect x="42" y="350" width="200" height="80" rx="6" class="c-mask"/>
+          <rect x="42" y="350" width="200" height="80" rx="6" class="c-frontend" stroke-width="1.5"/>
+          <g aria-hidden="true" data-semantic-sigil="frontend" class="semantic-sigil s-frontend" transform="translate(48 356) scale(0.6875)">
+            <rect x="2" y="3" width="12" height="10" rx="2"/>
+            <path d="M2 6.5h12"/>
+            <circle cx="4.1" cy="4.8" r=".7" class="sigil-fill"/>
+            <circle cx="6.3" cy="4.8" r=".7" class="sigil-fill"/>
+          </g>
+          <text data-node-label="" data-detail-anchor="" x="142" y="388" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">首次编译与测试</text>
+        <text data-detail="context" x="142" y="404" class="t-muted" font-size="9" text-anchor="middle">真实命令 · 结果 · 失败证据</text>
+        <text data-detail="fine" x="142" y="422" class="t-frontend" font-size="7" text-anchor="middle">失败反馈进入当前修复</text>
+        </g>
+
+        <g id="node-d_scope" data-node-id="d_scope" data-node-label="确定交付范围" tabindex="0" role="button" aria-label="聚焦确定交付范围，人工检视 · 批注 · 文件选择, 02  首次交付" aria-pressed="false" data-node-kind="frontend" data-node-sublabel="人工检视 · 批注 · 文件选择" data-node-tag="已有决定沿用，避免重复审批" data-node-context="02  首次交付">
+          <title>确定交付范围 · 人工检视 · 批注 · 文件选择 · 02  首次交付 · 已有决定沿用，避免重复审批</title>
+          <rect x="310" y="72" width="200" height="80" rx="6" class="c-mask"/>
+          <rect x="310" y="72" width="200" height="80" rx="6" class="c-frontend" stroke-width="1.5"/>
+          <g aria-hidden="true" data-semantic-sigil="frontend" class="semantic-sigil s-frontend" transform="translate(316 78) scale(0.6875)">
+            <rect x="2" y="3" width="12" height="10" rx="2"/>
+            <path d="M2 6.5h12"/>
+            <circle cx="4.1" cy="4.8" r=".7" class="sigil-fill"/>
+            <circle cx="6.3" cy="4.8" r=".7" class="sigil-fill"/>
+          </g>
+          <text data-node-label="" data-detail-anchor="" x="410" y="110" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">确定交付范围</text>
+        <text data-detail="context" x="410" y="126" class="t-muted" font-size="9" text-anchor="middle">人工检视 · 批注 · 文件选择</text>
+        <text data-detail="fine" x="410" y="144" class="t-frontend" font-size="7" text-anchor="middle">已有决定沿用，避免重复审批</text>
+        </g>
+
+        <g id="node-d_mr" data-node-id="d_mr" data-node-label="推送并提交 MR" tabindex="0" role="button" aria-label="聚焦推送并提交 MR，同步分支 · 推送 · 创建 / 关联, 02  首次交付" aria-pressed="false" data-node-kind="frontend" data-node-sublabel="同步分支 · 推送 · 创建 / 关联" data-node-tag="宿主执行，远端结果留痕" data-node-context="02  首次交付">
+          <title>推送并提交 MR · 同步分支 · 推送 · 创建 / 关联 · 02  首次交付 · 宿主执行，远端结果留痕</title>
+          <rect x="310" y="211" width="200" height="80" rx="6" class="c-mask"/>
+          <rect x="310" y="211" width="200" height="80" rx="6" class="c-frontend" stroke-width="1.5"/>
+          <g aria-hidden="true" data-semantic-sigil="frontend" class="semantic-sigil s-frontend" transform="translate(316 217) scale(0.6875)">
+            <rect x="2" y="3" width="12" height="10" rx="2"/>
+            <path d="M2 6.5h12"/>
+            <circle cx="4.1" cy="4.8" r=".7" class="sigil-fill"/>
+            <circle cx="6.3" cy="4.8" r=".7" class="sigil-fill"/>
+          </g>
+          <text data-node-label="" data-detail-anchor="" x="410" y="249" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">推送并提交 MR</text>
+        <text data-detail="context" x="410" y="265" class="t-muted" font-size="9" text-anchor="middle">同步分支 · 推送 · 创建 / 关联</text>
+        <text data-detail="fine" x="410" y="283" class="t-frontend" font-size="7" text-anchor="middle">宿主执行，远端结果留痕</text>
+        </g>
+
+        <g id="node-d_report" data-node-id="d_report" data-node-label="首次交付摘要" tabindex="0" role="button" aria-label="聚焦首次交付摘要，变更视图 · 测试与业务场景, 02  首次交付" aria-pressed="false" data-node-kind="frontend" data-node-sublabel="变更视图 · 测试与业务场景" data-node-tag="后台子会话，不阻塞 MR 迭代" data-node-context="02  首次交付">
+          <title>首次交付摘要 · 变更视图 · 测试与业务场景 · 02  首次交付 · 后台子会话，不阻塞 MR 迭代</title>
+          <rect x="310" y="350" width="200" height="80" rx="6" class="c-mask"/>
+          <rect x="310" y="350" width="200" height="80" rx="6" class="c-frontend" stroke-width="1.5"/>
+          <g aria-hidden="true" data-semantic-sigil="frontend" class="semantic-sigil s-frontend" transform="translate(316 356) scale(0.6875)">
+            <rect x="2" y="3" width="12" height="10" rx="2"/>
+            <path d="M2 6.5h12"/>
+            <circle cx="4.1" cy="4.8" r=".7" class="sigil-fill"/>
+            <circle cx="6.3" cy="4.8" r=".7" class="sigil-fill"/>
+          </g>
+          <text data-node-label="" data-detail-anchor="" x="410" y="388" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">首次交付摘要</text>
+        <text data-detail="context" x="410" y="404" class="t-muted" font-size="9" text-anchor="middle">变更视图 · 测试与业务场景</text>
+        <text data-detail="fine" x="410" y="422" class="t-frontend" font-size="7" text-anchor="middle">后台子会话，不阻塞 MR 迭代</text>
+        </g>
+
+        <g id="node-d_watch" data-node-id="d_watch" data-node-label="观察 MR 与 CI" tabindex="0" role="button" aria-label="聚焦观察 MR 与 CI，状态 · 日志 · 新检视意见, 03  MR LOOP · 观察、判断、修复与复验" aria-pressed="false" data-node-kind="frontend" data-node-sublabel="状态 · 日志 · 新检视意见" data-node-tag="监听当前发布版本" data-node-context="03  MR LOOP · 观察、判断、修复与复验">
+          <title>观察 MR 与 CI · 状态 · 日志 · 新检视意见 · 03  MR LOOP · 观察、判断、修复与复验 · 监听当前发布版本</title>
+          <rect x="584" y="72" width="180" height="80" rx="6" class="c-mask"/>
+          <rect x="584" y="72" width="180" height="80" rx="6" class="c-frontend" stroke-width="1.5"/>
+          <g aria-hidden="true" data-semantic-sigil="frontend" class="semantic-sigil s-frontend" transform="translate(590 78) scale(0.6875)">
+            <rect x="2" y="3" width="12" height="10" rx="2"/>
+            <path d="M2 6.5h12"/>
+            <circle cx="4.1" cy="4.8" r=".7" class="sigil-fill"/>
+            <circle cx="6.3" cy="4.8" r=".7" class="sigil-fill"/>
+          </g>
+          <text data-node-label="" data-detail-anchor="" x="674" y="110" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">观察 MR 与 CI</text>
+        <text data-detail="context" x="674" y="126" class="t-muted" font-size="9" text-anchor="middle">状态 · 日志 · 新检视意见</text>
+        <text data-detail="fine" x="674" y="144" class="t-frontend" font-size="7" text-anchor="middle">监听当前发布版本</text>
+        </g>
+
+        <g id="node-d_gate" data-node-id="d_gate" data-node-label="流水线 / 门禁修复" tabindex="0" role="button" aria-label="聚焦流水线 / 门禁修复，编译 · UT · CodeCheck, 03  MR LOOP · 观察、判断、修复与复验" aria-pressed="false" data-node-kind="frontend" data-node-sublabel="编译 · UT · CodeCheck" data-node-tag="客观失败 → 自动处理" data-node-context="03  MR LOOP · 观察、判断、修复与复验">
+          <title>流水线 / 门禁修复 · 编译 · UT · CodeCheck · 03  MR LOOP · 观察、判断、修复与复验 · 客观失败 → 自动处理</title>
+          <rect x="584" y="211" width="180" height="80" rx="6" class="c-mask"/>
+          <rect x="584" y="211" width="180" height="80" rx="6" class="c-frontend" stroke-width="1.5"/>
+          <g aria-hidden="true" data-semantic-sigil="frontend" class="semantic-sigil s-frontend" transform="translate(590 217) scale(0.6875)">
+            <rect x="2" y="3" width="12" height="10" rx="2"/>
+            <path d="M2 6.5h12"/>
+            <circle cx="4.1" cy="4.8" r=".7" class="sigil-fill"/>
+            <circle cx="6.3" cy="4.8" r=".7" class="sigil-fill"/>
+          </g>
+          <text data-node-label="" data-detail-anchor="" x="674" y="249" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">流水线 / 门禁修复</text>
+        <text data-detail="context" x="674" y="265" class="t-muted" font-size="9" text-anchor="middle">编译 · UT · CodeCheck</text>
+        <text data-detail="fine" x="674" y="283" class="t-frontend" font-size="7" text-anchor="middle">客观失败 → 自动处理</text>
+        </g>
+
+        <g id="node-d_push" data-node-id="d_push" data-node-label="修复提交与复验" tabindex="0" role="button" aria-label="聚焦修复提交与复验，代码修改 · 再推送 · 再验证, 03  MR LOOP · 观察、判断、修复与复验" aria-pressed="false" data-node-kind="frontend" data-node-sublabel="代码修改 · 再推送 · 再验证" data-node-tag="新结果回到监听" data-node-context="03  MR LOOP · 观察、判断、修复与复验">
+          <title>修复提交与复验 · 代码修改 · 再推送 · 再验证 · 03  MR LOOP · 观察、判断、修复与复验 · 新结果回到监听</title>
+          <rect x="584" y="350" width="180" height="80" rx="6" class="c-mask"/>
+          <rect x="584" y="350" width="180" height="80" rx="6" class="c-frontend" stroke-width="1.5"/>
+          <g aria-hidden="true" data-semantic-sigil="frontend" class="semantic-sigil s-frontend" transform="translate(590 356) scale(0.6875)">
+            <rect x="2" y="3" width="12" height="10" rx="2"/>
+            <path d="M2 6.5h12"/>
+            <circle cx="4.1" cy="4.8" r=".7" class="sigil-fill"/>
+            <circle cx="6.3" cy="4.8" r=".7" class="sigil-fill"/>
+          </g>
+          <text data-node-label="" data-detail-anchor="" x="674" y="388" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">修复提交与复验</text>
+        <text data-detail="context" x="674" y="404" class="t-muted" font-size="9" text-anchor="middle">代码修改 · 再推送 · 再验证</text>
+        <text data-detail="fine" x="674" y="422" class="t-frontend" font-size="7" text-anchor="middle">新结果回到监听</text>
+        </g>
+
+        <g id="node-d_comments" data-node-id="d_comments" data-node-label="MR 检视意见汇入" tabindex="0" role="button" aria-label="聚焦MR 检视意见汇入，人工意见 · 数字人报告, 03  MR LOOP · 观察、判断、修复与复验" aria-pressed="false" data-node-kind="frontend" data-node-sublabel="人工意见 · 数字人报告" data-node-tag="转为统一批注" data-node-context="03  MR LOOP · 观察、判断、修复与复验">
+          <title>MR 检视意见汇入 · 人工意见 · 数字人报告 · 03  MR LOOP · 观察、判断、修复与复验 · 转为统一批注</title>
+          <rect x="802" y="72" width="180" height="80" rx="6" class="c-mask"/>
+          <rect x="802" y="72" width="180" height="80" rx="6" class="c-frontend" stroke-width="1.5"/>
+          <g aria-hidden="true" data-semantic-sigil="frontend" class="semantic-sigil s-frontend" transform="translate(808 78) scale(0.6875)">
+            <rect x="2" y="3" width="12" height="10" rx="2"/>
+            <path d="M2 6.5h12"/>
+            <circle cx="4.1" cy="4.8" r=".7" class="sigil-fill"/>
+            <circle cx="6.3" cy="4.8" r=".7" class="sigil-fill"/>
+          </g>
+          <text data-node-label="" data-detail-anchor="" x="892" y="110" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">MR 检视意见汇入</text>
+        <text data-detail="context" x="892" y="126" class="t-muted" font-size="9" text-anchor="middle">人工意见 · 数字人报告</text>
+        <text data-detail="fine" x="892" y="144" class="t-frontend" font-size="7" text-anchor="middle">转为统一批注</text>
+        </g>
+
+        <g id="node-d_triage" data-node-id="d_triage" data-node-label="责任人判断与分派" tabindex="0" role="button" aria-label="聚焦责任人判断与分派，自行答复 / 闭环 / 交给 Agent, 03  MR LOOP · 观察、判断、修复与复验" aria-pressed="false" data-node-kind="frontend" data-node-sublabel="自行答复 / 闭环 / 交给 Agent" data-node-tag="支持补充要求、批量提交" data-node-context="03  MR LOOP · 观察、判断、修复与复验">
+          <title>责任人判断与分派 · 自行答复 / 闭环 / 交给 Agent · 03  MR LOOP · 观察、判断、修复与复验 · 支持补充要求、批量提交</title>
+          <rect x="802" y="211" width="180" height="80" rx="6" class="c-mask"/>
+          <rect x="802" y="211" width="180" height="80" rx="6" class="c-frontend" stroke-width="1.5"/>
+          <g aria-hidden="true" data-semantic-sigil="frontend" class="semantic-sigil s-frontend" transform="translate(808 217) scale(0.6875)">
+            <rect x="2" y="3" width="12" height="10" rx="2"/>
+            <path d="M2 6.5h12"/>
+            <circle cx="4.1" cy="4.8" r=".7" class="sigil-fill"/>
+            <circle cx="6.3" cy="4.8" r=".7" class="sigil-fill"/>
+          </g>
+          <text data-node-label="" data-detail-anchor="" x="892" y="249" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">责任人判断与分派</text>
+        <text data-detail="context" x="892" y="265" class="t-muted" font-size="9" text-anchor="middle">自行答复 / 闭环 / 交给 Agent</text>
+        <text data-detail="fine" x="892" y="283" class="t-frontend" font-size="7" text-anchor="middle">支持补充要求、批量提交</text>
+        </g>
+
+        <g id="node-d_review" data-node-id="d_review" data-node-label="检视意见修复" tabindex="0" role="button" aria-label="聚焦检视意见修复，按采纳要求修改 · 回应结果, 03  MR LOOP · 观察、判断、修复与复验" aria-pressed="false" data-node-kind="frontend" data-node-sublabel="按采纳要求修改 · 回应结果" data-node-tag="可与独立的 CI 修复协作" data-node-context="03  MR LOOP · 观察、判断、修复与复验">
+          <title>检视意见修复 · 按采纳要求修改 · 回应结果 · 03  MR LOOP · 观察、判断、修复与复验 · 可与独立的 CI 修复协作</title>
+          <rect x="802" y="350" width="180" height="80" rx="6" class="c-mask"/>
+          <rect x="802" y="350" width="180" height="80" rx="6" class="c-frontend" stroke-width="1.5"/>
+          <g aria-hidden="true" data-semantic-sigil="frontend" class="semantic-sigil s-frontend" transform="translate(808 356) scale(0.6875)">
+            <rect x="2" y="3" width="12" height="10" rx="2"/>
+            <path d="M2 6.5h12"/>
+            <circle cx="4.1" cy="4.8" r=".7" class="sigil-fill"/>
+            <circle cx="6.3" cy="4.8" r=".7" class="sigil-fill"/>
+          </g>
+          <text data-node-label="" data-detail-anchor="" x="892" y="388" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">检视意见修复</text>
+        <text data-detail="context" x="892" y="404" class="t-muted" font-size="9" text-anchor="middle">按采纳要求修改 · 回应结果</text>
+        <text data-detail="fine" x="892" y="422" class="t-frontend" font-size="7" text-anchor="middle">可与独立的 CI 修复协作</text>
+        </g>
+
+        <g id="node-d_merge" data-node-id="d_merge" data-node-label="实际合入确认" tabindex="0" role="button" aria-label="聚焦实际合入确认，MR 已合入 → 任务交付, 04  合入与知识回流" aria-pressed="false" data-node-kind="frontend" data-node-sublabel="MR 已合入 → 任务交付" data-node-tag="依据平台事实完成任务" data-node-context="04  合入与知识回流">
+          <title>实际合入确认 · MR 已合入 → 任务交付 · 04  合入与知识回流 · 依据平台事实完成任务</title>
+          <rect x="1078" y="72" width="200" height="80" rx="6" class="c-mask"/>
+          <rect x="1078" y="72" width="200" height="80" rx="6" class="c-frontend" stroke-width="1.5"/>
+          <g aria-hidden="true" data-semantic-sigil="frontend" class="semantic-sigil s-frontend" transform="translate(1084 78) scale(0.6875)">
+            <rect x="2" y="3" width="12" height="10" rx="2"/>
+            <path d="M2 6.5h12"/>
+            <circle cx="4.1" cy="4.8" r=".7" class="sigil-fill"/>
+            <circle cx="6.3" cy="4.8" r=".7" class="sigil-fill"/>
+          </g>
+          <text data-node-label="" data-detail-anchor="" x="1178" y="110" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">实际合入确认</text>
+        <text data-detail="context" x="1178" y="126" class="t-muted" font-size="9" text-anchor="middle">MR 已合入 → 任务交付</text>
+        <text data-detail="fine" x="1178" y="144" class="t-frontend" font-size="7" text-anchor="middle">依据平台事实完成任务</text>
+        </g>
+
+        <g id="node-d_notify" data-node-id="d_notify" data-node-label="进展与通知" tabindex="0" role="button" aria-label="聚焦进展与通知，工作台 · 小鲁班 · 待办, 04  合入与知识回流" aria-pressed="false" data-node-kind="cloud" data-node-sublabel="工作台 · 小鲁班 · 待办" data-node-tag="人不必一直盯着页面" data-node-context="04  合入与知识回流">
+          <title>进展与通知 · 工作台 · 小鲁班 · 待办 · 04  合入与知识回流 · 人不必一直盯着页面</title>
+          <rect x="1078" y="211" width="200" height="80" rx="6" class="c-mask"/>
+          <rect x="1078" y="211" width="200" height="80" rx="6" class="c-cloud" stroke-width="1.5"/>
+          <g aria-hidden="true" data-semantic-sigil="cloud" class="semantic-sigil s-cloud" transform="translate(1084 217) scale(0.6875)">
+            <path d="M4.3 12.5h7.3a2.4 2.4 0 0 0 .2-4.8 4 4 0 0 0-7.5-1.3A3.1 3.1 0 0 0 4.3 12.5Z"/>
+          </g>
+          <text data-node-label="" data-detail-anchor="" x="1178" y="249" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">进展与通知</text>
+        <text data-detail="context" x="1178" y="265" class="t-muted" font-size="9" text-anchor="middle">工作台 · 小鲁班 · 待办</text>
+        <text data-detail="fine" x="1178" y="283" class="t-cloud" font-size="7" text-anchor="middle">人不必一直盯着页面</text>
+        </g>
+
+        <g id="node-d_retro" data-node-id="d_retro" data-node-label="交付后经验复盘" tabindex="0" role="button" aria-label="聚焦交付后经验复盘，首次之后的修改 + 检视意见, 04  合入与知识回流" aria-pressed="false" data-node-kind="backend" data-node-sublabel="首次之后的修改 + 检视意见" data-node-tag="草稿 → 人审 → 知识治理" data-node-context="04  合入与知识回流" class="knowledge-node">
+          <title>交付后经验复盘 · 首次之后的修改 + 检视意见 · 04  合入与知识回流 · 草稿 → 人审 → 知识治理</title>
+          <rect x="1078" y="350" width="200" height="80" rx="6" class="c-mask"/>
+          <rect x="1078" y="350" width="200" height="80" rx="6" class="c-backend" stroke-width="1.5"/>
+          <g aria-hidden="true" data-semantic-sigil="backend" class="semantic-sigil s-backend" transform="translate(1084 356) scale(0.6875)">
+            <path d="M6 3 3 8l3 5M10 3l3 5-3 5"/>
+          </g>
+          <text data-node-label="" data-detail-anchor="" x="1178" y="388" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">交付后经验复盘</text>
+        <text data-detail="context" x="1178" y="404" class="t-muted" font-size="9" text-anchor="middle">首次之后的修改 + 检视意见</text>
+        <text data-detail="fine" x="1178" y="422" class="t-backend" font-size="7" text-anchor="middle">草稿 → 人审 → 知识治理</text>
+        </g>
+
+        <!-- Connection labels -->
+
+
+
+
+
+
+        <g data-detail="context" data-edge-from="d_watch" data-edge-to="d_gate" data-edge-label="失败" data-edge-key="6" data-edge-id="d_fail">
+          <rect x="635" y="164" width="30" height="14" rx="3" class="c-mask"/>
+          <text x="650" y="174" class="t-backend" font-size="8" text-anchor="middle">失败</text>
+        </g>
+
+        <g data-detail="context" data-edge-from="d_push" data-edge-to="d_watch" data-edge-label="LOOP · 新版本复验" data-edge-key="8" data-edge-id="d_repeat">
+          <rect x="615.2" y="468" width="91.6" height="14" rx="3" class="c-mask"/>
+          <text x="661" y="478" class="t-backend" font-size="8" text-anchor="middle">LOOP · 新版本复验</text>
+        </g>
+
+
+
+
+        <g data-detail="context" data-edge-from="d_watch" data-edge-to="d_merge" data-edge-label="MR 实际合入" data-edge-key="13" data-edge-id="d_merged">
+          <rect x="898.6" y="15" width="62.8" height="14" rx="3" class="c-mask"/>
+          <text x="930" y="25" class="t-backend" font-size="8" text-anchor="middle">MR 实际合入</text>
+        </g>
+
+
+
+        <!-- Boundary labels (foreground masks keep routes out of titles) -->
+        <g data-graph-role="structural-frame-label" data-composition-frame-id="0" data-composition-frame-kind="region" data-composition-frame-label="01  分析与开发">
+          <rect data-graph-role="structural-frame-label-mask" x="24" y="52" width="85.6" height="16" rx="3" class="c-mask"/>
+          <text data-boundary-label="" x="28" y="65" class="t-cloud" font-size="9" font-weight="600">01  分析与开发</text>
+        </g>
+
+        <g data-graph-role="structural-frame-label" data-composition-frame-id="1" data-composition-frame-kind="region" data-composition-frame-label="02  首次交付">
+          <rect data-graph-role="structural-frame-label-mask" x="292" y="52" width="74.8" height="16" rx="3" class="c-mask"/>
+          <text data-boundary-label="" x="296" y="65" class="t-cloud" font-size="9" font-weight="600">02  首次交付</text>
+        </g>
+
+        <g data-graph-role="structural-frame-label" data-composition-frame-id="2" data-composition-frame-kind="region" data-composition-frame-label="03  MR LOOP · 观察、判断、修复与复验">
+          <rect data-graph-role="structural-frame-label-mask" x="570" y="52" width="204.4" height="16" rx="3" class="c-mask"/>
+          <text data-boundary-label="" x="574" y="65" class="t-cloud" font-size="9" font-weight="600">03  MR LOOP · 观察、判断、修复与复验</text>
+        </g>
+
+        <g data-graph-role="structural-frame-label" data-composition-frame-id="3" data-composition-frame-kind="region" data-composition-frame-label="04  合入与知识回流">
+          <rect data-graph-role="structural-frame-label-mask" x="1060" y="52" width="107.2" height="16" rx="3" class="c-mask"/>
+          <text data-boundary-label="" x="1064" y="65" class="t-cloud" font-size="9" font-weight="600">04  合入与知识回流</text>
+        </g>
+
+        <!-- Legend -->
+
+      </svg>

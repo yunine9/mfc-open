@@ -1,0 +1,220 @@
+{
+  "_doc": [
+    "Gate 规则总账。两条红线的锚点:",
+    "  无残留 — 生产规则集合必须与本文件键集合完全相等。删规则必须删条目，",
+    "           新增规则必须登记，不允许出现只剩读取方或只剩条目的半套机制。",
+    "  无死锁 — 每条规则必须声明 escape。裁决类(permit)由 strike_escalation 自动",
+    "           追加放行令出口，结构性保证;绝对类(absolute)不追加任何东西，",
+    "           因此它的出路必须写在自己的拦截文案里，并被 evidence 关键词证实。",
+    "tier 是瘦身分层:A=底线(继续拦) B=流程督促(降级/迁移) C=模式定义(仅特定模式生效)。",
+    "escape 取值: permit | comply | user-terminal | cli:<子命令>",
+    "2026-08-07 曾把步骤级源码写入误当可逆流程督促退役；2026-08-25 内网 grill 实战证明 done/commit 兜底太晚，现恢复为 flow.json allow_source_edit 驱动的绝对阶段门禁。规格/需求文档、分支命名等其余可逆督促仍保持退役。"
+  ],
+  "rules": {
+    "bash-manual-dispatch": {
+      "kind": "absolute",
+      "tier": "A",
+      "escape": "cli:status",
+      "evidence": "status",
+      "why": "手动调 dispatch.py 是伪造 Hook 令牌的通道"
+    },
+    "bash-force-push": {
+      "kind": "absolute",
+      "tier": "A",
+      "escape": "user-terminal",
+      "evidence": "用户",
+      "why": "覆盖远端不可逆"
+    },
+    "bash-recursive-delete": {
+      "kind": "absolute",
+      "tier": "A",
+      "escape": "user-terminal",
+      "evidence": "请用户手动运行",
+      "why": "递归删除不可逆"
+    },
+    "bash-git-clean-ignored": {
+      "kind": "absolute",
+      "tier": "A",
+      "escape": "user-terminal",
+      "evidence": "用户",
+      "why": "会删掉流程状态与令牌，不可逆"
+    },
+    "bash-remote-script-pipe": {
+      "kind": "absolute",
+      "tier": "A",
+      "escape": "user-terminal",
+      "evidence": "请用户手动运行",
+      "why": "下载即执行远端脚本，供应链风险"
+    },
+    "bash-wipe-worktree": {
+      "kind": "permit",
+      "tier": "A",
+      "escape": "permit",
+      "why": "清空工作区会丢未提交成果"
+    },
+    "bash-discard-user-scene": {
+      "kind": "permit",
+      "tier": "A",
+      "escape": "permit",
+      "why": "单文件丢弃若命中用户流程启动前的未提交改动,等于销毁用户现场"
+    },
+    "bash-wide-add": {
+      "kind": "absolute",
+      "tier": "B",
+      "escape": "comply",
+      "evidence": "必须精确到文件",
+      "why": "2026-09-09 内核减权：仅建议，不阻断，不签重复授权。"
+    },
+    "bash-build-artifacts": {
+      "kind": "permit",
+      "tier": "B",
+      "escape": "permit",
+      "why": "高置信临时产物是完整性边界,不签放行令;文案直接给本地恢复做法",
+      "evidence": "git restore --staged"
+    },
+    "bash-compile-side-effects": {
+      "kind": "permit",
+      "tier": "B",
+      "escape": "permit",
+      "why": "编译副作用冒充源码改动是完整性边界,不签放行令;文案直接给移除做法",
+      "evidence": "移除这些路径"
+    },
+    "bash-foreign-openspec": {
+      "kind": "permit",
+      "tier": "A",
+      "escape": "permit",
+      "why": "夹带其他单的规格产物"
+    },
+    "bash-cross-delivery-carryover": {
+      "kind": "permit",
+      "tier": "A",
+      "escape": "permit",
+      "why": "夹带上一单遗留改动"
+    },
+    "bash-wide-openspec-add": {
+      "kind": "permit",
+      "tier": "B",
+      "escape": "permit",
+      "why": "2026-09-09 内核减权：仅建议，不阻断，不签重复授权。"
+    },
+    "bash-delivery-host-command": {
+      "kind": "absolute",
+      "tier": "A",
+      "escape": "cli:current",
+      "evidence": "current",
+      "why": "打开与核销反馈、宣布 MR 合入都能改变持续交付生命周期，只接受 Cloud 宿主权威事实；Agent 仅通过 current 承接已登记批次"
+    },
+    "bash-internal-state-read": {
+      "kind": "absolute",
+      "tier": "B",
+      "escape": "cli:current",
+      "evidence": "current",
+      "why": "2026-09-09 内核减权：仅建议，不阻断，不签重复授权。"
+    },
+    "bash-agent-interactive-exit": {
+      "kind": "absolute",
+      "tier": "A",
+      "escape": "user-terminal",
+      "evidence": "展示给用户手动执行",
+      "why": "交互式退出是留给用户的真实终端逃生口，Agent 不得代答"
+    },
+    "bash-commit-format": {
+      "kind": "permit",
+      "tier": "B",
+      "escape": "permit",
+      "why": "2026-09-09 内核减权：仅建议，不阻断，不签重复授权。"
+    },
+    "bash-commit-branch": {
+      "kind": "permit",
+      "tier": "A",
+      "escape": "permit",
+      "why": "提交到错分支的恢复成本高"
+    },
+    "edit-before-workflow": {
+      "kind": "permit",
+      "tier": "A",
+      "escape": "permit",
+      "why": "配置确认和交付方式选择前不默认写源码；流程边界与质量建议分离，显式人工授权仍有效。"
+    },
+    "bash-before-workflow": {
+      "kind": "permit",
+      "tier": "A",
+      "escape": "permit",
+      "why": "配置确认和交付方式选择前不默认写源码；流程边界与质量建议分离，显式人工授权仍有效。"
+    },
+    "edit-readonly-resource": {
+      "kind": "absolute",
+      "tier": "A",
+      "escape": "comply",
+      "evidence": "请 Read",
+      "why": "plugin、仓库和宿主 Skill/模板均以任务内快照交给 Agent；允许读取但禁止覆盖或删除，避免同一会话破坏后续指令资源"
+    },
+    "bash-build-output-artifacts": {
+      "kind": "permit",
+      "tier": "A",
+      "escape": "permit",
+      "why": "输出目录/产物后缀且 Agent 从未直接改写过的候选几乎必然是编译产出;真要交付预编译产物走一次性放行令"
+    },
+    "bash-pipeline-record-self-report": {
+      "kind": "absolute",
+      "tier": "A",
+      "escape": "comply",
+      "evidence": "结束当前回合",
+      "why": "流水线事实是权限最大的证据(能把整单判绿)却没有授权锚,实测手写两字段 JSON 即可自发绿灯;宿主直接子进程调用不过门禁,挡住会话这条路不影响正常交付"
+    },
+    "bash-user-intervention-self-report": {
+      "kind": "absolute",
+      "tier": "A",
+      "escape": "cli:current",
+      "evidence": "执行 current",
+      "why": "用户接管事实会清理旧审批和质量证据,只接受 Cloud 在用户主动交还现场时登记;宿主直接子进程调用不过门禁,主会话应通过 current 承接已经登记的现场"
+    },
+    "bash-comet-state-write": {
+      "kind": "absolute",
+      "tier": "A",
+      "escape": "cli:current",
+      "evidence": "执行 current",
+      "why": "状态文件直写等同伪造阶段/验证证据;正路是按 current 的本步指引推进"
+    },
+    "bash-internal-state-write": {
+      "kind": "absolute",
+      "tier": "A",
+      "escape": "cli:current",
+      "evidence": "执行 current",
+      "why": "同上,Bash 侧的对应拦截(改写/删除流程状态、账本、待重启标记、仓库预设)"
+    },
+    "bash-retired-force-phase": {
+      "kind": "absolute",
+      "tier": "B",
+      "escape": "cli:doctor",
+      "evidence": "doctor",
+      "why": "2026-09-09 内核减权：仅建议，不阻断，不签重复授权。"
+    },
+    "bash-vendored-runtime": {
+      "kind": "absolute",
+      "tier": "B",
+      "escape": "cli:current",
+      "evidence": "capability 命令",
+      "why": "2026-09-09 内核减权：仅建议，不阻断，不签重复授权。"
+    },
+    "bash-global-openspec": {
+      "kind": "absolute",
+      "tier": "B",
+      "escape": "cli:current",
+      "evidence": "capability openspec",
+      "why": "2026-09-09 内核减权：仅建议，不阻断，不签重复授权。"
+    },
+    "bash-git-objects-surgery": {
+      "kind": "permit",
+      "tier": "A",
+      "escape": "permit",
+      "why": "重写 .git/objects 会污染硬链接共享的源仓并销毁故障证据"
+    },
+    "bash-git-recursive-perms": {
+      "kind": "permit",
+      "tier": "A",
+      "escape": "permit",
+      "why": "对 .git 递归改权限会打到硬链接共享的源仓 inode"
+    }
+  }
+}

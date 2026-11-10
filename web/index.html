@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23655bd8'/%3E%3Cpath d='M7 23 12.5 8l3.5 8 3.5-8L25 23M9.5 18.5h13' fill='none' stroke='white' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+  <title>Mae-Flow 云端任务</title>
+  <!-- 层序声明必须先于一切样式表注册(层序=首次出现序,与选择器优先级无关)。
+       vite 会打乱打包 css 的物理序,内联在 head 顶保证:base(承载 preflight)
+       恒为最弱层、legacy 存量恒在其上、utilities 恒压全场。改层序须同步
+       src/tokens.css 的同名声明。 -->
+  <style>@layer base, legacy, fixes, theme, utilities;</style>
+</head>
+<body>
+  <div id="root"></div>
+  <script type="module" src="/src/main.tsx"></script>
+</body>
+</html>

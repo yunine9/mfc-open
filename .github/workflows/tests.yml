@@ -1,0 +1,162 @@
+# 测试分层 CI(2026-09-11 立,2026-09-13 分片化):本地迭代只守
+# npm run gate(秒级),全量测试放这里跑——迭代敏捷,不被低质量
+# 覆盖阻塞;md-only 提交不触发(测试纪律:慢而弱的覆盖没有阻塞资格)。
+#
+# 两个 job(红灯只进 checks 与 run summary:本仓不设分支保护,红
+# 不拦合入,合不入由人和 agent 合入前自行看红绿,2026-10-15 如实化):
+# - gate:typecheck + web 构建 + 秒级契约;
+# - full-suite(2026-09-14 起):全量 npm run test:full 按 3 分片
+#   并行跑(文件名哈希分桶,无需维护清单)。存量已知红已于
+#   2026-09-14 清零(隔离标记全摘,归因见
+#   docs/test-suite-efficiency-2026-09-11.md)。本地 npm test 2026-09-16
+#   起默认=快层(test:fast 同义,排除 delivery/mrLoop 等重仿真族)——
+#   防止 AI/人顺手一键踩进分钟级全量与它的并发抖动;全量须显式
+#   test:full。
+#
+# 2026-09-18 测试精简专题(docs/test-cost-leaderboard-2026-09-18.md):
+# 删 33 个环境不可跑/退役/低性价比测试文件,本地快层墙钟 ~30min→185s;
+# 原 prepushRecovery/hostPushRecovery 排除项随文件删除一并移除。
+# 容器真件与 PG 用例在 CI 缺镜像/缺库环境自动跳过(与本地无 docker
+# 同款分层);内核是仓内收编 kernel/,无需额外 checkout。
+
+name: tests
+
+on:
+  push:
+    branches: [main, dev]
+    paths-ignore:
+      - "**.md"
+  pull_request:
+    paths-ignore:
+      - "**.md"
+  workflow_dispatch:
+
+concurrency:
+  group: tests-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  gate:
+    name: gate
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 26
+          cache: npm
+      - name: 安装依赖(根)
+        run: npm ci
+      - name: 安装依赖(web)
+        run: npm ci
+        working-directory: web
+      - name: gate(typecheck + web 构建 + 秒级契约)
+        run: npm run -s gate
+
+  full-suite:
+    name: 全量(分片 ${{ matrix.shard }})
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: [0, 1, 2]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 26
+          cache: npm
+      - name: 安装依赖(根)
+        run: npm ci
+      - name: 安装依赖(web)
+        run: npm ci
+        working-directory: web
+      - name: 本分片用例清单(文件名哈希分桶)
+        id: files
+        run: |
+          SHARDS=3
+          IDX=${{ matrix.shard }}
+          for f in tests/*.test.ts; do
+            h=$(basename "$f" | cksum | cut -d' ' -f1)
+            (( h % SHARDS == IDX )) && printf '%s\n' "$f"
+          done > shard-files.txt
+          echo "count=$(wc -l < shard-files.txt)" >> "$GITHUB_OUTPUT"
+      - name: 全量测试(本分片)
+        id: tests
+        run: |
+          set -o pipefail
+          mapfile -t files < shard-files.txt
+          MFC_TEST_CONCURRENCY=4 npx tsx --test \
+            --test-timeout=180000 --test-force-exit \
+            "${files[@]}" 2>&1 | tee test-log.txt
+      - name: 汇总到 job summary
+        if: always()
+        run: |
+          {
+            echo "## 全量测试报告——分片 ${{ matrix.shard }}(${{ steps.files.outputs.count }} 文件)"
+            if grep -qE "^ℹ tests " test-log.txt; then
+              grep -E "^ℹ (tests|pass|fail|skipped|duration_ms)" test-log.txt
+              echo
+              echo "失败用例:"
+              grep -E "^✖" test-log.txt | grep -v "failing tests" \
+                | sort -u | head -40 || echo "(无)"
+            else
+              echo ":x: **分片没有真正跑起来**(基础设施失败)——看日志工件排查"
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"
+      - name: 上传完整日志
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-log-${{ matrix.shard }}-${{ github.run_id }}
+          path: test-log.txt
+          retention-days: 7
+
+  # 红绿对照(2026-10-31 立,清存量红后防复发):本 run 失败集合与 main
+  # 最新 run 的失败集合 diff,写进 summary。main 常红时「看红绿」无信息
+  # 量,对照才有——新增红是合入者必须清掉的,清掉的红顺手报喜。新增红
+  # 非零即 fail,给合入前一个确定性判据(分支保护仍不设,口径不变)。
+  failure-diff:
+    name: 红绿对照
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    needs: full-suite
+    if: always()
+    steps:
+      - name: 下载本 run 分片日志
+        uses: actions/download-artifact@v4
+        with:
+          pattern: test-log-*
+          merge-multiple: true
+          path: this
+      - name: 取 main 基线失败集
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p base
+          RUN=$(gh api "repos/${{ github.repository }}/actions/workflows/tests.yml/runs?branch=main&per_page=1" \
+            -q '.workflow_runs[0].id // empty' 2>/dev/null || true)
+          if [ -n "$RUN" ] && [ "$RUN" != "${{ github.run_id }}" ]; then
+            echo "main 基线 run: $RUN"
+            gh run download "$RUN" -D base 2>/dev/null || echo "(基线日志已过保留期,按空基线处理)"
+          else
+            echo "(无 main 基线 run,按空基线处理:全部失败计为新增红)"
+          fi
+      - name: 失败集合 diff
+        run: |
+          extract() { grep -hE "^✖" "$1"/* "$1"/*/* 2>/dev/null | grep -v "failing tests" | sed 's/ ([0-9.]*ms)$//' | sort -u || true; }
+          this_f=$(extract this); base_f=$(extract base)
+          new=$(comm -13 <(printf '%s\n' "$base_f" | grep . || true) <(printf '%s\n' "$this_f" | grep . || true) | grep . || true)
+          fixed=$(comm -23 <(printf '%s\n' "$base_f" | grep . || true) <(printf '%s\n' "$this_f" | grep . || true) | grep . || true)
+          this_n=$(printf '%s' "$this_f" | grep -c . || true); base_n=$(printf '%s' "$base_f" | grep -c . || true)
+          {
+            echo "## 红绿对照——本分支失败 ${this_n} / main 基线失败 ${base_n}"
+            echo; echo "### 新增红(合入前必须清零)"; printf '%s\n' "$new" | grep . || echo "(无)"
+            echo; echo "### 清掉的红"; printf '%s\n' "$fixed" | grep . || echo "(无)"
+          } >> "$GITHUB_STEP_SUMMARY"
+          if [ -n "$new" ]; then
+            echo "::error::相对 main 新增 $(printf '%s\n' "$new" | grep -c .) 个失败用例,见 job summary 的「新增红」"
+            exit 1
+          fi

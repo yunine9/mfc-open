@@ -1,0 +1,43 @@
+{
+  "name": "mae-flow-cloud",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Mae-Flow 云端服务:Pi(pi-mono)进程内集成 + Mae-Flow 内核宿主适配",
+  "scripts": {
+    "probe": "tsx src/probe.ts",
+    "test": "tsx scripts/clean-test-tmp.ts && tsx --test --test-concurrency=${MFC_TEST_CONCURRENCY:-8} --test-timeout=180000 --test-force-exit $(ls tests/*.test.ts | grep -vE 'delivery(\\.test|\\.part)|mrLoop|activity|containerOwnership|issueFlowFixed|continuousReviewContract|gitToken|managedStartup|issueGatewayDegrade|feedbackSourcesReceipt|annotateTargets|kernelUnavailableRecovery')",
+    "test:fast": "npm run test",
+    "test:full": "tsx scripts/clean-test-tmp.ts && tsx --test --test-concurrency=${MFC_TEST_CONCURRENCY:-8} --test-timeout=180000 --test-force-exit tests/*.test.ts",
+    "typecheck": "tsc -p tsconfig.json && tsc -p tsconfig.contract.json",
+    "gate": "bash scripts/gate.sh",
+    "fix-ratio": "bash scripts/fix-ratio.sh",
+    "visual": "tsx scripts/visual-scenes.ts",
+    "ui:fixtures": "tsx scripts/seed-ui-workbench-fixtures.ts",
+    "ui:fixtures:reset": "tsx scripts/seed-ui-workbench-fixtures.ts --force",
+    "ui:preview": "MAE_FLOW_UI_FIXTURE_MODE=1 tsx src/serve.ts --data .ui-fixtures --port 8838",
+    "serve": "node --max-old-space-size=32768 --import tsx src/serve.ts",
+    "adapter": "tsx src/platformAdapter.ts",
+    "pilot": "tsx src/pilot.ts",
+    "runtime": "node --max-old-space-size=32768 --import tsx src/executionRuntime.ts",
+    "test:affected": "tsx scripts/affected-tests.ts",
+    "benchmark:knowledge": "tsx harness/knowledge-benchmark/run.ts",
+    "benchmark:knowledge:feedback": "tsx harness/knowledge-benchmark/feedback.ts"
+  },
+  "dependencies": {
+    "@ast-grep/cli": "0.45.3",
+    "@earendil-works/pi-coding-agent": "1.2.0",
+    "@sylphx/anymd": "8.5.3",
+    "elkjs": "^0.12.0",
+    "pg": "^8.23.0",
+    "ssh2": "^1.17.0",
+    "typebox": "1.3.7",
+    "undici": "^7.29.1"
+  },
+  "devDependencies": {
+    "@types/node": "^24",
+    "@types/pg": "^8.21.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.6.0"
+  }
+}
