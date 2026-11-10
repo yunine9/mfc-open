@@ -146,7 +146,7 @@ test("一档全自动:有单分析闸全量代答,自动确认进问题修改", 
   }
 });
 
-test("代答竞速守卫:一档不发可行动卡通知(小鲁班只见已代答),二档照发等卡", async () => {
+test("代答竞速守卫:一档不发可行动卡通知(通知服务只见已代答),二档照发等卡", async () => {
   // 用户实锤:通知先飞、代答紧随——用户按通知 /mfc 回复时卡已被平台
   // 答掉,待办一查空。守卫=willAutoAnswer:会代答的卡不发等待卡通知,
   // 告知由「已代答」收口通知承担;二档(闸是停靠点)照发等真人。
@@ -163,7 +163,7 @@ test("代答竞速守卫:一档不发可行动卡通知(小鲁班只见已代答
   const CARD_MARK = "请查阅 issue-analysis.md 后确认";
   const AUTO_MARK = "介入档位免审批:分析结论已自动确认";
 
-  // 一档:闸被代答,小鲁班只有「已代答」通知,没有邀人回复的卡通知。
+  // 一档:闸被代答,通知服务只有「已代答」通知,没有邀人回复的卡通知。
   {
     const dataDir = mfcTemp("mfc-issue-tier-card-suppressed-");
     const origin = bareOrigin(dataDir);
@@ -477,7 +477,7 @@ test("自动档(一/二档):纯选项题 Agent 卡按推荐项整卡代答,续�
       "现场账必须记录这是系统代答,不是用户作答");
     assert.ok(events.includes("两题都按推荐处理完毕"),
       "作答后走 resumeWithDecision 续跑,剧本下一幕真的执行了");
-    // 小鲁班 outcome 通知照发:台账记录人话摘要,通知载荷带工作台链接。
+    // 通知服务 outcome 通知照发:台账记录人话摘要,通知载荷带工作台链接。
     const outcome = await until(() =>
       notifier.list().find((item) => item.summary.includes("介入档位免审批")),
       "代答 outcome 通知落台账");
@@ -487,7 +487,7 @@ test("自动档(一/二档):纯选项题 Agent 卡按推荐项整卡代答,续�
       luban.messages.find((message) =>
         String(message.link ?? "") === `${LINK_BASE}/issues/${created.id}`
         && String(message.text ?? "").includes("介入档位免审批")),
-      "代答 outcome 通知送达假小鲁班");
+      "代答 outcome 通知送达假通知服务");
     assert.ok(delivered, "通知载荷带链接与代答说明");
   } finally {
     await service.shutdown().catch(() => undefined);

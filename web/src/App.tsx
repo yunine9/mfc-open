@@ -205,7 +205,7 @@ function workspacePath(taskId: string, reviewId = ""): string {
     + (reviewId ? `/review/${encodeURIComponent(reviewId)}` : "");
 }
 
-/** 问题会话工作台深链(/issues/:id,小鲁班通知的落点)。匹配返回会话
+/** 问题会话工作台深链(/issues/:id,通知服务通知的落点)。匹配返回会话
  * id,其余路径返回空串。 */
 function readIssueRoute(): string {
   const match = location.pathname.match(/^\/(?:issues|pipeline-repairs)\/([^/]+)\/?$/);
@@ -1019,7 +1019,7 @@ export function App() {
     });
   }
 
-  // 发起条件必须以服务端为准：部署形态决定是否需要 Git / 小鲁班，
+  // 发起条件必须以服务端为准：部署形态决定是否需要 Git / 通知服务，
   // 管理员配置也可能热更新。个人设置保存后 session hint 改变，会立即
   // 复查；不能再靠前端硬编码几个字段猜测。
   useEffect(() => {
@@ -1415,7 +1415,7 @@ export function App() {
     issues: { title: "问题处理", description: session.role === "admin"
       ? "全员问题会话只读查看:进入单个会话围观现场,操作仍属归属人。"
       : "登记问题并指派责任人，或处理指派到你名下的问题：先定位，后补单，非问题也是合法结论。" },
-    profile: { title: "个人设置", description: "集中管理任务审批方式、CodeHub 提交身份和小鲁班通知。" },
+    profile: { title: "个人设置", description: "集中管理任务审批方式、CodeHub 提交身份和通知服务通知。" },
     library: { title: "知识库", description: "" },
     answers: { title: "知识问答", description: "" },
     knowledge: { title: "知识全文", description: "下单时匹配到的模块知识或 Skill 原文。" },

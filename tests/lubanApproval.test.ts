@@ -1,4 +1,4 @@
-/** 小鲁班插件纯文本审批：验签、本人隔离、审批码、过期与幂等。 */
+/** 通知服务插件纯文本审批：验签、本人隔离、审批码、过期与幂等。 */
 
 import { test } from "node:test";
 import assert from "node:assert/strict";
@@ -150,7 +150,7 @@ test("唯一待办首次查询直接展示完整详情，裸序号提交当前�
   });
   assert.equal(chosen.status, 200);
   assert.deepEqual(service.calls, [{
-    id: "task-1", decision: "通过", notes: "小鲁班手机审批",
+    id: "task-1", decision: "通过", notes: "通知服务手机审批",
   }]);
 
   service.tasks[0].status = "waiting_for_human";
@@ -199,7 +199,7 @@ test("唯一待办通知建立审批上下文：先 /mfc 激活再回复序号",
 
   assert.equal(chosen.status, 200);
   assert.deepEqual(service.calls, [{
-    id: "task-notified", decision: "打回", notes: "小鲁班手机审批",
+    id: "task-notified", decision: "打回", notes: "通知服务手机审批",
   }]);
 });
 
@@ -269,7 +269,7 @@ test("多项待办先用裸序号选任务，再用裸序号审批", async () =>
   });
   assert.equal(approved.status, 200);
   assert.deepEqual(service.calls, [{
-    id: "task-2", decision: "通过", notes: "小鲁班手机审批",
+    id: "task-2", decision: "通过", notes: "通知服务手机审批",
   }]);
 });
 
@@ -371,7 +371,7 @@ test("选择与退回始终提交选项原文；同 message_id 并发/重放不�
   assert.equal(repeated.status, 200);
   assert.equal(repeated.replayed, true);
   assert.deepEqual(service.calls, [{
-    id: "task-1", decision: "通过", notes: "小鲁班手机审批",
+    id: "task-1", decision: "通过", notes: "通知服务手机审批",
   }]);
 
   const rejectService = new FakeApprovalService([task("task-3", "alice", "异常补充")]);
@@ -486,7 +486,7 @@ test("多题澄清按当前题逐题记录，全部答完后一次提交", async
       "需要灰度吗？": "不需要",
       "请填写灰度观察时长": "30 分钟",
     },
-    notes: "小鲁班手机审批",
+    notes: "通知服务手机审批",
   }]);
 });
 

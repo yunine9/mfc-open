@@ -325,7 +325,7 @@ test("轮询单轮:全量快照逐条串行;单条抛错只跳过不抛出,不�
   assert.equal(states.get(c.id)?.state, "failed");
   assert.equal(states.get(c.id)?.reason, "unreachable");
   assert.equal(log.length, 1, "单条失败记了日志");
-  assert.match(log[0], /10\.0\.0\.2/);
+  assert.match(log[0], /192\.0\.2\.2/);
 
   // 空台账:一轮空跑,零探测零异常。
   const empty = fresh();

@@ -2617,7 +2617,7 @@ export function TaskWorkspace({
             </Alert>}
             {task.notify?.settled && !task.notify.delivered && task.notify.attempts > 0 && (
               <Alert variant="destructive" role="status" className="mb-3">
-                <AlertTitle>小鲁班通知未送达</AlertTitle>
+                <AlertTitle>通知服务通知未送达</AlertTitle>
                 <AlertDescription>已尝试 {task.notify.attempts} 次{task.notify.last_error?.match(/HTTP\s+\d{3}/)?.[0]
                   ? `（${task.notify.last_error.match(/HTTP\s+\d{3}/)![0]}）` : ""}；待办仍然有效，请在本页处理。</AlertDescription>
               </Alert>

@@ -366,7 +366,7 @@ export async function putLubanToken(
   return parseJson(response);
 }
 
-/** 用已保存的个人 Token 走一遍正式小鲁班发送链路。 */
+/** 用已保存的个人 Token 走一遍正式通知服务发送链路。 */
 export async function testLubanConnection(): Promise<{
   ok: true;
   message: string;
@@ -435,7 +435,7 @@ export async function listPeople(): Promise<PersonIdentity[]> {
 
 export async function listCollaborationAssignees(
   /** "issue":问题登记指派的固定映射(ADR-0031)——只认 Git 令牌+邮箱,
-   * 不问小鲁班令牌;映射在服务端,客户端只点名场景。 */
+   * 不问通知服务令牌;映射在服务端,客户端只点名场景。 */
   flow?: "issue",
 ): Promise<CollaborationAssignee[]> {
   const response = await fetch(flow

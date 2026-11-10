@@ -998,9 +998,9 @@ export interface TaskSummary {
    * 不在了,再量一遍只会把收好口的老单翻成"验证中"甚至重新推分支
    * (同一个坑 settledBeforeContract 已经踩过一次)。 */
   workspace_reclaimed_at?: string;
-  /** 小鲁班通知账号(任务创建时填写,主 spec §5.1)。 */
+  /** 通知服务通知账号(任务创建时填写,主 spec §5.1)。 */
   luban_account?: string;
-  /** 待办来源域(小鲁班手机审批展示用):需求任务缺省 requirement;
+  /** 待办来源域(通知服务手机审批展示用):需求任务缺省 requirement;
    * 问题会话等待卡的投影标 issue(卡面称呼「问题 单号 · 会话」)。 */
   origin?: "requirement" | "issue";
   /** 跨仓主任务的共同开发者。主责任人仍由 luban_account 唯一确定；
@@ -1199,7 +1199,7 @@ export interface TaskServiceOptions {
   /** Cloud 工作流资产使用的只读目录根；不会开启代码仓、内核执行或交付。
    * 演示形态也可据此创建、发布并真实编译工作流方案。 */
   workflowCatalogRoot?: string;
-  /** 小鲁班通知(内网能力,外部用 FakeLubanServer 模拟)。 */
+  /** 通知服务通知(内网能力,外部用 FakeLubanServer 模拟)。 */
   notifier?: Notifier;
   /** Git 交付(§10):平台 API 地址(外部=FakeGitPlatform)。
    * 配了它,任务收轮后由服务账号建 MR + 触发权威流水线。
@@ -1386,7 +1386,7 @@ function discussionRevisionFromKey(key: string): number {
   return matched ? Number(matched[1]) : 0;
 }
 
-/** 小鲁班链接必须落到前端任务工作台，而不是 /tasks/:id 的 JSON API。
+/** 通知服务链接必须落到前端任务工作台，而不是 /tasks/:id 的 JSON API。
  * 身份只认登录会话，URL 只承载任务定位；每个任务因此也有可复制、
  * 可刷新、可从通知直接进入的稳定页面地址。 */
 function personalTaskLink(
@@ -6788,7 +6788,7 @@ export class TaskService {
       needs: {
         // 个人令牌该不该要,由部署形态决定(同上:只拦真会咬人的)。
         git_token: !!this.options.host,
-        // 假小鲁班不索令牌(没人消费它);切了真端点要求立刻恢复。
+        // 假通知服务不索令牌(没人消费它);切了真端点要求立刻恢复。
         // 判定在 Notifier 里,跟着生效端点走——内网 agent 实测在演示
         // 形态被"先配令牌"挡住,那是一道谁也过不去也不必过的假门。
         luban_token: this.options.notifier?.needsPersonalToken() ?? false,
@@ -11067,7 +11067,7 @@ export class TaskService {
       && submitted.some((answer) => matchesStepChoice(effect, answer)))
       // 云端 push 卡不在内核 effect 契约里；除明确确认外都意味着进入
       // 新修复会话。这里必须由服务端认定为“处理意见”，不能依赖网页
-      // 携带 annotation_ids——小鲁班回复只有选项和说明。
+      // 携带 annotation_ids——通知服务回复只有选项和说明。
       || (pushConfirmCard && !confirmingPush)
       || submitted.some(explicitlyRequestsReviewFeedback);
     if (handlesFeedback) this.assertOwnerDecides(task, input.actor, "随决定送出检视意见");
@@ -17449,7 +17449,7 @@ export class TaskService {
         { mode: 0o444 });
     } catch (error) {
       // 这份材料是人工入口的可用性增强；落不下不能反过来改写交付
-      // 判定，小鲁班与任务 waiting_on 仍是完整的降级入口。
+      // 判定，通知服务与任务 waiting_on 仍是完整的降级入口。
       this.options.log?.(
         `任务 ${task.summary.id} 证据缺口材料写入失败: ${String(error)}`);
     }
@@ -19710,7 +19710,7 @@ export class TaskService {
     return swept;
   }
 
-  /** 待办 → 小鲁班。发送失败不改流程状态;结果回填 summary.notify
+  /** 待办 → 通知服务。发送失败不改流程状态;结果回填 summary.notify
    * 供页面标红。未配置通知器或未填账号时静默跳过(演示模式)。 */
   private notifyWaiting(task: TaskState): void {
     const { notifier } = this.options;
@@ -20359,7 +20359,7 @@ export class TaskService {
     return target;
   }
 
-  /** 自动修复停下(halted/exhausted)→ 小鲁班。这是修复环里唯一
+  /** 自动修复停下(halted/exhausted)→ 通知服务。这是修复环里唯一
    * 真正需要人的时刻,必须主动喊人,不能等人自己来看页面。
    * 幂等键带 loop 状态,与早先发过的"验证中"收口通知不同键——
    * 那条说的是"机器在干活",这条说的是"机器干不动了,该你了"。 */
@@ -20416,7 +20416,7 @@ export class TaskService {
     }
   }
 
-  /** 任务收口 → 小鲁班(说人话)。语义同待办通知:失败不改流程,
+  /** 任务收口 → 通知服务(说人话)。语义同待办通知:失败不改流程,
    * 同任务同状态幂等。没配通知器或没填账号静默跳过。 */
   private notifyOutcome(task: TaskState): void {
     const { notifier } = this.options;

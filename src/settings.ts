@@ -51,7 +51,7 @@ export interface RuntimeKnobs {
   issue_build_products_cooldown_hours?: number;
   repair_rounds?: number;
   /** 环境验证卡守闸阈值(分钟,#248):mr_green 收口后超过该值仍无
-   * 验证卡,守闸器向小鲁班报警(纯报警不举卡)。缺省 120;0=关闭。 */
+   * 验证卡,守闸器向通知服务报警(纯报警不举卡)。缺省 120;0=关闭。 */
   env_verify_watchdog_minutes?: number;
   /** 问题流自动接单扫描间隔(秒,ADR-0061):定时扫描已开启自动接单
    *  (个人设置开关)的责任人名下符合条件的新 DTS 单。缺省 1800

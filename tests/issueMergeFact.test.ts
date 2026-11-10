@@ -4,7 +4,7 @@
  * 建了 MR 未全合=fixed 软闸不堵);归档与 merge-status 现扫带竞态兜底。
  *
  * 范式与 issueMrDiscussions 同款:ScriptedModelServer 剧本 +
- * FakeGitPlatform 假交付平台 + FakeLubanServer 假小鲁班,只走公开 API 断言。
+ * FakeGitPlatform 假交付平台 + FakeLubanServer 假通知服务,只走公开 API 断言。
  */
 
 import { test } from "node:test";

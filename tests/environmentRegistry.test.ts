@@ -179,7 +179,7 @@ test("IP 查重:创建撞与更新撞都 409 并指向既有条目;trim 规范�
   assert.equal(dup.status, 409);
   assert.equal(dup.body.existing_id, first.body.id,
     "冲突响应体指向已有条目 id");
-  assert.match(dup.body.error, /10\.0\.0\.8/);
+  assert.match(dup.body.error, /192\.0\.2\.8/);
 
   // 更新撞:把 192.0.2.9 改成 192.0.2.8 → 409 指向第一条。
   const clash = await drive("PUT", ["environments", second.body.id], opts, {

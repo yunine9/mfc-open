@@ -174,7 +174,7 @@ test("唯一命中直接挂载:服务端解密快照进 vault,元信息可查;�
     const receipt = receiptsOf(dataDir, created.id, "select_environment")[0];
     assert.ok(receipt, "select_environment 回执在场");
     assert.equal(receipt.is_error, false, "唯一命中挂载是成功收口");
-    assert.match(String(receipt.result), /10\.0\.0\.8/, "回执报告命中 IP");
+    assert.match(String(receipt.result), /192\.0\.2\.8/, "回执报告命中 IP");
     assert.match(String(receipt.result), /容器化\(K8s\)/, "回执报告台账形态");
     assert.doesNotMatch(String(receipt.result),
       new RegExp(`${BACKEND_SECRET}|${ROOT_SECRET}`), "回执不带密码");
@@ -250,7 +250,7 @@ test("已配环境的会话可覆盖:给新 IP 即换环境,转移账留痕,形�
     assert.match(String(receipt.result), /覆盖/, "回执报告覆盖了原环境");
     const onDisk = readStateFile(dataDir, created.id);
     assert.ok((onDisk.transitions ?? []).some((row) =>
-      /网管环境已配置.*10\.0\.0\.8/.test(row.note ?? "")),
+      /网管环境已配置.*192\.0\.2\.8/.test(row.note ?? "")),
       "转移账留痕(既有 attachEnvironment 同款记账)");
   } finally {
     await service.shutdown().catch(() => undefined);

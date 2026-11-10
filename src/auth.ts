@@ -105,7 +105,7 @@ interface StoredUser extends AuthUser {
   /** 个人 Git 平台令牌(PAT)。密码是哈希,这个必须明文存——git 要用
    * 原文;所以只许住在 0600 的本文件里,永不进公开视图/日志/URL。 */
   git_token?: string;
-  /** 个人通知令牌(小鲁班):该接口以令牌对应的人的身份发消息,
+  /** 个人通知令牌(通知服务):该接口以令牌对应的人的身份发消息,
    * 所以按人存,不是服务级配一个。 */
   luban_token?: string;
   /** 平台侧的 git 用户名,PAT 的搭档;不填默认用登录账号名。 */
@@ -203,7 +203,7 @@ export class LocalAuth {
         const missing: string[] = [];
         if (needs.git_token && !user.git_token) missing.push("CodeHub Token");
         if (needs.git_token && !user.git_email) missing.push("提交邮箱");
-        if (needs.luban_token && !user.luban_token) missing.push("小鲁班 Token");
+        if (needs.luban_token && !user.luban_token) missing.push("通知服务 Token");
         return {
           username: user.username,
           ...(user.display_name ? { display_name: user.display_name } : {}),
@@ -375,7 +375,7 @@ export class LocalAuth {
     return maskToken(this.users.get(username)?.git_token);
   }
 
-  /** 设置/删除个人通知令牌(小鲁班)。与 Git 令牌同样是"只写不读"。
+  /** 设置/删除个人通知令牌(通知服务)。与 Git 令牌同样是"只写不读"。
    *
    * 为什么按人存而不是全服务配一个:那个接口是**以令牌对应的人的
    * 身份发消息**——用服务号统一发,所有人收到的都是同一个机器人;

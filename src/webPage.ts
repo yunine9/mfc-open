@@ -37,7 +37,7 @@ export const WEB_PAGE = `<!doctype html>
 <h1>Mae-Flow 云端任务</h1>
 <form id="create">
   <input type="text" id="requirement" placeholder="用一句话描述需求,例如:交付 REQ2026xxxx …" required>
-  <input type="text" id="account" placeholder="小鲁班账号(可选)" style="max-width:11rem">
+  <input type="text" id="account" placeholder="通知服务账号(可选)" style="max-width:11rem">
   <button type="submit">发起任务</button>
 </form>
 <div id="tasks"></div>
@@ -76,7 +76,7 @@ async function refresh() {
       }
     }
     if (task.notify && !task.notify.delivered && task.notify.attempts > 0) {
-      html += '<div style="color:#dc2626">⚠ 小鲁班通知没送到'
+      html += '<div style="color:#dc2626">⚠ 通知服务通知没送到'
         + '(已试 ' + task.notify.attempts + ' 次)——待办仍在,请在本页处理。</div>';
     }
     if (task.status !== "queued") {

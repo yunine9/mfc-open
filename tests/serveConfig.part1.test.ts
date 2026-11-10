@@ -63,7 +63,7 @@ test("配置文件坏了拒绝启动,不静默忽略", async () => {
 
 
 
-test("小鲁班回复能力不能只凭文案开启，必须同时准备回调 Token", async () => {
+test("通知服务回复能力不能只凭文案开启，必须同时准备回调 Token", async () => {
   const dir = mkdtempSync(join(tmpdir(), "mfc-luban-replies-"));
   const result = await run([
     "--luban-plugin-replies",

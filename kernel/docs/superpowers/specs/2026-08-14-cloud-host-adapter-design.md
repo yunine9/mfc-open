@@ -145,7 +145,7 @@ Pi 侧前提(五问第 1 问,一票否决):Pi 必须支持"工具调用先外呼
 **AskUserQuestion 永不真实执行**。流转:
 
 1. Agent 按步骤文档调用 AskUserQuestion(34 处文档原样生效);
-2. GateService 拦下,HumanGate 据 `tool_input`(问题、选项)+ 当前步骤上下文创建 `WAITING_FOR_HUMAN` 记录(含状态版本),任务暂停,小鲁班通知;
+2. GateService 拦下,HumanGate 据 `tool_input`(问题、选项)+ 当前步骤上下文创建 `WAITING_FOR_HUMAN` 记录(含状态版本),任务暂停,通知服务通知;
 3. Web 端提交决定 → `human_decision` 事件,校验状态版本,第一个匹配的生效;
 4. 决定以 **AskUserQuestion 的工具结果**回注 Pi 会话(`call_id` 对上),Agent 视角与今天完全一致;同时 TranscriptStore 落 `tool_result` 块,posttool 捕获路径照旧工作。
 

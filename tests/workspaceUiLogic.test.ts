@@ -141,7 +141,7 @@ function review(id: string, taskId: string) {
   };
 }
 
-test("个人小鲁班已配置时显示连通测试，未配置时只引导配置", () => {
+test("个人通知服务已配置时显示连通测试，未配置时只引导配置", () => {
   const ready = renderToStaticMarkup(React.createElement(
     lubanTokenCard.LubanTokenCard,
     { session: {
@@ -156,7 +156,7 @@ test("个人小鲁班已配置时显示连通测试，未配置时只引导配�
     { session: { username: "bob", role: "developer" } },
   ));
   assert.doesNotMatch(missing, /测试连通性/);
-  assert.match(missing, />配置小鲁班<\/button>/);
+  assert.match(missing, />配置通知服务<\/button>/);
 });
 
 function annotation(overrides: Record<string, unknown> = {}) {

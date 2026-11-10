@@ -286,7 +286,7 @@ test("登记指派:Git 凭据门查责任人并点名,自登记文案维持「�
   }
 });
 
-test("登记指派:小鲁班通知发给责任人;自登记不发、登记人不收", async () => {
+test("登记指派:通知服务通知发给责任人;自登记不发、登记人不收", async () => {
   const luban = new FakeLubanServer();
   await luban.start();
   const dataDir = mfcTemp("mfc-issue-assign-notify-");

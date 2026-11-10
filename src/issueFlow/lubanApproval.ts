@@ -1,5 +1,5 @@
 /**
- * 问题会话等待卡 → 小鲁班手机审批的适配层。
+ * 问题会话等待卡 → 通知服务手机审批的适配层。
  *
  * 手机审批网关只认 LubanApprovalService(list/decide)一个口,过去
  * 只有 TaskService 实现它——问题会话的等待卡通知里带着审批码,手机
@@ -29,7 +29,7 @@ import type { IssueGate, IssueSummary } from "./state.ts";
 /** 手机审批评论的固定前缀(网关 submit 硬加的审计词)。问题会话的
  * 留痕位(notes)自己会记"来自手机审批"的语义吗?不会——前缀剥掉,
  * 只留用户的原话;来源是手机这件事由决定走的是哪条协议口自证。 */
-const APPROVAL_COMMENT_PREFIX = "小鲁班手机审批：";
+const APPROVAL_COMMENT_PREFIX = "通知服务手机审批：";
 
 /** 投影给展示层的选项:label 给人看,codes 供 decide 反查。 */
 interface CardQuestion {
@@ -52,7 +52,7 @@ const STATUS_ALIASES: Record<string, TaskSummary["status"]> = {
 
 function stripApprovalComment(comment: string | undefined): string | undefined {
   const trimmed = comment?.trim();
-  if (!trimmed || trimmed === "小鲁班手机审批") return undefined;
+  if (!trimmed || trimmed === "通知服务手机审批") return undefined;
   const stripped = trimmed.startsWith(APPROVAL_COMMENT_PREFIX)
     ? trimmed.slice(APPROVAL_COMMENT_PREFIX.length).trim()
     : trimmed;

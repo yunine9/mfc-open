@@ -4,7 +4,7 @@
  *   未配/残缺 fail-open 走平台并出一行日志;任务级 model_choice 让位;
  * - 视觉绑定不换装:平台 vision 的 provider 条目并入个人现场 json,
  *   个人通道会话照样能解析出视觉模型;
- * - 密钥纪律与个人令牌(Git/小鲁班)同款:明文只进 0600 的 auth.json,
+ * - 密钥纪律与个人令牌(Git/通知服务)同款:明文只进 0600 的 auth.json,
  *   视图永远掩码;留空=沿用已存,四字段全空/clear=删除回落平台;
  * - 端点:PUT /auth/me/models 谁登录配谁(非 admin 可用),
  *   POST /auth/me/models/check 只测本人配置(草稿>已存),无部署层兜底;
@@ -186,7 +186,7 @@ test("存储:四字段保存/留空沿用密钥/清空回落,重启仍在 0600 �
   assert.ok(!JSON.stringify(auth.sessionView("zhang")).includes(PERSONAL_KEY),
     "本人会话视图不得出现密钥明文");
   // 重启(重新加载文件)后配置还在——auth.json 是真相;密钥明文只住
-  // 0600 的账号文件,这是与 Git/小鲁班令牌同一纪律。
+  // 0600 的账号文件,这是与 Git/通知服务令牌同一纪律。
   const revived = new LocalAuth(file);
   assert.equal(revived.personalModels("zhang")?.model, "personal-max");
   assert.ok(readFileSync(file, "utf-8").includes(PERSONAL_KEY),

@@ -1,5 +1,5 @@
 /**
- * 问题流接入小鲁班通知的契约测试(对齐需求侧公共能力):
+ * 问题流接入通知服务通知的契约测试(对齐需求侧公共能力):
  * - Agent 举卡(AskUserQuestion)与平台闸卡转 waiting_user 时,通知
  *   归属用户,载荷钉死(waiting_id/账号/questions/link/state_version);
  * - 平台闸卡通知给人话 label 不给决策码,waiting_id 用 gate.id;
@@ -7,7 +7,7 @@
  * - 通知是旁路:notifier 缺席(未配置)一切照旧。
  *
  * 范式与 issueFlowFixed.test.ts 同款:ScriptedModelServer 剧本 +
- * FakeLubanServer 假小鲁班,只走公开 API 断言。
+ * FakeLubanServer 假通知服务,只走公开 API 断言。
  */
 
 import { test } from "node:test";
@@ -38,7 +38,7 @@ async function until<T>(
   }
 }
 
-/** 带审批码的假小鲁班通知器:mobileApproval 打开后 latestApproval 里
+/** 带审批码的假通知服务通知器:mobileApproval 打开后 latestApproval 里
  * 能读到 stateVersion/waitingId——通知载荷里无处安放的字段从这条
  * 手机审批绑定上断言。 */
 function makeNotifier(luban: FakeLubanServer): Notifier {
@@ -96,7 +96,7 @@ test("Agent 举卡等决策:通知归属用户,载荷钉死;恢复不重复,正�
     // until 把 false 也当"已就绪"(非 undefined 即返回),这里必须
     // 回传数组本身做真值探针,等发送真正落账再断言条数。
     await until(() => luban.messages.length >= 1 ? luban.messages : undefined,
-      "通知送达假小鲁班");
+      "通知送达假通知服务");
     assert.equal(record.task_id, created.id);
     assert.equal(record.account, "dev");
     assert.equal(record.waiting_id, `${created.id}:scripted-0`,

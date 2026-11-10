@@ -393,7 +393,7 @@ export function TaskCard({
           {task.notify?.settled === true && !task.notify.delivered
             && task.notify.attempts > 0 && (
             <Alert variant="destructive" className="mb-3">
-              <AlertTitle>小鲁班通知未送达</AlertTitle>
+              <AlertTitle>通知服务通知未送达</AlertTitle>
               <AlertDescription>
                 已完成 {task.notify.attempts} 次发送仍未送达
                 {notifyHttpError ? `（${notifyHttpError}）` : ""}。

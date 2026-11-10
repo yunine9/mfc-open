@@ -484,10 +484,10 @@ test("旧 delivery.sha 不阻止真实推送：一次人工确认覆盖后续同
   assert.equal(f.task.summary.waiting.waiting_id, waiting.waiting_id, "恢复同一待办不另举卡");
   assert.equal(notifications, 1);
   const question = waiting.question.questions[0].question;
-  // 真实人工入口；包含小鲁班备注，确认后宿主实际把对象传到 bare remote。
+  // 真实人工入口；包含通知服务备注，确认后宿主实际把对象传到 bare remote。
   f.service.existingMergeRequestAllowsDelivery = async () => true;
   await f.service.decide(f.task.summary.id, { state_version: waiting.state_version,
-    selected_options: { [question]: "确认推送" }, notes: "小鲁班手机审批" });
+    selected_options: { [question]: "确认推送" }, notes: "通知服务手机审批" });
   const deadline = Date.now() + 20000;
   while (new TaskHostLedger(f.task.summary).read().operations[0].state === "running") {
     if (Date.now() > deadline) throw new Error("确认后推送未完成");

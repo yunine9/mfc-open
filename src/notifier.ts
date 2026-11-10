@@ -1,5 +1,5 @@
 /**
- * 小鲁班通知(主 spec §9/§14.4)——内网能力的可替换模拟。
+ * 通知服务通知(主 spec §9/§14.4)——内网能力的可替换模拟。
  *
  * 语义三条,真假件共同遵守:
  * 1. WAITING_FOR_HUMAN 事件发送给任务创建时填写的账号,附审批链接;
@@ -12,7 +12,7 @@
  * 指令由代码追加,不归模板管——那是"每条消息说清激活前置"的承诺,
  * 交给配置等于允许被人不小心删掉。
  *
- * 真小鲁班就绪时:换 endpoint 地址与鉴权头,本文件其余零改动;
+ * 真通知服务就绪时:换 endpoint 地址与鉴权头,本文件其余零改动;
  * FakeLubanServer 只在测试与演示里出场。
  */
 
@@ -200,7 +200,7 @@ function waitingSummary(input: {
 }
 
 export interface NotifierOptions {
-  /** 小鲁班发送端点(真件=内网地址,演示=FakeLubanServer)。 */
+  /** 通知服务发送端点(真件=内网地址,演示=FakeLubanServer)。 */
   endpoint: string;
   /** 真件鉴权头(如 Authorization)。假件不需要;值是密钥,来自
    * 权限 600 的配置文件,不落日志。 */
@@ -208,18 +208,18 @@ export interface NotifierOptions {
   /** 运行时覆盖(管理页热改):每次发送现读,返回 endpoint/headers 的
    * 覆盖值,没有就回落静态配置。生效边界=下一条消息。 */
   live?: () => { endpoint?: string; headers?: Record<string, string> };
-  /** 发件人的通知令牌(小鲁班以令牌对应的人的身份发消息,所以
+  /** 发件人的通知令牌(通知服务以令牌对应的人的身份发消息,所以
    * 按发起人取,不是服务级配一个)。**只经请求头下发**——请求体会被外部
    * 动作台账原样记进投影,令牌进体等于把密钥写进数据库。 */
   personalToken?: (account: string) => string | undefined;
-  /** 端点是假小鲁班(演示/试跑形态,serve 自己起的):假件收什么都行,
+  /** 端点是假通知服务(演示/试跑形态,serve 自己起的):假件收什么都行,
    * 个人令牌在它面前没有意义。这个标记让配置门禁不去索要一个谁也用
    * 不上的令牌——演示模式登进去第一件事就被"先配令牌"挡住,是内网
    * agent 端到端验证实测撞上的假门。 */
   fake?: boolean;
   /** 有限退避重试的间隔(毫秒);长度即最大重试次数。 */
   backoffMs?: number[];
-  /** 小鲁班真实入站回复已完成端到端验收时，才在通知里承诺手机入口。 */
+  /** 通知服务真实入站回复已完成端到端验收时，才在通知里承诺手机入口。 */
   mobileApproval?: boolean;
   /** 为当前 waiting 生成短期审批码。密钥留在实现闭包中，不进通知器。 */
   approvalCode?: (input: {
@@ -685,7 +685,7 @@ export class Notifier {
   }
 }
 
-/** 假小鲁班:收什么记什么,GET /messages 可查——演示与测试用。 */
+/** 假通知服务:收什么记什么,GET /messages 可查——演示与测试用。 */
 export class FakeLubanServer {
   readonly messages: Array<Record<string, unknown>> = [];
   readonly requestHeaders: Array<

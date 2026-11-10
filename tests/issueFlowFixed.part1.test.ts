@@ -2058,7 +2058,7 @@ test("登记元信息块(ADR-0003):开场/续聊词渲染环境明文与模块/�
   const fixed = issueFixedOpeningPrompt(metaState(), META_CREDENTIALS);
   // 凭据明文:密码字面量就出现在渲染结果里(不脱敏)。页面凭据已
   // 废弃(2026-09-10),渲染行不再出现。
-  assert.match(fixed, /服务器地址: 10\.0\.0\.8, 10\.0\.0\.9/);
+  assert.match(fixed, /服务器地址: 192\.0\.2\.8, 192\.0\.2\.9/);
   assert.match(fixed, /环境形态: 虚拟化/);
   assert.match(fixed, /网管后台密码.*: env-shared-secret/);
   assert.doesNotMatch(fixed, /页面账号/);
@@ -2491,9 +2491,9 @@ test("红灯不可修:AI 在发送回合举 pipeline_unfixable 卡带事实,纯�
       "红灯反馈账本留痕(人在平台处理后由新绿灯闭环)");
     assert.ok(existsSync(join(dataDir, "issues", "issue-1",
       "pipeline", "build.log")), "取证镜像照做(不因举卡缺席)");
-    // 小鲁班等待卡通知:卡面问题与 AI 补充(context)到达。
+    // 通知服务等待卡通知:卡面问题与 AI 补充(context)到达。
     const messages = await until(() =>
-      luban.messages.length ? luban.messages : undefined, "小鲁班通知");
+      luban.messages.length ? luban.messages : undefined, "通知服务通知");
     assert.match(JSON.stringify(messages), /交付平台/);
     assert.match(JSON.stringify(messages), /SuperChecker/);
     // 认不得的答复打回(状态未动,闸还在)。
@@ -3094,7 +3094,7 @@ test("名单未配置→照常发送事实派发修复(名单已整体退出问�
 // ---- notifyRepairStopped 同语义),盲输入并入证据回灌举卡路。 ----
 
 
-test("红灯修复轮预算耗尽→小鲁班停机通知(标题/单号/原因/轮次/建议动作);同因恢复重放不重发", async () => {
+test("红灯修复轮预算耗尽→通知服务停机通知(标题/单号/原因/轮次/建议动作);同因恢复重放不重发", async () => {
   const dataDir = mfcTemp("mfc-issue-budget-notify-");
   const origin = bareOrigin(dataDir);
   const platform = new LoopPlatform("failed", "failed");
@@ -3361,7 +3361,7 @@ test("盲输入形态:零 checks+链接式摘要+零产物→事实照发送,AI 
     assert.equal(gated.feedback?.at(-1)?.status, "repairing", "留痕照记");
     assert.equal(existsSync(join(dataDir, "issues", "issue-1",
       "pipeline", "build.log")), false, "零产物前提成立");
-    // 小鲁班等待卡通知也带盲因(context),人不用开网页就知道要贴原文。
+    // 通知服务等待卡通知也带盲因(context),人不用开网页就知道要贴原文。
     const messages = await until(() =>
       luban.messages.length ? luban.messages : undefined, "等待卡通知");
     assert.match(JSON.stringify(messages), /摘要只有链接且无产物/);

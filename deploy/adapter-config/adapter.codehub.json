@@ -1,0 +1,384 @@
+{
+  "port": 8790,
+  "mr_create": {
+    "participant_flags": {
+      "reviewers": "--approval-reviewers",
+      "approval_approvers": "--approval-approvers"
+    },
+    "command": [
+      "codehub-cli",
+      "mr",
+      "create",
+      "--host",
+      "yellow",
+      "--project",
+      "{repo}",
+      "--source-branch",
+      "{source_branch}",
+      "--target-branch",
+      "{target_branch}",
+      "--title",
+      "{title}",
+      "--e2e-issues",
+      "{dts_no}",
+      "--token",
+      "{token}",
+      "--format",
+      "json",
+      "--json",
+      "web_url,iid",
+      "-k"
+    ],
+    "url": {
+      "json": "web_url"
+    },
+    "id": {
+      "json": "iid"
+    }
+  },
+  "pipeline_trigger": {
+    "observe_only": true
+  },
+  "pipeline_status": {
+    "command": [
+      "bash",
+      "/data/mae-flow-cloud/repo/deploy/adapter-tools/pipeline-status.sh",
+      "{repo_path}",
+      "{sha}",
+      "{token}"
+    ],
+    "status": {
+      "json": "status"
+    },
+    "log": {
+      "json": "fail_summary"
+    },
+    "run_sha": {
+      "json": "sha"
+    },
+    "pipeline_id": {
+      "json": "pipeline_id"
+    },
+    "web_url": {
+      "json": "web_url"
+    },
+    "checks": {
+      "json": "checks"
+    },
+    "check_dimension": {
+      "json": "dimension"
+    },
+    "check_status": {
+      "json": "status"
+    },
+    "check_job": {
+      "json": "job"
+    },
+    "check_url": {
+      "json": "url"
+    },
+    "check_tool": {
+      "json": "tool"
+    },
+    "status_map": {
+      "success": "success",
+      "failed": "failed",
+      "running": "running",
+      "pending": "running",
+      "canceled": "failed",
+      "skipped": "failed",
+      "created": "running",
+      "manual": "running"
+    }
+  },
+  "pipeline_artifacts": {
+    "command": [
+      "bash",
+      "/data/mae-flow-cloud/repo/deploy/adapter-tools/pipeline-artifacts.sh",
+      "{repo_path}",
+      "{sha}",
+      "{token}",
+      "{mr}"
+    ],
+    "fields": {
+      "name": {
+        "json": "name"
+      },
+      "text": {
+        "json": "text"
+      }
+    }
+  },
+  "mr_lookup": {
+    "command": [
+      "codehub-cli",
+      "mr",
+      "list",
+      "--host",
+      "yellow",
+      "--project",
+      "{repo}",
+      "--source-branch",
+      "{source_branch}",
+      "--target-branch",
+      "{target_branch}",
+      "--state",
+      "opened",
+      "--token",
+      "{token}",
+      "--format",
+      "json",
+      "--json",
+      "web_url,iid",
+      "-k"
+    ],
+    "url": {
+      "json": "0.web_url"
+    },
+    "id": {
+      "json": "0.iid"
+    }
+  },
+  "mr_detail": {
+    "command": ["python3", "/data/mae-flow-cloud/repo/deploy/adapter-tools/mr-detail.py", "{mr}", "{token}", "{sha}"],
+    "timeout_s": 12
+  },
+  "mr_discover": {
+    "command": [
+      "python3",
+      "/data/mae-flow-cloud/repo/deploy/adapter-tools/mr-discover.py",
+      "{repo_path}",
+      "{source_branch}",
+      "{target_branch}",
+      "{token}"
+    ],
+    "timeout_s": 10
+  },
+  "mr_discussions": {
+    "command": [
+      "codehub-cli",
+      "mr",
+      "review",
+      "list",
+      "--host",
+      "yellow",
+      "--project",
+      "{repo}",
+      "{mr}",
+      "--token",
+      "{token}",
+      "--format",
+      "json",
+      "--limit",
+      "100",
+      "-k"
+    ],
+    "fields": {
+      "id": {
+        "json": "id"
+      },
+      "updated_at": {
+        "json": "notes.0.updated_at"
+      },
+      "file": {
+        "json": "notes.0.diff_file"
+      },
+      "line": {
+        "json": "notes.0.position.new_line"
+      },
+      "author": {
+        "json": "notes.0.author.username"
+      },
+      "body": {
+        "json": "notes.0.body"
+      },
+      "revision": {
+        "json": "notes.0.id"
+      },
+      "severity": {
+        "json": "severity"
+      }
+    },
+    "timeout_s": 30,
+    "items": {
+      "json": ""
+    }
+  },
+  "mr_gates": {
+    "command": [
+      "python3",
+      "/data/mae-flow-cloud/repo/deploy/adapter-tools/mr-gates.py",
+      "{repo_path}",
+      "{mr}",
+      "{token}"
+    ],
+    "bools": {
+      "json": "gates"
+    },
+    "mr_state": {
+      "json": "mr_state"
+    },
+    "mr_state_map": {
+      "opened": "opened",
+      "merged": "merged",
+      "closed": "closed",
+      "locked": "opened"
+    },
+    "ignore_fields": [
+      "state",
+      "status_for_list",
+      "status_for_rebase_and_merge_without_conflict",
+      "status_without_conflict",
+      "status_without_non_ff",
+      "status_without_user_auth",
+      "can_force_merge",
+      "is_access_control_downgrade",
+      "is_target_branch_updated",
+      "query_conflict_process",
+      "merge_gate_verify_duration",
+      "merge_gate_verify_message",
+      "min_merged_score",
+      "merge_request_id",
+      "merge_request_switch"
+    ],
+    "timeout_s": 30,
+    "reason": {
+      "json": "gates.reason"
+    },
+    "mr_sha": {
+      "json": "sha"
+    }
+  },
+  "discussion_reply": {
+    "command": [
+      "codehub-cli",
+      "mr",
+      "review",
+      "reply",
+      "--host",
+      "yellow",
+      "--project",
+      "{repo}",
+      "{mr}",
+      "{id}",
+      "--body",
+      "{body}",
+      "--token",
+      "{token}",
+      "--format",
+      "json",
+      "--no-cache",
+      "-k"
+    ],
+    "timeout_s": 15,
+    "note_id": {
+      "json": "id"
+    },
+    "idempotency_no_cli_key": true
+  },
+  "discussion_resolve": {
+    "command": [
+      "codehub-cli",
+      "mr",
+      "review",
+      "resolve",
+      "--host",
+      "yellow",
+      "--project",
+      "{repo}",
+      "{mr}",
+      "{id}",
+      "--token",
+      "{token}",
+      "--format",
+      "json",
+      "--no-cache",
+      "-k"
+    ],
+    "timeout_s": 15
+  },
+  "mr_close": {
+    "command": [
+      "curl",
+      "--fail",
+      "--silent",
+      "--show-error",
+      "--noproxy",
+      "*",
+      "--connect-timeout",
+      "5",
+      "--max-time",
+      "30",
+      "-X",
+      "PUT",
+      "-H",
+      "Private-Token: {token}",
+      "--data-urlencode",
+      "state_event=close",
+      "https://codehub-y.example.com/api/v4/projects/{repo_path}/merge_requests/{mr}"
+    ],
+    "timeout_s": 35
+  },
+  "mr_create_knowledge": {
+    "participant_flags": {
+      "reviewers": "--approval-reviewers",
+      "approval_approvers": "--approval-approvers"
+    },
+    "command": [
+      "codehub-cli",
+      "mr",
+      "create",
+      "--host",
+      "yellow",
+      "--project",
+      "{repo}",
+      "--source-branch",
+      "{source_branch}",
+      "--target-branch",
+      "{target_branch}",
+      "--title",
+      "{title}",
+      "--e2e-issues",
+      "{dts_no}",
+      "--token",
+      "{token}",
+      "--format",
+      "json",
+      "--json",
+      "web_url,iid",
+      "-k"
+    ],
+    "url": {
+      "json": "web_url"
+    },
+    "id": {
+      "json": "iid"
+    }
+  },
+  "mr_approver_members": {
+    "command": [
+      "codehub-cli",
+      "project",
+      "member",
+      "list",
+      "--host",
+      "yellow",
+      "-p",
+      "{repo}",
+      "--token",
+      "{token}",
+      "--format",
+      "json",
+      "-k"
+    ],
+    "fields": {
+      "username": {
+        "json": "username"
+      },
+      "access_level": {
+        "json": "access_level"
+      }
+    },
+    "timeout_s": 15
+  }
+}

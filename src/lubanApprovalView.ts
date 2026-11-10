@@ -1,4 +1,4 @@
-/** 小鲁班纯文本审批的展示层；不持有会话或审批状态。 */
+/** 通知服务纯文本审批的展示层；不持有会话或审批状态。 */
 
 import type { WaitingRecord } from "./humanGate.ts";
 import type { TaskSummary } from "./taskService.ts";

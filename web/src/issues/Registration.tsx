@@ -289,7 +289,7 @@ function ManualRegister({
   const moduleCatalog = useMemo(() => (modules ?? []).filter((module) =>
     module.status === "active" && module.repositories.length > 0), [modules]);
   const selectedModule = moduleCatalog.find((module) => module.id === moduleId);
-  // 指派候选(flow=issue 固定口径:只认 Git 令牌+邮箱,不问小鲁班
+  // 指派候选(flow=issue 固定口径:只认 Git 令牌+邮箱,不问通知服务
   // 令牌)。拉取失败置空表——必填校验拦住提交,服务端门禁兜底。
   useEffect(() => {
     let alive = true;

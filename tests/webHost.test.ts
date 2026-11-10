@@ -119,7 +119,7 @@ test("配 webRoot:index 与资产按类型出文件,API 与穿越各归各位", 
     assert.equal(apiDetail.status, 404);
     assert.match(apiDetail.headers.get("content-type") ?? "", /application\/json/);
 
-    // 问题会话工作台深链(小鲁班通知的落点):GET /issues/:id 既是详情
+    // 问题会话工作台深链(通知服务通知的落点):GET /issues/:id 既是详情
     // API 又是前端路由——判别式与 /tasks/:id 相同,浏览器导航(Accept
     // 要 text/html)拿 SPA 入口,程序 fetch(默认 Accept: */*)照旧拿
     // 问题流 API 的 JSON,契约零变化。

@@ -1,9 +1,9 @@
 /**
- * 小鲁班插件的纯文本审批入口。
+ * 通知服务插件的纯文本审批入口。
  *
  * 它只是一层移动端输入适配：任务、待办、权限与决定仍以 TaskService
  * 为唯一真相；这里不保存第二份审批状态，也不替内核解释决定。
- * 小鲁班真实回调形状未知时，由部署侧桥转换成本文件的稳定小契约。
+ * 通知服务真实回调形状未知时，由部署侧桥转换成本文件的稳定小契约。
  */
 
 import {
@@ -125,13 +125,13 @@ class CallbackError extends Error {
 /** 回调 Token 只从 0600 文件读取，避免明文进入进程参数和部署配置 diff。 */
 export function loadLubanPluginToken(path: string): string {
   const info = statSync(path);
-  if (!info.isFile()) throw new Error("小鲁班插件 Token 路径不是普通文件");
+  if (!info.isFile()) throw new Error("通知服务插件 Token 路径不是普通文件");
   if (process.platform !== "win32" && (info.mode & 0o077) !== 0) {
-    throw new Error("小鲁班插件 Token 文件权限必须是 0600");
+    throw new Error("通知服务插件 Token 文件权限必须是 0600");
   }
   const token = readFileSync(path, "utf-8").trim();
   if (Buffer.byteLength(token, "utf-8") < 32) {
-    throw new Error("小鲁班插件 Token 至少需要 32 字节");
+    throw new Error("通知服务插件 Token 至少需要 32 字节");
   }
   return token;
 }
@@ -202,7 +202,7 @@ export class LubanApprovalGateway {
   ) {
     this.service = Array.isArray(service) ? new CompositeLubanApproval(service) : service;
     if (Buffer.byteLength(options.token, "utf-8") < 32) {
-      throw new Error("小鲁班插件 Token 至少需要 32 字节");
+      throw new Error("通知服务插件 Token 至少需要 32 字节");
     }
   }
 
@@ -279,7 +279,7 @@ export class LubanApprovalGateway {
       if (error instanceof CallbackError) {
         return { status: error.status, text: error.message };
       }
-      this.options.log?.(`小鲁班审批回调失败: ${String(error)}`);
+      this.options.log?.(`通知服务审批回调失败: ${String(error)}`);
       return { status: 500, text: "Mae-Flow 暂时无法处理，请稍后重试" };
     }
   }
@@ -296,7 +296,7 @@ export class LubanApprovalGateway {
     const message = createHash("sha256")
       .update(envelope.message_id, "utf-8").digest("hex").slice(0, 10);
     this.options.log?.(
-      `小鲁班审批回调已处理: sender=${envelope.sender},message=${message},`
+      `通知服务审批回调已处理: sender=${envelope.sender},message=${message},`
         + `status=${reply.status}${reply.replayed ? ",replayed=true" : ""}`,
     );
   }
@@ -825,7 +825,7 @@ export class LubanApprovalGateway {
         state_version: task.waiting!.state_version,
         selected_options: selectedOptions,
         free_responses: freeResponses,
-        comment: notes ? `小鲁班手机审批：${notes}` : "小鲁班手机审批",
+        comment: notes ? `通知服务手机审批：${notes}` : "通知服务手机审批",
       });
       if (task.luban_account) this.cursors.delete(task.luban_account);
       return {

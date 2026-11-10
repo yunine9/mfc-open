@@ -131,7 +131,7 @@ test("环境保险箱:API 引用无密码、宿主可解密、文件不是明文
   assert.equal(vault.credentials("issue-1", refs[0].id).length, 3);
   const ciphertext = readFileSync(
     join(dataDir, ".issue-environments", "issue-1.json"), "utf8");
-  assert.doesNotMatch(ciphertext, /shared-secret|operator|10\.0\.0\.8/);
+  assert.doesNotMatch(ciphertext, /shared-secret|operator|192\.0\.2\.8/);
   vault.remove("issue-1");
   assert.equal(existsSync(join(dataDir, ".issue-environments", "issue-1.json")), false);
 });

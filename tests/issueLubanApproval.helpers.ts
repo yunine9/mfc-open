@@ -23,7 +23,7 @@ import {
 import type { TaskSummary } from "../src/taskService.ts";
 import { mfcTemp } from "./mfcTmp.ts";
 /**
- * 问题会话接入小鲁班手机审批的契约测试(与需求侧同一网关、同一审批码):
+ * 问题会话接入通知服务手机审批的契约测试(与需求侧同一网关、同一审批码):
  * - 等待卡(平台闸卡与 Agent 问题卡)经适配层进网关,手机纯文本回复
  *   (裸序号/审批码)能落账到问题会话,后续回合照常续跑;
  * - 通知里的审批码与网关侧派码同源(同 token、同四元组),回复即达;
@@ -31,7 +31,7 @@ import { mfcTemp } from "./mfcTmp.ts";
  * - 码表标注「填写补充说明」的选项,手机必须带说明(与页面同纪律)。
  *
  * 范式与 issueFlowNotify.test.ts 同款:ScriptedModelServer 剧本 +
- * FakeLubanServer 假小鲁班,只走公开 API 断言。
+ * FakeLubanServer 假通知服务,只走公开 API 断言。
  */
 
 
@@ -96,7 +96,7 @@ export async function makeService(
     dts: new MockDtsGateway(),
     notifier,
     linkBase: "https://mfc.example.com",
-    // 这些用例验证的是“真人收到小鲁班审批卡并作答”的通路。默认
+    // 这些用例验证的是“真人收到通知服务审批卡并作答”的通路。默认
     // 二档会代答带推荐项的纯选择题，并有意抑制即将失效的通知；
     // 显式使用三档，避免把自动节奏和人工审批混在同一用例里。
     interventionTier: () => "3",

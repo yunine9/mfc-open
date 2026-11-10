@@ -239,7 +239,7 @@ async function startChain(options: {
     chainScenes(origin, options.steps?.(origin) ?? []),
     "scripted-v1", { linear: true });
   await model.start();
-  // 假小鲁班挂上收口通知:mr_green 全绿收口要点名用户待归档(ADR-0013)。
+  // 假通知服务挂上收口通知:mr_green 全绿收口要点名用户待归档(ADR-0013)。
   const luban = new FakeLubanServer();
   await luban.start();
   const notifier = new Notifier({
@@ -495,7 +495,7 @@ test("MR 验绿门·全绿当场收口:申报即核验,全绿即流程终点待�
     // 独有断言,该用例与本条重复已于 2026-09-18 删除)。
     assert.match(chain.okReceipts(), /环境验证卡交给用户/);
     assert.match(chain.trail(), /MR 核验通过/, "核验裁决要进台账");
-    // 收口要点名用户:小鲁班通知"全部跑绿,待归档"(ADR-0013)。
+    // 收口要点名用户:通知服务通知"全部跑绿,待归档"(ADR-0013)。
     // (等待闸卡也发通知,按内容取收口那条。)
     const notice = await until(() =>
       chain.notifier.list().find((record) => /归档/.test(record.summary ?? "")),

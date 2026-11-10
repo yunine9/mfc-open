@@ -553,7 +553,7 @@ test("创建:固定流程登记回执、vault 与开场上下文照旧", async (
     await until(() => model.requests.length ? 1 : undefined, "首轮请求");
     const requestText = JSON.stringify(model.requests);
     assert.match(requestText, /env-shared-secret/);
-    assert.match(requestText, /10\.0\.0\.8/, "环境地址是现场材料,应该可见");
+    assert.match(requestText, /192\.0\.2\.8/, "环境地址是现场材料,应该可见");
     // 开场问题应作为用户消息入账(等首回合收口再查线程)。
     await until(() =>
       service.get(created.id).status === "idle" ? 1 : undefined, "首回合收口");

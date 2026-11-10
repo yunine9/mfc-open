@@ -52,12 +52,12 @@ export async function runDeploymentCheck(input: {
     items.push(!notify?.configured
       ? { key: "notify", label: "消息通知", status: "warning",
           detail: "通知通道未配置",
-          suggestion: "这是部署项；成员只需在个人设置中填写自己的小鲁班 Token" }
+          suggestion: "这是部署项；成员只需在个人设置中填写自己的通知服务 Token" }
       : notify.last_error
         ? { key: "notify", label: "消息通知", status: "warning",
             detail: "已配置，但最近一次发送失败", suggestion: notify.last_error }
         : { key: "notify", label: "消息通知", status: "ok",
-            detail: "小鲁班通知通道已就绪" });
+            detail: "通知服务通知通道已就绪" });
 
     // 通知链接地址:2026-08-19 内网实锤——没配 --public-url,发起人又
     // 只从回环地址(本机/SSH 隧道)访问,通知里的链接别人打不开。回环

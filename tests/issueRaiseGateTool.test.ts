@@ -350,7 +350,7 @@ test("端到端:AI 举验证卡落卡即返回收口等待;闸在场 AskUserQues
       "打回文案指路先等闸裁决");
     assert.match(JSON.stringify(model.requests), /平台闸/,
       "互斥文案进模型上下文");
-    // 落卡即返回的另一半:等待通知发出(小鲁班喊人验环境)。
+    // 落卡即返回的另一半:等待通知发出(通知服务喊人验环境)。
     await until(() => luban.messages.length ? luban.messages : undefined,
       "等待卡通知发出");
     assert.match(JSON.stringify(luban.messages), /验证/,

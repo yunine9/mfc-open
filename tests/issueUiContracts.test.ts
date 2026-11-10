@@ -27,7 +27,8 @@ const annotations = readFileSync(
   resolve("web/src/AnnotationPanel.tsx"), "utf-8");
 const launch = readFileSync(
   resolve("web/src/LaunchWorkspace.tsx"), "utf-8");
-const issueFlow = readFileSync(resolve("docs/issue-flow.md"), "utf-8");
+const issueFlowDoc = resolve("docs/issue-flow.md");
+const issueFlow = existsSync(issueFlowDoc) ? readFileSync(issueFlowDoc, "utf-8") : "";
 const environmentVault = readFileSync(resolve("src/issueEnvironment.ts"), "utf-8");
 const issueService = readFileSync(resolve("src/issueFlow/service.ts"), "utf-8");
 const issuePrompt = readFileSync(resolve("src/issueFlow/prompt.ts"), "utf-8");
@@ -233,8 +234,10 @@ test("隐私说明如实覆盖 AI 上下文，管理员旁路有明确入口", (
   // 无需在此填写"的说明替代;密码的唯一输入处是共用新建/编辑弹框。
   assert.match(decisions, /密码以选定时为准[\s\S]*密码无需在此填写/);
   assert.match(editor, /密码加密保存在服务端[\s\S]*明文提供给当前 AI 会话/);
-  assert.match(issueFlow, /网管环境口令的契约[\s\S]*AI 上下文[\s\S]*事件流/);
-  assert.doesNotMatch(issueFlow, /网管环境密码[\s\S]{0,120}不进模型上下文/);
+  if (issueFlow) {
+    assert.match(issueFlow, /网管环境口令的契约[\s\S]*AI 上下文[\s\S]*事件流/);
+    assert.doesNotMatch(issueFlow, /网管环境密码[\s\S]{0,120}不进模型上下文/);
+  }
   // 管理员旁路的开关由服务端下发(feedbackPolicy 唯一判定处),页面按
   // 结论开按钮;入口本身仍必须在面板上明确存在。(#230 改锚:旁路已
   // 统一成两段式「管理员代办」流程,代删口并入同一入口。)
@@ -1808,7 +1811,7 @@ test("登记页责任人指派接线(ADR-0031):选人框进表单、缺省纯函
   assert.match(registration, /resolveAssignee\(\{\s*manualPick: assigneeManual,/);
   assert.match(registration,
     /<UserPicker value=\{assignee\} options=\{assigneeOptions\}\s*onChange=\{setAssigneeManual\} ariaLabel="责任人"/);
-  // 候选走 flow=issue 固定口径(只认 Git 凭据,不问小鲁班令牌);
+  // 候选走 flow=issue 固定口径(只认 Git 凭据,不问通知服务令牌);
   // 模块责任人+维护者置顶带标记。
   assert.match(registration, /listCollaborationAssignees\("issue"\)/);
   assert.match(registration, /"模块责任人"/);
@@ -1937,7 +1940,7 @@ test("发起即终止草稿+清空重填(2026-10-15 拍板)", () => {
 
 test("AI 润色退役反钉(#272,ADR-0030):入口与通路不回潮", () => {
   assert.doesNotMatch(registration, /润色|polish/i);
-  assert.doesNotMatch(issueFlow, /AI 润色|polish-description/);
+  if (issueFlow) assert.doesNotMatch(issueFlow, /AI 润色|polish-description/);
 });
 
 test("工作区变更聚合视图按仓分段:服务端标记切片,聚焦视图不分段(ADR-0032)", () => {

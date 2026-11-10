@@ -233,7 +233,7 @@ async function main(): Promise<void> {
   // 云端服务默认静音内核桌面弹窗:该被叫的是控制台前的人,不是跑服务的
   // 那台机器。内核默认开弹窗,是为"人坐在终端旁"的单机场景设计的;放到
   // 服务里,同一台机器上跑几单就弹几倍的通知,而真正的送达通道是待办与
-  // 小鲁班。要恢复单机手感就加 --desktop-notify。
+  // 通知服务。要恢复单机手感就加 --desktop-notify。
   if (has("--desktop-notify")) {
     // TaskService 默认闸静音(防的是测试/probe 把用户 mac 弹一串),
     // 这里显式声明"人就在这台机器旁",闸才放行。
@@ -513,7 +513,7 @@ async function main(): Promise<void> {
     : undefined;
   if (projection) console.log(`[serve] PostgreSQL 投影已接线`);
 
-  // 通知端点:--luban <endpoint> 接真件;不配则起假小鲁班。原来这里
+  // 通知端点:--luban <endpoint> 接真件;不配则起假通知服务。原来这里
   // 永远起假件——部署手册写着"换 endpoint 零改动",代码里却没有那个
   // 口子,真件根本切不过去(盘配置面时逮住的缺口)。
   // --luban-header "Name: value"(可重复)带鉴权头;头的值是密钥,
@@ -521,7 +521,7 @@ async function main(): Promise<void> {
   let lubanEndpoint = flag("--luban");
   let lubanIsFake = false;
   if (lubanEndpoint) {
-    console.log(`[serve] 小鲁班真件: ${lubanEndpoint}`);
+    console.log(`[serve] 通知服务真件: ${lubanEndpoint}`);
   } else if (issueOnly) {
     // 问题流专用部署:通知假件起不来也不许挡住问题处理(需求流程
     // 反正停用,没人消费通知)。完整部署保持 fail-loud 不变。
@@ -530,16 +530,16 @@ async function main(): Promise<void> {
       await luban.start();
       lubanEndpoint = luban.endpoint;
       lubanIsFake = true;
-      console.log("[serve] 假小鲁班已就位(问题流专用部署)");
+      console.log("[serve] 假通知服务已就位(问题流专用部署)");
     } catch (error) {
-      console.log(`[serve] 假小鲁班启动失败,问题流专用模式继续(通知不可用): ${String(error)}`);
+      console.log(`[serve] 假通知服务启动失败,问题流专用模式继续(通知不可用): ${String(error)}`);
     }
   } else {
     const luban = new FakeLubanServer();
     await luban.start();
     lubanEndpoint = luban.endpoint;
     lubanIsFake = true;  // 假件不索个人令牌(配置门禁据此放行)
-    console.log("[serve] 假小鲁班已就位,消息可查: " + luban.endpoint.replace("/notify", ""));
+    console.log("[serve] 假通知服务已就位,消息可查: " + luban.endpoint.replace("/notify", ""));
   }
   const lubanHeaders: Record<string, string> = {};
   for (const header of flags("--luban-header")) {
@@ -560,7 +560,7 @@ async function main(): Promise<void> {
   // 手机审批是入站回调，与上面的出站通知令牌是两套身份。Token 只从
   // 0600 文件读，不允许塞进命令行或 JSON 配置的明文字段。
   const lubanPluginTokenFile = flag("--luban-plugin-token-file");
-  // Token 只让 Cloud 的接收端点就绪；真实小鲁班是否会把回复送进来是
+  // Token 只让 Cloud 的接收端点就绪；真实通知服务是否会把回复送进来是
   // 另一项部署事实。未完成端到端验收时绝不能在通知里承诺“直接回复”。
   const lubanPluginReplies = has("--luban-plugin-replies");
   let lubanPluginToken: string | undefined;
@@ -568,10 +568,10 @@ async function main(): Promise<void> {
     try {
       lubanPluginToken = loadLubanPluginToken(
         resolve(lubanPluginTokenFile));
-      console.log("[serve] 小鲁班 Cloud 回调端点已就绪: "
+      console.log("[serve] 通知服务 Cloud 回调端点已就绪: "
         + "/integrations/luban/plugin");
     } catch (error) {
-      console.error(`[serve] 小鲁班插件 Token 无效，拒绝启动: ${String(error)}`);
+      console.error(`[serve] 通知服务插件 Token 无效，拒绝启动: ${String(error)}`);
       process.exit(2);
     }
   }
@@ -581,10 +581,10 @@ async function main(): Promise<void> {
     process.exit(2);
   }
   if (lubanPluginToken && !lubanPluginReplies) {
-    console.log("[serve] 小鲁班回调端点已就绪，但尚未声明入站回复已接通；"
+    console.log("[serve] 通知服务回调端点已就绪，但尚未声明入站回复已接通；"
       + "通知不会提示直接回复序号");
   } else if (lubanPluginReplies) {
-    console.log("[serve] 小鲁班入站回复已由部署显式启用；通知将提供手机审批指令");
+    console.log("[serve] 通知服务入站回复已由部署显式启用；通知将提供手机审批指令");
   }
 
   // 统一任务执行面:普通编码/修复/子 Agent/Build-Fix 的 Bash
@@ -869,7 +869,7 @@ async function main(): Promise<void> {
   // 走同一个网关实例,未配置时由占位网关说人话,不静默 404。
   const issueDtsGateway = issueDts ?? new UnconfiguredDtsGateway();
   const issueLog = (message: string) => console.log(`  [issue] ${message}`);
-  // issue-only 下假小鲁班起不来时 endpoint 缺席:通知器整个不接
+  // issue-only 下假通知服务起不来时 endpoint 缺席:通知器整个不接
   // (notifier 是可选项),不让它变成问题流的启动依赖。
   const notifier = lubanEndpoint
     ? new Notifier({
@@ -964,7 +964,7 @@ async function main(): Promise<void> {
         }
       : {}),
     log: issueLog,
-    // 小鲁班通知是公共能力:问题流 AI 举卡等决策时也提醒归属用户
+    // 通知服务通知是公共能力:问题流 AI 举卡等决策时也提醒归属用户
     // (与需求侧同一实例;--issue-only 专用部署同样接线)。
     ...(notifier ? { notifier } : {}),
     // 通知深链落到问题会话工作台 /issues/<id>(与需求侧 /work 同一地位)。

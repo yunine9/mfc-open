@@ -323,7 +323,7 @@ test("4+1 的图真实渲染，其他章节或代码示例中的图不能代替"
 });
 
 for (const failed of [false, true]) {
-  test(`小鲁班通知责任人一次，通知失败=${failed} 不影响摘要或任务`, async () => {
+  test(`通知服务通知责任人一次，通知失败=${failed} 不影响摘要或任务`, async () => {
     const f = fixture();
     try {
       f.task.summary.luban_account = "owner";

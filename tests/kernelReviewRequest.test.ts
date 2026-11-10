@@ -54,7 +54,7 @@ for (const answer of [confirm, "先调整"]) {
     assert.equal(outcome.status, "waiting_for_human", readFileSync(join(cwd, "events.jsonl"), "utf8"));
     const waiting = outcome.waiting!;
     const resolved = gate.resolve(waiting.waiting_id, { stateVersion: waiting.state_version,
-      decision: answer, answers: { "交付是否确认？": answer }, notes: "小鲁班手机审批" });
+      decision: answer, answers: { "交付是否确认？": answer }, notes: "通知服务手机审批" });
     assert.equal((await session.resumeWithDecision(resolved)).status, "turn_finished");
     assert.equal(gate.all().length, 1, "只出现 Agent 最初的问题");
     const after = JSON.parse(readFileSync(join(cwd, ".mae-flow.json"), "utf8"));

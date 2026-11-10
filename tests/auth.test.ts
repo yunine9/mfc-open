@@ -356,7 +356,7 @@ test("介入档位:issue 路由写档位,需求侧轴不动", async () => {
   }
 });
 
-test("个人设置可用已保存 Token 真实测试小鲁班连通性", async () => {
+test("个人设置可用已保存 Token 真实测试通知服务连通性", async () => {
   const dir = mkdtempSync(join(tmpdir(), "mfc-auth-luban-test-"));
   const auth = new LocalAuth(join(dir, "auth.json"));
   auth.bootstrapAdmin("admin", "administrator-pass");
@@ -397,7 +397,7 @@ test("个人设置可用已保存 Token 真实测试小鲁班连通性", async (
       method: "POST", headers: { cookie: bob },
     });
     assert.equal(missing.status, 409);
-    assert.match(await missing.text(), /请先保存小鲁班 Token/);
+    assert.match(await missing.text(), /请先保存通知服务 Token/);
 
     const alice = await login("alice", "alice-password-1");
     const tested = await fetch(`${base}/auth/me/luban-test`, {
@@ -406,7 +406,7 @@ test("个人设置可用已保存 Token 真实测试小鲁班连通性", async (
     assert.equal(tested.status, 200);
     assert.deepEqual(await tested.json(), {
       ok: true,
-      message: "测试消息已发送，请在小鲁班中确认是否收到。",
+      message: "测试消息已发送，请在通知服务中确认是否收到。",
     });
     assert.equal(luban.messages.length, 1);
     assert.equal(luban.messages[0].account, "alice");

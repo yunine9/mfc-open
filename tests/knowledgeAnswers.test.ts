@@ -189,7 +189,7 @@ test("停止和超时不会被迟到答案覆盖；错误引用不得写成完�
   } finally { late(); await service.shutdown(); rmSync(dir, { recursive: true, force: true }); }
 });
 
-test("小鲁班消息去重跨重启保存，消息冲突和账号隔离均核对", async () => {
+test("通知服务消息去重跨重启保存，消息冲突和账号隔离均核对", async () => {
   const dir = fixture(); let executions = 0;
   const run: KnowledgeAnswerRunner = async () => { executions++; return { markdown: "尚未取得资料，无法确认", evidence_ids: [], unknowns: ["资料缺失"] }; };
   let service = new KnowledgeAnswers(dir, run);

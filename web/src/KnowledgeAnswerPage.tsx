@@ -6,7 +6,7 @@ function readRoute() {
   return { answerId: query.get("kbAsk") || "", moduleKey: query.get("kbModule") || undefined, documentId: query.get("knowledgeDocument") || undefined };
 }
 
-/** 文档提问、侧栏入口和小鲁班链接共用同一个独立问答页面。 */
+/** 文档提问、侧栏入口和通知服务链接共用同一个独立问答页面。 */
 export function openKnowledgeAnswer(answerId = "", moduleKey?: string, documentId?: string) {
   const url = new URL(location.href);
   url.pathname = "/";

@@ -669,7 +669,7 @@ export interface IssueFlowOptions {
       /** 红灯修复轮预算(与需求侧同一旋钮,缺省 20;0=关掉自动修复)。 */
       repair_rounds?: number;
       /** 环境验证卡守闸阈值(#248,分钟):mr_green 收口后超过该值
-       *  仍无 env_verify 卡(且会话空闲、无闸在等),守闸器向小鲁班
+       *  仍无 env_verify 卡(且会话空闲、无闸在等),守闸器向通知服务
        *  报警——纯报警不举卡,静默漏卡唯一的声器。缺省 120;0=关闭;
        *  允许小数(亚分钟窗口,测试用)。 */
       env_verify_watchdog_minutes?: number;
@@ -741,7 +741,7 @@ export interface IssueFlowOptions {
    * 组装会话时按同款逻辑变成 VisionCapabilityConfig,主会话由此获得
    * inspect_image 工具;缺席则工具不出现,行为照旧。 */
   vision?: VisionModelChoice;
-  /** 小鲁班通知(公共能力,与需求侧同一实例):AI 举卡等决策时提醒
+  /** 通知服务通知(公共能力,与需求侧同一实例):AI 举卡等决策时提醒
    * 归属用户。缺席(演示形态)不通知,流程照走——通知是旁路,不是
    * 问题流的启动依赖。 */
   notifier?: Notifier;
@@ -3334,7 +3334,7 @@ export class IssueFlowService {
     if (isTerminal(state.status)) this.releaseDriver(live);
   }
 
-  /** 等待卡 → 小鲁班(需求侧 notifyWaiting 的同款公共能力)。两条纪律:
+  /** 等待卡 → 通知服务(需求侧 notifyWaiting 的同款公共能力)。两条纪律:
    * - 旁路 fail-open:发送失败只记日志,回合状态一字不动;
    * - 幂等靠 notifier 按 waiting_id 去重,恢复重放不重复轰炸。
    * 闸卡与 Agent 卡并存时闸优先——与作答分派(answer)同一优先级;
@@ -3414,7 +3414,7 @@ export class IssueFlowService {
     return this.options.linkBase ?? this.observedLinkBase;
   }
 
-  /** 会话工作台深链(等待卡/代答的小鲁班通知共用;尾部斜杠归一)。
+  /** 会话工作台深链(等待卡/代答的通知服务通知共用;尾部斜杠归一)。
    *  linkBase 缺席时回落从请求 Host 学到的入口,不再只剩路径后缀。 */
   private issueLink(issueId: string): string {
     return `${(this.notificationLinkBase() ?? "").replace(/\/+$/, "")}`
@@ -6476,7 +6476,7 @@ export class IssueFlowService {
     void this.options.notifier?.notifyOutcome({
       taskId: live.id,
       account: live.state.account,
-      // 状态词与其它 outcome 通知分开:小鲁班按 taskId:outcome:状态
+      // 状态词与其它 outcome 通知分开:通知服务按 taskId:outcome:状态
       // 幂等,同词会被前一条吞掉。
       status: summary.includes("已合入") ? "已合入" : "MR被关闭",
       summary,
@@ -7442,7 +7442,7 @@ export class IssueFlowService {
   }
 
   /** mr_green 收口(2026-09-02 拍板,ADR-0013:流程终点=流水线全绿,
-   * 换库验证封存):当前阶段 fixedComplete、用户小鲁班通知、等归属人
+   * 换库验证封存):当前阶段 fixedComplete、用户通知服务通知、等归属人
    * 合入即自动归档(ADR-0034,归档收尾走终态卫生尾巴)。合入前用户
    * 续聊即重开本阶段返工(见 reply 的收口重开),AI 修完重推再申报,
    * 可多轮。ticket 场景状态保持 idle——收口是"等合入事实",不是终态;
@@ -7593,7 +7593,7 @@ export class IssueFlowService {
     }
   }
 
-  /** 放弃点 → 小鲁班(票 81,需求侧 notifyRepairStopped 同语义):
+  /** 放弃点 → 通知服务(票 81,需求侧 notifyRepairStopped 同语义):
    * 预算烧完/轮询超时这类"机器放弃、需要人接手"的时刻必须主动喊人,
    * 不能等人自己刷网页。两条纪律:
    * - 幂等靠 outcome 通道既有机制(键=会话:原因:仓:提交,taskId 已含

@@ -461,12 +461,12 @@ export function createTaskServer(
         options.issueFlow?.observeLinkBase(linkBase);
       }
 
-      // 小鲁班插件回调使用独立固定 Token，不依赖浏览器 Cookie。插件
+      // 通知服务插件回调使用独立固定 Token，不依赖浏览器 Cookie。插件
       // 只获得这一个纯文本入口，绝不能借它穿透成通用任务 API。
       if (parts[0] === "integrations" && parts[1] === "luban"
           && parts[2] === "plugin" && parts.length === 3) {
         if (!options.lubanApproval) {
-          return json(response, 404, { error: "未启用小鲁班手机审批" });
+          return json(response, 404, { error: "未启用通知服务手机审批" });
         }
         if (request.method !== "POST") {
           response.setHeader("allow", "POST");
@@ -528,7 +528,7 @@ export function createTaskServer(
         }
         if (needs.luban_token && !options.auth.lubanToken(who.username)) {
           missing.push({ key: "luban_token", where: "me",
-            label: "小鲁班 Token 未配置（个人设置 → 个人接入），"
+            label: "通知服务 Token 未配置（个人设置 → 个人接入），"
               + "没有它就无法及时提醒你处理任务" });
         }
         return missing;
@@ -660,7 +660,7 @@ export function createTaskServer(
           return json(response, 200,
             options.auth!.gitProfile(viewer.username));
         }
-        // 个人通知令牌(小鲁班):同样只写不读。按人存是因为那个接口
+        // 个人通知令牌(通知服务):同样只写不读。按人存是因为那个接口
         // 以令牌对应的人的身份发消息——管理员配一个服务号,所有人收到
         // 的都是同一个机器人；各人配自己的，普通提醒发给自己，主动
         // 邀请检视时则发给所选 Committer 工号。
@@ -685,11 +685,11 @@ export function createTaskServer(
           if (!viewer) return json(response, 401, { error: "尚未登录" });
           const notifier = service.options.notifier;
           if (!notifier) {
-            return json(response, 503, { error: "当前部署未启用小鲁班通知" });
+            return json(response, 503, { error: "当前部署未启用通知服务通知" });
           }
           if (notifier.needsPersonalToken()
               && !options.auth!.lubanToken(viewer.username)) {
-            return json(response, 409, { error: "请先保存小鲁班 Token" });
+            return json(response, 409, { error: "请先保存通知服务 Token" });
           }
           const result = await notifier.testDelivery(viewer.username);
           if (!result.ok) {
@@ -701,7 +701,7 @@ export function createTaskServer(
           }
           return json(response, 200, {
             ok: true,
-            message: "测试消息已发送，请在小鲁班中确认是否收到。",
+            message: "测试消息已发送，请在通知服务中确认是否收到。",
           });
         }
         // 个人模型网关(ADR-0068):成员自助配模型接入,四字段与平台
@@ -838,7 +838,7 @@ export function createTaskServer(
         // 跨仓分工候选：所有登录者都可读，但只给“是否就绪+缺项”，
         // 不给 token hint、邮箱或管理员账号。服务形态决定哪些配置必需;
         // ?flow=issue 是问题登记指派的固定映射(ADR-0031):只认 Git
-        // 令牌+署名邮箱,不问小鲁班令牌——问题通知是旁路,不因缺通知
+        // 令牌+署名邮箱,不问通知服务令牌——问题通知是旁路,不因缺通知
         // 令牌挡指派。映射钉死在服务端,客户端只点名场景,不递需求。
         if (request.method === "GET" && parts[1] === "collaboration-assignees") {
           if (!viewer) return json(response, 401, { error: "尚未登录" });
@@ -1044,7 +1044,7 @@ export function createTaskServer(
           });
         }
         // GET /issues 与 /issues/:id 既是 API 也是问题工作台的深链地址
-        // (裸 /issues=登记页,带 id=会话工作台;小鲁班通知点开即达)。
+        // (裸 /issues=登记页,带 id=会话工作台;通知服务通知点开即达)。
         // 与 /tasks/:id 的旧通知兼容同一判别式:浏览器导航(Accept 要
         // text/html)让给前端 SPA,程序 fetch(默认 Accept: */*)照旧拿
         // JSON,API 契约零变化。
@@ -2158,7 +2158,7 @@ export function createTaskServer(
           && (url.pathname === "/" || parts[0] !== "tasks")) {
         const workspaceRoute = parts[0] === "work" && parts.length >= 2;
         const helpRoute = parts[0] === "help" && extname(url.pathname) === "";
-        // 问题工作台深链(小鲁班通知的落点):上一段已把带 text/html 的
+        // 问题工作台深链(通知服务通知的落点):上一段已把带 text/html 的
         // GET /issues 与 /pipeline-repairs 的列表、详情让出，这里交给 React。
         const issuesRoute = parts[0] === "issues" || parts[0] === "pipeline-repairs";
         // 环境管理页签深链(#149):API 判别式放行的 text/html GET 在这里接住交给 React。

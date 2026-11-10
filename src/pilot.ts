@@ -224,7 +224,7 @@ async function main(): Promise<number> {
     console.error(`[pilot] 现场不存在,无从续跑: ${dataDir}`);
     return 1;
   }
-  // 内网件全用假件:裸仓当 Git 服务端,MR/流水线走环回 API,小鲁班收消息。
+  // 内网件全用假件:裸仓当 Git 服务端,MR/流水线走环回 API,通知服务收消息。
   const platform = new FakeGitPlatform();
   platform.initBare(repoPath, dataDir);
   const auxBare = auxRepoPath ? initAuxBare(auxRepoPath, dataDir, auxName) : undefined;
@@ -506,10 +506,10 @@ async function main(): Promise<number> {
   }
   console.log(`[pilot] 平台侧 MR: ${JSON.stringify(platform.mergeRequests)}`);
   console.log(`[pilot] 平台侧流水线: ${JSON.stringify(platform.pipelines)}`);
-  console.log(`[pilot] 小鲁班收到 ${luban.messages.length} 条通知`);
+  console.log(`[pilot] 通知服务收到 ${luban.messages.length} 条通知`);
   if (enabled("--show-luban")) {
     for (const [index, message] of luban.messages.entries()) {
-      console.log(`[pilot] 小鲁班 #${index + 1}: ${String(message.text ?? "")}`);
+      console.log(`[pilot] 通知服务 #${index + 1}: ${String(message.text ?? "")}`);
     }
   }
   await platform.stop();

@@ -65,7 +65,7 @@ function integrationReply(record: KnowledgeAnswerRecord) {
 export async function lubanKnowledgeRoute(request: IncomingMessage, response: ServerResponse, answers: () => KnowledgeAnswers,
   options: { token?: string; accountEnabled: (account: string) => boolean }, readBody: ReadBody, json: Json) {
   response.setHeader("cache-control", "no-store");
-  if (!options.token) return json(response, 404, { error: "未配置小鲁班问答接口令牌" });
+  if (!options.token) return json(response, 404, { error: "未配置通知服务问答接口令牌" });
   if (request.method !== "POST") { response.setHeader("allow", "POST"); return json(response, 405, { error: "只接受 POST" }); }
   const first = (value: string | string[] | undefined) => Array.isArray(value) ? value[0] : value;
   const token = first(request.headers["x-mfc-luban-plugin-token"]) ?? first(request.headers.authorization)?.replace(/^Bearer\s+/i, "");
