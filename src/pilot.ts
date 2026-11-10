@@ -8,15 +8,15 @@
  *
  * 用法:
  *   npm run pilot -- --models .local/models.json --provider glm \
- *     --model glm-5.1 --repo ../mae-flow-fieldtest-java \
+ *     --model glm-5.1 --repo ../demo-repo \
  *     [--requirement "交付 REQ...:..."] [--max-cards 12] [--timeout-min 20]
  * 流水线故障/排除项/取证缺口剧本见 README「跑起来」。
  *
  * 跨仓演练(2026-09-06):再挂一个候选仓,任务走"分析→确认拆分→按仓建子任务"
  * 一整条链,代答循环盯全部任务(父+子),子任务到待合入时在假平台上真合入,
  * 下游子任务才会解阻塞启动——这是"上下游通知"唯一真跑得起来的形态:
- *   npm run pilot -- --label cross-<日期> --repo ../mae-flow-fieldtest-java \
- *     --repo-aux ../mae-flow-fieldtest-java --aux-name notify-portal \
+ *   npm run pilot -- --label cross-<日期> --repo ../demo-repo \
+ *     --repo-aux ../demo-repo --aux-name notify-portal \
  *     --isolate-image mfc-java-pilot:latest --timeout-min 90 --max-cards 30
  *
  * 边跑边看(2026-09-06 用户:"没有可以直接看的真实现场吗?"):试跑器是进程内
@@ -154,13 +154,13 @@ async function main(): Promise<number> {
   const modelsPath = resolve(flag("--models", ".local/models.json")!);
   const provider = flag("--provider", "glm")!;
   const model = flag("--model", "glm-5.1")!;
-  const repoPath = resolve(flag("--repo", "../mae-flow-fieldtest-java")!);
+  const repoPath = resolve(flag("--repo", "../demo-repo")!);
   const auxRepoPath = flag("--repo-aux") ? resolve(flag("--repo-aux")!) : undefined;
   const auxName = flag("--aux-name", "notify-portal")!;
   const crossRepo = Boolean(auxRepoPath);
   const kernelRoot = discoverKernelRoot(REPO_ROOT);
   if (!kernelRoot) {
-    console.error("[pilot] 找不到内核(MAE_FLOW_HOME/../mae-flow/kernel 皆无),不硬跑");
+    console.error("[pilot] 找不到内核(MAE_FLOW_HOME/仓内 kernel/ 皆无),不硬跑");
     process.exit(1);
   }
   const maxCards = Number(flag("--max-cards", "12"));

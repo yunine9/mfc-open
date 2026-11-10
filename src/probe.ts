@@ -5,7 +5,7 @@
  *
  * 用法: npm run probe [-- --out <目录>]
  * 前置: pi 不需要单独安装(SDK 内嵌);内核优先来自 MAE_FLOW_HOME 或
- * 随 Cloud 发布的 kernel/，快照缺席时才回退 ../mae-flow。
+ * 随 Cloud 发布的 kernel/，不依赖外部内核仓。
  */
 
 import { mkdirSync, rmSync, writeFileSync } from "node:fs";

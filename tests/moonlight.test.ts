@@ -73,7 +73,7 @@ function allSeen(model: ScriptedModelServer): string {
 test("交付方式预答:内核举卡,下单选定的那项自动交卷,不等人", async (t) => {
   if (!LANES.length) {
     t.skip("缺内核 flow.json 的 workflow_select:仓内 kernel/ 快照不完整,"
-      + "这条要停下来查(harness/sync-kernel.sh 刷新)");
+      + "这条要停下来查(确认 kernel/ 快照完整)");
     return;
   }
   const choice = LANES.find((item) => item.key === "tweak") ?? LANES[0];

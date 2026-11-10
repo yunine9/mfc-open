@@ -1,0 +1,84 @@
+[
+  {
+    "ticket": "DTS-2026-1001",
+    "title": "【DEV·模拟】订单列表导出超时(数据量大时必现)",
+    "status": "打开",
+    "featureName": "订单中心"
+  },
+  {
+    "ticket": "DTS-2026-1002",
+    "title": "【DEV·模拟】消息中心未读数偶发不清零",
+    "status": "开发人员实施修改",
+    "version": "V100R025C10SPC010B009",
+    "severity": "提示",
+    "submitter": "zhangsan",
+    "featureName": "消息中心"
+  },
+  {
+    "ticket": "DTS-2026-1003",
+    "title": "【DEV·模拟】移动端审批页白屏(iOS 17.4)",
+    "status": "处理中",
+    "version": "V100R025C10SPC010B011",
+    "severity": "严重",
+    "submitter": "lisi",
+    "featureName": "移动审批"
+  },
+  {
+    "ticket": "DTS-2026-1004",
+    "title": "【DEV·模拟】批量删除用户报唯一约束冲突",
+    "status": "开发人员实施修改",
+    "version": "V100R025C10SPC021B002",
+    "severity": "一般",
+    "submitter": "wangwu",
+    "featureName": "用户管理"
+  },
+  {
+    "ticket": "DTS-2026-1005",
+    "title": "【DEV·模拟】流水线产物下载 404",
+    "status": "处理中",
+    "version": "V100R025C10SPC010B009",
+    "severity": "严重",
+    "submitter": "zhangsan",
+    "featureName": "报表中心"
+  },
+  {
+    "ticket": "DTS-2026-1006",
+    "title": "【DEV·模拟】开局飞跑",
+    "status": "打开",
+    "content": "【MOCK 单据】开局飞跑\n\n单号: DTS-2026-1006\n状态: 打开\n现象: 开局在点击行军之后,第一次的时候会徒步到自己的首都;联网模式下只有在用户打开浏览器的时候,才会播放行军动画,会影响游戏的整体一致性。\n影响: 联网/离线两种模式下开局表现不一致,破坏整体体验一致性。"
+  },
+  {
+    "ticket": "DTS-2026-1007",
+    "title": "【DEV·模拟】报表导出失败(带内嵌截图)",
+    "status": "打开",
+    "description": "<p>现象:点击「导出」后接口报 500,页面截图如下。</p><img src=\"/v1/nfs/mock/2026-1007/export-error.png\"><p>对照:正常环境的模块拓扑图。</p><img src=\"/v1/nfs/mock/2026-1007/topology.png\">",
+    "content": "【MOCK 单据】报表导出失败\n\n单号: DTS-2026-1007\n状态: 打开\n<p>现象:点击「导出」后接口报 500,页面截图如下。</p><img src=\"/v1/nfs/mock/2026-1007/export-error.png\"><p>对照:正常环境的模块拓扑图。</p><img src=\"/v1/nfs/mock/2026-1007/topology.png\">"
+  },
+  {
+    "ticket": "DTS-2026-1008",
+    "title": "【DEV·模拟】登录页验证码不刷新(可直接发起)",
+    "status": "开发人员实施修改",
+    "version": "V100R026C00B003",
+    "severity": "一般",
+    "submitter": "zhaoliu",
+    "content": "【MOCK 单据】登录页验证码不刷新\n\n单号: DTS-2026-1008\n状态: 开发人员实施修改\n现象: 点击“换一张”后验证码图片不更新,需整页刷新。\n影响: 弱网下用户可能连续拿到同一个验证码。\n初步定位: 前端时间戳参数未随请求更新。"
+  },
+  {
+    "ticket": "DTS-2026-1009",
+    "title": "【DEV·模拟】多仓会话下 MR 清单漏报第二仓(可直接发起)",
+    "status": "开发人员实施修改",
+    "version": "V100R025C10SPC021B002",
+    "severity": "严重",
+    "submitter": "lisi",
+    "content": "【MOCK 单据】多仓会话下 MR 清单漏报第二仓\n\n单号: DTS-2026-1009\n状态: 开发人员实施修改\n现象: 双仓改动只申报了首个仓的 MR,验绿门按少报打回。\n影响: 多仓交付收口被阻塞,需人工点名补报。\n初步定位: 申报清单只遍历了首个改动仓。"
+  },
+  {
+    "ticket": "DTS-2026-1010",
+    "title": "【DEV·模拟】example-web 启动页面按钮大小不一(可直接发起)",
+    "status": "开发人员实施修改",
+    "version": "V100R025C10SPC010B011",
+    "severity": "提示",
+    "submitter": "zhangsan",
+    "content": "【MOCK 单据】example-web 启动页面按钮大小不一\n\n单号: DTS-2026-1010\n状态: 开发人员实施修改\n现象: example-web 启动页(大厅页)的操作按钮宽高不一致,同一排按钮有的带固定高度、有的没定,视觉上忽大忽小。\n影响: 启动页观感粗糙,用户质疑前端样式规范性。\n初步定位: 怀疑按钮未统一走公共样式,部分按钮单独写死尺寸,等待分析会话定位。"
+  }
+]

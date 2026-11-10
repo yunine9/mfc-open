@@ -16,10 +16,10 @@ import { discoverKernelRoot } from "../src/kernelDiscovery.ts";
 import { managedFlowFixture } from "./support/managedFlowFixture.ts";
 
 // bootstrap 会真跑内核(INACTIVE 全放行),所以内核必须真找得到——
-// worktree 里 cwd()/../mae-flow 不存在,手写路径曾让整批用例超时。
+// 内核固定用仓内自带的 kernel/,不再依赖兄弟目录。
 function kernelRootOrDie(): string {
   const found = discoverKernelRoot(process.cwd());
-  if (!found) throw new Error("找不到内核(MAE_FLOW_HOME/../mae-flow/仓内 kernel/ 皆无)");
+  if (!found) throw new Error("找不到内核(MAE_FLOW_HOME/仓内 kernel/ 皆无)");
   return found;
 }
 export const KERNEL_ROOT = kernelRootOrDie();

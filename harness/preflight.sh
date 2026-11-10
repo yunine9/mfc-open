@@ -35,35 +35,20 @@ done
 
 echo "== 上线自查 =="
 
-# 0. 收编内核来源。运行时和测试默认使用仓内快照；VENDORED 里的 SHA
-# 是来源元数据，不冒充逐文件一致性证明。有兄弟内核时核对来源提交与
-# 工作树状态，后面的 probe 再直接验证仓内快照的实际能力。
+# 0. 仓内内核快照自带版本元数据；mfc-open 不依赖外部内核仓。
 VENDORED_FILE="kernel/VENDORED"
 VENDORED_SHA=""
 VENDORED_REF=""
 if [ -f "$VENDORED_FILE" ]; then
-  VENDORED_SHA=$(sed -n 's/^来源: mae-flow@//p' "$VENDORED_FILE" | head -n 1)
+  VENDORED_SHA=$(sed -n 's/^版本: //p' "$VENDORED_FILE" | head -n 1)
   VENDORED_REF=$(sed -n 's/^分支: //p' "$VENDORED_FILE" | head -n 1)
 fi
 if ! printf '%s' "$VENDORED_SHA" | grep -Eq '^[0-9a-f]{40}$'; then
-  bad "0. 仓内内核快照缺少有效来源 SHA(harness/sync-kernel.sh 刷新)"
+  bad "0. 仓内内核快照缺少有效版本($VENDORED_FILE)"
 elif [ -z "$VENDORED_REF" ]; then
-  bad "0. 仓内内核快照缺少来源分支(harness/sync-kernel.sh 刷新)"
-elif [ -d "../mae-flow/.git" ]; then
-  LIVE_SHA=$(git -C ../mae-flow rev-parse HEAD 2>/dev/null || true)
-  LIVE_REF=$(git -C ../mae-flow symbolic-ref --quiet --short HEAD 2>/dev/null || printf 'detached')
-  LIVE_DIRTY=$(git -C ../mae-flow status --porcelain 2>/dev/null || true)
-  if [ -n "$LIVE_DIRTY" ]; then
-    bad "0. 兄弟内核有未提交改动，收编快照无法代表当前测试内容"
-  elif [ "$VENDORED_SHA" != "$LIVE_SHA" ]; then
-    bad "0. 仓内内核快照落后(运行 harness/sync-kernel.sh 后再发布)"
-  elif [ "$VENDORED_REF" != "$LIVE_REF" ]; then
-    bad "0. 仓内内核来源分支不一致:快照 $VENDORED_REF，兄弟仓 $LIVE_REF"
-  else
-    ok "0. 仓内内核快照与 mae-flow ${VENDORED_REF}@${VENDORED_SHA%????????????????????????????} 对齐;实际能力由 probe 验证"
-  fi
+  bad "0. 仓内内核快照缺少来源分支($VENDORED_FILE)"
 else
-  ok "0. 仓内内核快照来源可追溯(${VENDORED_REF}@${VENDORED_SHA%????????????????????????????})"
+  ok "0. 仓内内核快照版本 ${VENDORED_REF}@${VENDORED_SHA%????????????????????????????};实际能力由 probe 验证"
 fi
 
 # 1. 隔离镜像体检：容器只提供安全边界，python3/git 是转发壳与提交链

@@ -270,11 +270,11 @@ function contractScene(): ReturnType<typeof reproduceTerminalRollover> {
 
 test("内核来源契约：Cloud 专属分支和分叉基线必须同时写进 VENDORED", () => {
   const metadata = readFileSync(join(KERNEL_ROOT!, "VENDORED"), "utf-8");
-  assert.match(metadata, /^来源: mae-flow@[0-9a-f]{40}$/m);
+  assert.match(metadata, /^版本: [0-9a-f]{40}$/m);
   assert.match(metadata, /^分支: cloud\/workflow-customization$/m);
   assert.match(metadata,
-    /^基线: mae-flow@ad5b92af3e19766558dbca476389dda5cd80d076$/m);
-  assert.match(metadata, /更新跑 harness\/sync-kernel\.sh/,
+    /^基线: ad5b92af3e19766558dbca476389dda5cd80d076$/m);
+  assert.match(metadata, /不依赖外部仓/,
     "快照必须保留禁止手改、只从源仓同步的纪律");
 });
 

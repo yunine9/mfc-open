@@ -12,7 +12,7 @@ function kernelAt(path: string): string {
   return path;
 }
 
-test("默认优先使用随 Cloud 发布的内核，兄弟活内核只作兜底", () => {
+test("默认使用仓内自带内核，不依赖兄弟仓", () => {
   const root = mkdtempSync(join(tmpdir(), "mfc-kernel-discovery-"));
   const cloud = join(root, "mae-flow-cloud");
   const bundled = kernelAt(join(cloud, "kernel"));

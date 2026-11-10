@@ -28,7 +28,7 @@ import { managedFlowFixture } from "./support/managedFlowFixture.ts";
 
 export const KERNEL_ROOT = (() => {
   const found = discoverKernelRoot(process.cwd());
-  if (!found) throw new Error("找不到内核(MAE_FLOW_HOME/../mae-flow/仓内 kernel/ 皆无)");
+  if (!found) throw new Error("找不到内核(MAE_FLOW_HOME/仓内 kernel/ 皆无)");
   return found;
 })();
 

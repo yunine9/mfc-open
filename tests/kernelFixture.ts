@@ -20,7 +20,7 @@ const REPO_ROOT = resolve(fileURLToPath(import.meta.url), "..", "..");
 export const KERNEL_ROOT = discoverKernelRoot(REPO_ROOT)
   ?? resolve(REPO_ROOT, "kernel"); // 兜底给探测一个必然落空的路径
 export const FIELDTEST = process.env.MAE_FLOW_FIELDTEST_JAVA
-  ?? resolve(REPO_ROOT, "..", "mae-flow-fieldtest-java");
+  ?? resolve(REPO_ROOT, "..", "mae-flow-demo-repo");
 
 const HAS_KERNEL = existsSync(join(KERNEL_ROOT, "hooks", "dispatch.py"));
 const HAS_FIELDTEST = existsSync(FIELDTEST);

@@ -1,5 +1,5 @@
-来源: mae-flow@245ec975994870948b75e2813c688c128c0f923d
+版本: 245ec975994870948b75e2813c688c128c0f923d
 分支: cloud/workflow-customization
-基线: mae-flow@ad5b92af3e19766558dbca476389dda5cd80d076
+基线: ad5b92af3e19766558dbca476389dda5cd80d076
 收编时间: 2026-11-04
-纪律: 此目录是快照,不许手改;更新跑 harness/sync-kernel.sh
+说明: 本目录是 mfc-open 自带的内核快照，随本仓发布，不依赖外部仓；更新时整体替换。

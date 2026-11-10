@@ -1179,7 +1179,7 @@ test("消费:任务级代码仓压过部署仓,克隆的就是下单填的那个
   git(repoB, "add", ".mae-flow-defaults.json");
   git(repoB, "commit", "--quiet", "-m", "add repository execution preset");
   const kernelRoot = discoverKernelRoot(process.cwd());
-  if (!kernelRoot) throw new Error("找不到内核(MAE_FLOW_HOME/../mae-flow/仓内 kernel/ 皆无)");
+  if (!kernelRoot) throw new Error("找不到内核(MAE_FLOW_HOME/仓内 kernel/ 皆无)");
   const model = new ScriptedModelServer(SCRIPT);
   await model.start();
   const service = new TaskService({

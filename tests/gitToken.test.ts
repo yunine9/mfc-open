@@ -197,7 +197,7 @@ test("消费:宿主 clone 短暂鉴权;Agent 会话无凭据/config helper;缺�
   const remote = await serveBareRepo(join(bare, "r.git"), expectAuth);
   const repoUrl = `http://127.0.0.1:${remote.port}/repo.git`;
   const kernelRoot = discoverKernelRoot(process.cwd());
-  if (!kernelRoot) throw new Error("找不到内核(MAE_FLOW_HOME/../mae-flow/仓内 kernel/ 皆无)");
+  if (!kernelRoot) throw new Error("找不到内核(MAE_FLOW_HOME/仓内 kernel/ 皆无)");
   const boundaryScript: Scene[] = [
     { tool: { name: "bash", input: { command:
         "test ! -e ../pi-agent/git-credential && "
