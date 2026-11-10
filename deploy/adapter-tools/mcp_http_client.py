@@ -9,7 +9,7 @@ CLI 是降级,REST 直调只有建 MR 一处。
 本客户端就是那条主路的最小实现:POST JSON-RPC(initialize →
 notifications/initialized → tools/call),响应兼容纯 JSON 与 SSE 帧。
 
-与 mcp_sse_client.py 的分工:SSE 那台(192.0.2.123:9000)是日志
+与 mcp_sse_client.py 的分工:SSE 那台(10.244.150.123:9000)是日志
 网关的旧式 SSE 形态,构建日志下载继续走它;本客户端对接 streamable
 HTTP 形态的网关(codehub 等)。
 
@@ -44,7 +44,7 @@ GATEWAYS = {
     "build": "http://mcp.example.com/mcp/"
              "route",
     "codecheck": "http://mcp.example.com/mcp/"
-               "route/2000522391440105473",
+               "route/route",
     "codecov": "http://mcp.example.com/mcp/"
                "route",
     "dts": "http://mcp.example.com/mcp/"

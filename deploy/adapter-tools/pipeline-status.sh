@@ -60,7 +60,7 @@ encoded_repo = urllib.parse.quote(decoded_repo, safe='')
 CODEHUB_API = os.environ.get(
     'MFC_CODEHUB_API', 'https://codehub-y.example.com/api/v4')
 CLI_HOST = os.environ.get('MFC_CODEHUB_CLI_HOST', 'yellow')
-MCP_SSE_HOST = os.environ.get('MFC_MCP_SSE_HOST', '192.0.2.123')
+MCP_SSE_HOST = os.environ.get('MFC_MCP_SSE_HOST', '10.244.150.123')
 MCP_SSE_PORT = int(os.environ.get('MFC_MCP_SSE_PORT', '9000'))
 configured_mcp_token = os.environ.get('MFC_MCP_TOKEN_FILE', '').strip()
 if configured_mcp_token:

@@ -46,6 +46,7 @@ tests/                    不变式单测、决策表与端到端回归
 
 ```bash
 npm install
+(cd web && npm run build)   # 浏览器用例需要前端产物
 npm test            # 快层测试：核心不变式 + API 端到端
 npm run test:full   # 全量门禁测试
 npm run probe       # 整链演练：进程内 Pi + 剧本假模型 + 内核证据验收

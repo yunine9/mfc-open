@@ -3,8 +3,8 @@
 # Public defaults are pinned multi-platform manifests so a developer build is
 # reproducible. Production must still override both with scanned internal
 # mirrors pinned by their approved @sha256 digests.
-ARG JAVA_MAVEN_BASE_IMAGE=maven:3.9.9-eclipse-temurin-21-jammy@sha256:route
-ARG NODE_BASE_IMAGE=node:18.16.1-bullseye-slim@sha256:route
+ARG JAVA_MAVEN_BASE_IMAGE=maven:3.9.9-eclipse-temurin-21-jammy@sha256:7f8422bd81f19b9035007a75e2f82272b09af64db08848d7d4e93302466e8b6f
+ARG NODE_BASE_IMAGE=node:18.16.1-bullseye-slim@sha256:1ba1ddfc61b385b6436fd0fa0d1d42d322a0cd03c1ff110fa39e828511152aef
 
 FROM ${NODE_BASE_IMAGE} AS node_runtime
 

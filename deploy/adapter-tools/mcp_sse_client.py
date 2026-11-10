@@ -256,7 +256,7 @@ if __name__ == "__main__":
         sys.exit(2)
     mr_url = sys.argv[1]
     host = sys.argv[2] if len(sys.argv) > 2 \
-        else os.environ.get("MFC_MCP_SSE_HOST", "192.0.2.123")
+        else os.environ.get("MFC_MCP_SSE_HOST", "10.244.150.123")
     port = int(sys.argv[3] if len(sys.argv) > 3
                else os.environ.get("MFC_MCP_SSE_PORT", "9000"))
     from mcp_http_client import default_mcp_token_file

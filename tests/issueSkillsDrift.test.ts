@@ -144,7 +144,12 @@ test("技能指路真实性:skills/<名>/SKILL.md 引用必须指向真实物化
   }
 });
 
-test("整包物化:技能目录的附属物(如 fetch-logs 的 bin 引擎)必须随技能落到工作区且有执行位", () => {
+test("整包物化:技能目录的附属物(如 fetch-logs 的 bin 引擎)必须随技能落到工作区且有执行位", t => {
+  // 公开快照不含内部抓日志二进制，缺源即跳过，不把内部资产缺席当成漂移。
+  if (!existsSync(join(process.cwd(), "assets", "issue-skills", "fetch-logs", "bin"))) {
+    t.skip("公开快照不含 fetch-logs 二进制");
+    return;
+  }
   // 非标单文件物化的旧病回潮=技能携带的能力静默失效,按盘上真物验。
   const workspace = mfcTemp("mfc-skill-materialize-");
   const paths = materializeIssueSkills(workspace);

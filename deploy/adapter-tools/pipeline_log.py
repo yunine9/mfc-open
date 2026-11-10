@@ -74,7 +74,7 @@ CODEHUB_API = os.environ.get(
 CODEHUB_HOST = os.environ.get(
     'MFC_CODEHUB_HOST', codehub_host_from_url(CODEHUB_API))
 CLI_HOST = os.environ.get('MFC_CODEHUB_CLI_HOST', 'yellow')
-MCP_SSE_HOST = os.environ.get('MFC_MCP_SSE_HOST', '192.0.2.123')
+MCP_SSE_HOST = os.environ.get('MFC_MCP_SSE_HOST', '10.244.150.123')
 MCP_SSE_PORT = int(os.environ.get('MFC_MCP_SSE_PORT', '9000'))
 _configured_token_file = os.environ.get('MFC_MCP_TOKEN_FILE', '').strip()
 if _configured_token_file:
