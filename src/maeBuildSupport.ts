@@ -10,15 +10,15 @@ export const MAE_BUILD_ASSETS = fileURLToPath(new URL("../assets/mae-build", imp
 export const MAE_BUILD_SKILLS = fileURLToPath(new URL("../assets/build-skills", import.meta.url));
 export const MAE_BUILD_MOUNT = "/opt/mae-flow-build";
 export const MAE_BUILD_REPOSITORIES = [
-  { name: "MAEStarterParent", url: "https://codehub.example.com/example-org/CI/MAEStarterParent.git", ref: "master" },
-  { name: "MAEServiceBuild", url: "https://codehub.example.com/example-org-internal/DevTools/MAEServiceBuild.git", ref: "master" },
-  { name: "MAEBuild", url: "https://codehub.example.com/example-org/CI/MAEBuild.git", ref: "master" },
-  { name: "DeployBuildTool", url: "https://codehub.example.com/example-org/CI/DeployBuildTool.git", ref: "master" },
+  { name: "MAEStarterParent", url: "https://codehub.example.com/MAE-M/CI/MAEStarterParent.git", ref: "master" },
+  { name: "MAEServiceBuild", url: "https://codehub.example.com/MAE-M-Internal/DevTools/MAEServiceBuild.git", ref: "master" },
+  { name: "MAEBuild", url: "https://codehub.example.com/MAE-M/CI/MAEBuild.git", ref: "master" },
+  { name: "DeployBuildTool", url: "https://codehub.example.com/MAE-M/CI/DeployBuildTool.git", ref: "master" },
 ] as const;
 
 export function isMaeRepository(repository: string): boolean {
   try { const url = new URL(repository); return url.protocol === "https:"
-    && url.hostname.endsWith(".codehub.example.com") && /^\/MAE[^/]*\//i.test(url.pathname); }
+    && (url.hostname === "codehub.example.com" || url.hostname.endsWith(".codehub.example.com")) && /^\/MAE[^/]*\//i.test(url.pathname); }
   catch { return false; }
 }
 

@@ -959,10 +959,10 @@ test("下单即校验:不存在的模型、负预算、带密码的仓地址,当
   // publickey 拒绝,还死在整轮流程跑完之后)。两种写法都要认得出。
   assert.throws(() =>
     service.create("x", {
-      repo: "ssh://codehub.example.com:2222/example-org/Access/SONService.git" }),
+      repo: "ssh://codehub.example.com:2222/MAE-M/Access/SONService.git" }),
     /请填 HTTPS 地址/);
   assert.throws(() =>
-    service.create("x", { repo: "git@codehub.example.com:example-org/r.git" }),
+    service.create("x", { repo: "git@codehub.example.com:MAE-M/r.git" }),
     /请填 HTTPS 地址/);
   // 本地路径(演练/试跑的假件形态)不能被 SSH 拦截误伤
   assert.doesNotThrow(() =>

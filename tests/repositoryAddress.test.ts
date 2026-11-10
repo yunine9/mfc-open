@@ -12,8 +12,8 @@ import { createBusinessModule, updateBusinessModule, readBusinessModule } from "
 import { saveComponentRepository, componentRepositories } from "../src/componentRepositories.ts";
 import { seedTechnologyStacks } from "./fixtures/technologyStacks.ts";
 
-const web = "https://codehub-y.example.com/example-org/FMEMate/FMEMateService/";
-const clone = "https://codehub.example.com/example-org/FMEMate/FMEMateService.git";
+const web = "https://codehub-y.example.com/MAE-M/FMEMate/FMEMateService/";
+const clone = "https://codehub.example.com/MAE-M/FMEMate/FMEMateService.git";
 
 test("Git 地址拒绝已知网页/API 域名；不把缺 .git 或尾斜杠当作普遍错误", () => {
   for (const address of [web, web.slice(0, -1), web.slice(0, -1) + ".git", web.replace("codehub-y", "CODEHUB-Y"), web.replace(".com/", ".com.:443/")]) {

@@ -49,10 +49,10 @@ async function cloneFixture(url: string, target: string) {
 }
 test('仅适配 MAE HTTPS 仓；宿主固定四仓版本、复用并拒绝污染', async t => {
   const dir = temp(t), root = join(dir, 'task'); let clones = 0;
-  const input = { root, dataDir: join(dir, 'data'), repositories: ['https://codehub.example.com/example-org/FarsService.git'],
+  const input = { root, dataDir: join(dir, 'data'), repositories: ['https://codehub.example.com/MAE-M/FarsService.git'],
     clone: async (url: string, target: string) => { clones++; await cloneFixture(url, target); } };
-  assert.equal(isMaeRepository('https://github.com/example-org/repo'), false);
-  assert.equal(isMaeRepository('https://codehub.example.com.attacker.invalid/example-org/repo'), false);
+  assert.equal(isMaeRepository('https://github.com/MAE-M/repo'), false);
+  assert.equal(isMaeRepository('https://codehub.example.com.attacker.invalid/MAE-M/repo'), false);
   assert.equal(await prepareMaeBuildSupport({ ...input, repositories: ['https://github.com/test/repo'] }), false);
   await Promise.all([prepareMaeBuildSupport(input), prepareMaeBuildSupport(input)]);
   assert.equal(clones, 4);
@@ -130,7 +130,7 @@ test('问题流 prepareMaeBuild 降级：辅助仓 dirty 不再抛断会话，�
   const model = new ScriptedModelServer([{ text: 'idle' }]); await model.start();
   const service = new IssueFlowService({ dataDir: join(dir, 'data'), provider: 'maeflow',
     model: 'scripted-v1', modelsJson: model.modelsJson(), deferRecovery: true });
-  const state: any = { repo_urls: ['https://codehub.example.com/example-org/FarsService.git'] };
+  const state: any = { repo_urls: ['https://codehub.example.com/MAE-M/FarsService.git'] };
   const live = { id: 'issue-degrade', root: dir, state };
   try {
     // 干净辅助仓:照常就绪,无降级回执。
